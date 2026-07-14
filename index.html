@@ -5387,18 +5387,11 @@
 </div><!-- /#app-content -->
 
 <script>
-(function(){
-  if (sessionStorage.getItem('splash_done') === '1') {
-    document.getElementById('splash').style.display = 'none';
-    document.getElementById('app-content').classList.add('show');
-  }
-})();
 function dismissSplash() {
   var s = document.getElementById('splash');
   if (s.classList.contains('dismiss')) return;
   s.classList.add('dismiss');
   document.getElementById('app-content').classList.add('show');
-  sessionStorage.setItem('splash_done', '1');
 }
 </script>
 
