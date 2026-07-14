@@ -935,18 +935,48 @@
     background: var(--accent);
     color: #F5F0E8;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(44,36,22,0.18);
-    transition: background 0.2s;
+    box-shadow: 0 3px 12px rgba(44,36,22,0.2);
+    transition:
+      background 0.25s ease,
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  #assistant-fab:hover { background: #964A30; }
+  #assistant-fab::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(168,90,60,0.35);
+    opacity: 0;
+    animation: fabPulse 2.4s ease-out infinite;
+    pointer-events: none;
+  }
+  #assistant-fab:hover {
+    background: #964A30;
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 8px 20px rgba(168,90,60,0.35);
+  }
+  #assistant-fab:active { transform: scale(0.94); }
+  #assistant-fab.is-open {
+    background: #7A3E28;
+    transform: rotate(90deg);
+  }
+  #assistant-fab.is-open::before { animation: none; opacity: 0; }
   #assistant-fab .fab-ic {
     font-family: 'Zhi Mang Xing', 'Liu Jian Mao Cao', 'STXingkai', cursive;
     font-size: 22px;
     letter-spacing: 0;
     line-height: 1;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #assistant-fab:hover .fab-ic { transform: scale(1.08); }
+  @keyframes fabPulse {
+    0%   { transform: scale(0.92); opacity: 0.55; }
+    70%  { transform: scale(1.35); opacity: 0; }
+    100% { transform: scale(1.35); opacity: 0; }
   }
   #assistant-panel {
     position: fixed;
@@ -955,7 +985,7 @@
     z-index: 1200;
     width: min(380px, calc(100vw - 36px));
     max-height: min(70vh, 580px);
-    display: none;
+    display: flex;
     flex-direction: column;
     background: var(--paper-bg);
     border: 1px solid rgba(60,48,36,0.16);
@@ -963,8 +993,40 @@
     box-shadow: 0 8px 30px rgba(44,36,22,0.18);
     overflow: hidden;
     font-family: 'Zhi Mang Xing', 'Liu Jian Mao Cao', 'STXingkai', cursive;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(18px) scale(0.94);
+    transform-origin: bottom right;
+    transition:
+      opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0.42s,
+      box-shadow 0.3s ease;
   }
-  #assistant-panel.open { display: flex; }
+  #assistant-panel.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition:
+      opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0s,
+      box-shadow 0.3s ease;
+    box-shadow: 0 14px 40px rgba(44,36,22,0.22);
+  }
+  #assistant-panel.open.is-ready .asst-head,
+  #assistant-panel.open.is-ready .asst-disclaimer,
+  #assistant-panel.open.is-ready .asst-input {
+    animation: asstChromeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  #assistant-panel.open.is-ready .asst-disclaimer { animation-delay: 0.06s; }
+  #assistant-panel.open.is-ready .asst-input { animation-delay: 0.1s; }
+  @keyframes asstChromeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
   .asst-head {
     display: flex;
     align-items: center;
@@ -989,6 +1051,12 @@
     letter-spacing: 0.08em;
     margin-left: 4px;
     vertical-align: middle;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  #assistant-panel.open .asst-badge {
+    color: var(--accent);
+    border-color: rgba(168,90,60,0.35);
+    background: rgba(168,90,60,0.06);
   }
   #assistant-close {
     background: none;
@@ -997,10 +1065,16 @@
     line-height: 1;
     color: var(--ink-light);
     cursor: pointer;
-    padding: 0 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
     font-family: 'Zhi Mang Xing', cursive;
+    transition: color 0.2s, background 0.2s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  #assistant-close:hover { color: var(--accent); }
+  #assistant-close:hover {
+    color: var(--accent);
+    background: rgba(168,90,60,0.08);
+    transform: rotate(90deg);
+  }
   .asst-disclaimer {
     padding: 7px 14px;
     font-size: 14px;
@@ -1018,15 +1092,32 @@
     gap: 12px;
   }
   .asst-messages::-webkit-scrollbar { width: 4px; }
-  .asst-messages::-webkit-scrollbar-thumb { background: rgba(60,48,36,0.2); border-radius: 2px; }
-  .asst-msg { max-width: 90%; font-size: 16px; line-height: 1.85; letter-spacing: 0.04em; }
+  .asst-messages::-webkit-scrollbar-thumb {
+    background: rgba(60,48,36,0.2);
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .asst-messages::-webkit-scrollbar-thumb:hover { background: rgba(168,90,60,0.45); }
+  .asst-msg {
+    max-width: 90%;
+    font-size: 16px;
+    line-height: 1.85;
+    letter-spacing: 0.04em;
+    animation: asstMsgIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes asstMsgIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
   .asst-msg.user {
     align-self: flex-end;
     background: rgba(168,90,60,0.1);
     color: var(--ink-dark);
     padding: 8px 12px;
     border-radius: 10px 10px 2px 10px;
+    transition: background 0.2s;
   }
+  .asst-msg.user:hover { background: rgba(168,90,60,0.16); }
   .asst-msg.bot {
     align-self: flex-start;
     color: var(--ink-medium);
@@ -1042,7 +1133,14 @@
     font-weight: 400;
   }
   .asst-msg.bot h6:first-child { margin-top: 0; }
-  .asst-msg.bot a.herb-link { font-weight: 400; }
+  .asst-msg.bot a.herb-link {
+    font-weight: 400;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .asst-msg.bot a.herb-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
   .asst-msg.tip { align-self: center; color: var(--ink-light); font-size: 15px; }
   .asst-msg.error {
     align-self: flex-start;
@@ -1051,11 +1149,35 @@
     border-left: 2px solid #A85A3C;
     padding-left: 8px;
   }
+  .asst-msg.typing {
+    align-self: flex-start;
+    display: inline-flex;
+    gap: 5px;
+    padding: 10px 12px;
+    background: rgba(60,48,36,0.05);
+    border-radius: 10px 10px 10px 2px;
+  }
+  .asst-msg.typing span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ink-light);
+    animation: asstDot 1.2s ease-in-out infinite;
+  }
+  .asst-msg.typing span:nth-child(2) { animation-delay: 0.15s; }
+  .asst-msg.typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes asstDot {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.35; }
+    40% { transform: translateY(-4px); opacity: 1; }
+  }
   .asst-input {
     display: flex;
     gap: 8px;
     padding: 10px 12px 12px;
     border-top: 1px solid rgba(60,48,36,0.1);
+    transition: background 0.25s;
+  }
+  #assistant-panel:focus-within .asst-input {
+    background: rgba(168,90,60,0.04);
   }
   #assistant-text {
     flex: 1;
@@ -1069,8 +1191,13 @@
     background: rgba(255,255,255,0.7);
     color: var(--ink-dark);
     outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
   }
-  #assistant-text:focus { border-color: var(--accent); }
+  #assistant-text:focus {
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 0 0 3px rgba(168,90,60,0.12);
+  }
   #assistant-send {
     flex-shrink: 0;
     align-self: stretch;
@@ -1083,9 +1210,28 @@
     border-radius: 6px;
     cursor: pointer;
     letter-spacing: 0.1em;
+    transition:
+      background 0.2s,
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s;
   }
-  #assistant-send:hover { background: #964A30; }
+  #assistant-send:hover:not(:disabled) {
+    background: #964A30;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(168,90,60,0.3);
+  }
+  #assistant-send:active:not(:disabled) { transform: scale(0.96); }
   #assistant-send:disabled { opacity: 0.5; cursor: default; }
+  @media (prefers-reduced-motion: reduce) {
+    #assistant-fab,
+    #assistant-fab::before,
+    #assistant-panel,
+    .asst-msg,
+    .asst-msg.typing span {
+      animation: none !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 
   #home-foot {
     flex-shrink: 0;
@@ -5310,7 +5456,7 @@
     ta.value = '';
     asstBusy = true;
     if (send) send.disabled = true;
-    var thinking = asstAppend('tip', '正在辨症…');
+    var thinking = asstAppend('typing', '<span></span><span></span><span></span>');
     fetch(API + '/api/assistant/consult', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -5331,32 +5477,42 @@
     }).finally(function () {
       asstBusy = false;
       if (send) send.disabled = false;
+      if (ta) ta.focus();
     });
   }
 
   function assistantOpen() {
     var panel = document.getElementById('assistant-panel');
+    var fab = document.getElementById('assistant-fab');
     if (!panel) return;
     panel.classList.add('open');
     panel.setAttribute('aria-hidden', 'false');
+    if (fab) fab.classList.add('is-open');
+    requestAnimationFrame(function () {
+      panel.classList.add('is-ready');
+    });
     if (!asstWelcomed) {
       asstWelcomed = true;
-      asstAppend('bot', asstRenderReply(
-        '你好，我是本草辨症助手。\n' +
-        '用日常话描述你的不适（如：怕冷、鼻塞流清涕、咳嗽痰白），\n' +
-        '我会归纳症状标签并给出可参考的中药与用法方向。\n' +
-        '就医提示：仅供参考，如有需要请到医院就诊。'
-      ));
+      setTimeout(function () {
+        asstAppend('bot', asstRenderReply(
+          '你好，我是本草辨症助手。\n' +
+          '用日常话描述你的不适（如：怕冷、鼻塞流清涕、咳嗽痰白），\n' +
+          '我会归纳症状标签并给出可参考的中药与用法方向。\n' +
+          '就医提示：仅供参考，如有需要请到医院就诊。'
+        ));
+      }, 180);
     }
     var ta = document.getElementById('assistant-text');
-    if (ta) ta.focus();
+    if (ta) setTimeout(function () { ta.focus(); }, 280);
   }
 
   function assistantClose() {
     var panel = document.getElementById('assistant-panel');
+    var fab = document.getElementById('assistant-fab');
     if (!panel) return;
-    panel.classList.remove('open');
+    panel.classList.remove('is-ready', 'open');
     panel.setAttribute('aria-hidden', 'true');
+    if (fab) fab.classList.remove('is-open');
   }
 
   (function bindAssistant() {
