@@ -18,7 +18,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "Songti SC", Georgia, serif;
-    background: var(--bg); color: var(--text); line-height: 1.75;
+    background: var(--bg); color: var(--text); line-height: 1.85; font-size: 16px;
   }
   .hero {
     text-align: center; padding: 80px 24px 60px;
@@ -26,17 +26,17 @@
     border-bottom: 1px solid var(--border);
   }
   .hero h1 {
-    font-size: 42px; font-weight: 700; letter-spacing: 4px;
+    font-size: 54px; font-weight: 700; letter-spacing: 6px;
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .hero .en { font-size: 20px; color: var(--sub); letter-spacing: 2px; margin-top: 8px; }
-  .hero .tagline { font-size: 17px; color: var(--sub); margin-top: 20px; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .hero .en { font-size: 24px; color: var(--sub); letter-spacing: 3px; margin-top: 10px; }
+  .hero .tagline { font-size: 19px; color: var(--sub); margin-top: 24px; max-width: 680px; margin-left: auto; margin-right: auto; }
   .hero .badges { margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .badge {
     display: inline-block; padding: 6px 16px; border-radius: 20px;
-    font-size: 14px; background: var(--tag-bg); color: var(--accent); border: 1px solid #c3d7c3;
+    font-size: 15px; background: var(--tag-bg); color: var(--accent); border: 1px solid #c3d7c3;
   }
   .badge.filled { background: var(--accent); color: #fff; border-color: var(--accent); }
 
@@ -45,7 +45,7 @@
   section { padding: 56px 0; }
   section + section { border-top: 1px dashed var(--border); }
 
-  h2 { font-size: 26px; font-weight: 700; margin-bottom: 28px; text-align: center; letter-spacing: 2px; }
+  h2 { font-size: 30px; font-weight: 700; margin-bottom: 28px; text-align: center; letter-spacing: 3px; }
   h2 span { border-bottom: 3px solid var(--accent); padding-bottom: 4px; }
 
   .features { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
@@ -54,19 +54,19 @@
     padding: 28px 24px; transition: box-shadow .2s;
   }
   .feat-card:hover { box-shadow: 0 6px 24px rgba(90,125,90,.10); }
-  .feat-card .icon { font-size: 32px; margin-bottom: 12px; }
-  .feat-card h3 { font-size: 17px; margin-bottom: 8px; }
-  .feat-card p { font-size: 14px; color: var(--sub); }
+  .feat-card .icon { font-size: 38px; margin-bottom: 12px; }
+  .feat-card h3 { font-size: 19px; margin-bottom: 8px; }
+  .feat-card p { font-size: 15px; color: var(--sub); }
 
   .tech-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .tech-tag {
     padding: 8px 18px; background: var(--card); border: 1px solid var(--border);
-    border-radius: 8px; font-size: 14px; font-family: "SF Mono", "Consolas", monospace;
+    border-radius: 8px; font-size: 15px; font-family: "SF Mono", "Consolas", monospace;
   }
 
   .quickstart {
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 32px; font-family: "SF Mono", "Consolas", monospace; font-size: 14px;
+    padding: 32px; font-family: "SF Mono", "Consolas", monospace; font-size: 15px;
     overflow-x: auto; white-space: pre-wrap; color: #3a3a3a;
   }
   .quickstart .cm { color: #888; }
@@ -79,14 +79,14 @@
   .screen-card .ph {
     aspect-ratio: 16/10; background: linear-gradient(135deg, #eef5ec, #f5f2e8);
     display: flex; align-items: center; justify-content: center;
-    font-size: 42px; color: #b0c4b0;
+    font-size: 48px; color: #b0c4b0;
   }
-  .screen-card .lbl { padding: 14px 16px; font-size: 14px; color: var(--sub); text-align: center; }
+  .screen-card .lbl { padding: 14px 16px; font-size: 16px; color: var(--sub); text-align: center; }
 
   .links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
   .btn {
     display: inline-flex; align-items: center; gap: 6px;
-    padding: 12px 28px; border-radius: 8px; font-size: 15px; text-decoration: none;
+    padding: 14px 32px; border-radius: 8px; font-size: 17px; text-decoration: none;
     transition: background .2s, transform .1s;
   }
   .btn:hover { transform: translateY(-1px); }
@@ -97,7 +97,7 @@
 
   footer {
     text-align: center; padding: 40px 24px;
-    font-size: 13px; color: #aaa; border-top: 1px solid var(--border);
+    font-size: 14px; color: #aaa; border-top: 1px solid var(--border);
   }
   footer a { color: var(--accent); text-decoration: none; }
 </style>
