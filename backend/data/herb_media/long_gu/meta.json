@@ -1,0 +1,16 @@
+{
+  "key": "long_gu",
+  "name_zh": "龙骨",
+  "ok": true,
+  "resolve": "wikidata-search:Q582062",
+  "filename": "Nachbau Wikingerschiff Roskilde.jpg",
+  "commons_title": "File:Nachbau Wikingerschiff Roskilde.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ANachbau%20Wikingerschiff%20Roskilde.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Stefan Kühn",
+  "credit": "Own work",
+  "sketch": "/media/herbs/long_gu/sketch.png",
+  "source": "/media/herbs/long_gu/source.jpg",
+  "attribution": "Image: Stefan Kühn / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

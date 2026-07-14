@@ -1,0 +1,16 @@
+{
+  "key": "luo_han_guo",
+  "name_zh": "罗汉果",
+  "ok": true,
+  "resolve": "wikidata-search:Q1544966",
+  "filename": "Fructus Momordicae.jpg",
+  "commons_title": "File:Fructus Momordicae.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AFructus%20Momordicae.jpg",
+  "license": "CC BY 2.5",
+  "license_url": "https://creativecommons.org/licenses/by/2.5",
+  "artist": "User:KasugaHuang",
+  "credit": "Own work",
+  "sketch": "/media/herbs/luo_han_guo/sketch.png",
+  "source": "/media/herbs/luo_han_guo/source.jpg",
+  "attribution": "Image: User:KasugaHuang / CC BY 2.5; pencil sketch derived locally for Herba Atlas."
+}

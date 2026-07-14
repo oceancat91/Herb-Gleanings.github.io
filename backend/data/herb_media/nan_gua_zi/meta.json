@@ -1,0 +1,16 @@
+{
+  "key": "nan_gua_zi",
+  "name_zh": "南瓜子",
+  "ok": true,
+  "resolve": "wikidata-search:Q3056521",
+  "filename": "Pepita de calabaza.jpg",
+  "commons_title": "File:Pepita de calabaza.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3APepita%20de%20calabaza.jpg",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "artist": "Dmitry Makeev",
+  "credit": "Own work",
+  "sketch": "/media/herbs/nan_gua_zi/sketch.png",
+  "source": "/media/herbs/nan_gua_zi/source.jpg",
+  "attribution": "Image: Dmitry Makeev / CC BY-SA 4.0; pencil sketch derived locally for Herba Atlas."
+}

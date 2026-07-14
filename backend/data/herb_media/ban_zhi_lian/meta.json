@@ -1,0 +1,16 @@
+{
+  "key": "ban_zhi_lian",
+  "name_zh": "半枝莲",
+  "ok": true,
+  "resolve": "wikidata-search:Q159547",
+  "filename": "Portulaca grandiflora flower.jpg",
+  "commons_title": "File:Portulaca grandiflora flower.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3APortulaca%20grandiflora%20flower.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Laogooli",
+  "credit": "Own work",
+  "sketch": "/media/herbs/ban_zhi_lian/sketch.png",
+  "source": "/media/herbs/ban_zhi_lian/source.jpg",
+  "attribution": "Image: Laogooli / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

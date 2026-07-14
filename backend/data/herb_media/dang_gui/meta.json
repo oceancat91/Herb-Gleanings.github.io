@@ -1,0 +1,16 @@
+{
+  "key": "dang_gui",
+  "name_zh": "当归",
+  "ok": true,
+  "resolve": "wikidata:Q2051387",
+  "filename": "Dongquai cr.jpg",
+  "commons_title": "File:Dongquai cr.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ADongquai%20cr.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "NIH",
+  "credit": "https://www.nlm.nih.gov/medlineplus/druginfo/natural/patient-dongquai.html",
+  "sketch": "/media/herbs/dang_gui/sketch.png",
+  "source": "/media/herbs/dang_gui/source.jpg",
+  "attribution": "Image: NIH / Public domain; pencil sketch derived locally for Herba Atlas."
+}

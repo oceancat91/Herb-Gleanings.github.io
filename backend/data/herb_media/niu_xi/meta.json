@@ -1,0 +1,16 @@
+{
+  "key": "niu_xi",
+  "name_zh": "牛膝",
+  "ok": true,
+  "resolve": "wikidata-search:Q1151611",
+  "filename": "Achyranthes bidentata.jpg",
+  "commons_title": "File:Achyranthes bidentata.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AAchyranthes%20bidentata.jpg",
+  "license": "CC BY 2.5",
+  "license_url": "https://creativecommons.org/licenses/by/2.5",
+  "artist": "Stanislav Doronenko",
+  "credit": "Own work",
+  "sketch": "/media/herbs/niu_xi/sketch.png",
+  "source": "/media/herbs/niu_xi/source.jpg",
+  "attribution": "Image: Stanislav Doronenko / CC BY 2.5; pencil sketch derived locally for Herba Atlas."
+}

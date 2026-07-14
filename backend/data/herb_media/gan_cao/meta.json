@@ -1,0 +1,16 @@
+{
+  "key": "gan_cao",
+  "name_zh": "甘草",
+  "ok": true,
+  "resolve": "wikidata:Q1196166",
+  "filename": "Glycyrrhizauralensis.jpg",
+  "commons_title": "File:Glycyrrhizauralensis.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AGlycyrrhizauralensis.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Stickpen",
+  "credit": "Own work",
+  "sketch": "/media/herbs/gan_cao/sketch.png",
+  "source": "/media/herbs/gan_cao/source.jpg",
+  "attribution": "Image: Stickpen / Public domain; pencil sketch derived locally for Herba Atlas."
+}

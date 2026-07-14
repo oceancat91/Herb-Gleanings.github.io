@@ -1,0 +1,16 @@
+{
+  "key": "nuo_dao_gen",
+  "name_zh": "糯稻根",
+  "ok": true,
+  "resolve": "wikidata-search:Q161426",
+  "filename": "Reis-Rispe.jpg",
+  "commons_title": "File:Reis-Rispe.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AReis-Rispe.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Leo Michels",
+  "credit": "http://www.plantimag.de/dat/0207249.html",
+  "sketch": "/media/herbs/nuo_dao_gen/sketch.png",
+  "source": "/media/herbs/nuo_dao_gen/source.jpg",
+  "attribution": "Image: Leo Michels / Public domain; pencil sketch derived locally for Herba Atlas."
+}

@@ -1,0 +1,16 @@
+{
+  "key": "ai_di_cha",
+  "name_zh": "矮地茶",
+  "ok": true,
+  "resolve": "wikidata-search:Q858326",
+  "filename": "Ardisia japonica 01.jpg",
+  "commons_title": "File:Ardisia japonica 01.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AArdisia%20japonica%2001.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "Hamachidori",
+  "credit": "Own work",
+  "sketch": "/media/herbs/ai_di_cha/sketch.png",
+  "source": "/media/herbs/ai_di_cha/source.jpg",
+  "attribution": "Image: Hamachidori / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

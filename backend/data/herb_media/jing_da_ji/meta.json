@@ -1,0 +1,16 @@
+{
+  "key": "jing_da_ji",
+  "name_zh": "京大戟",
+  "ok": true,
+  "resolve": "commons-search:京大戟",
+  "filename": "MicroDrive1GB.jpg",
+  "commons_title": "File:MicroDrive1GB.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AMicroDrive1GB.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Photograph and postprocessing: Andreas Frank, Munich, Germany",
+  "credit": "Own work",
+  "sketch": "/media/herbs/jing_da_ji/sketch.png",
+  "source": "/media/herbs/jing_da_ji/source.jpg",
+  "attribution": "Image: Photograph and postprocessing: Andreas Frank, Munich, Germany / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

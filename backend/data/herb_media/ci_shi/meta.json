@@ -1,0 +1,16 @@
+{
+  "key": "ci_shi",
+  "name_zh": "磁石",
+  "ok": true,
+  "resolve": "wikidata-search:Q190426",
+  "filename": "Artist’s impression of the magnetar in the star cluster Westerlund 1.jpg",
+  "commons_title": "File:Artist’s impression of the magnetar in the star cluster Westerlund 1.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AArtist%E2%80%99s%20impression%20of%20the%20magnetar%20in%20the%20star%20cluster%20Westerlund%201.jpg",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0",
+  "artist": "ESO/L. Calçada",
+  "credit": "http://www.eso.org/public/images/eso1415a/",
+  "sketch": "/media/herbs/ci_shi/sketch.png",
+  "source": "/media/herbs/ci_shi/source.jpg",
+  "attribution": "Image: ESO/L. Calçada / CC BY 4.0; pencil sketch derived locally for Herba Atlas."
+}

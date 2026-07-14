@@ -1,0 +1,16 @@
+{
+  "key": "ding_xiang",
+  "name_zh": "丁香",
+  "ok": true,
+  "resolve": "wikidata-search:Q26736",
+  "filename": "Cengkih.jpg",
+  "commons_title": "File:Cengkih.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACengkih.jpg",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "artist": "Bayu Nugroho",
+  "credit": "Own work",
+  "sketch": "/media/herbs/ding_xiang/sketch.png",
+  "source": "/media/herbs/ding_xiang/source.jpg",
+  "attribution": "Image: Bayu Nugroho / CC BY-SA 4.0; pencil sketch derived locally for Herba Atlas."
+}

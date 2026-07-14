@@ -1,0 +1,16 @@
+{
+  "key": "bing_lang",
+  "name_zh": "槟榔",
+  "ok": true,
+  "resolve": "wikidata-search:Q156969",
+  "filename": "Beetle palm with nut bunch.jpg",
+  "commons_title": "File:Beetle palm with nut bunch.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ABeetle%20palm%20with%20nut%20bunch.jpg",
+  "license": "CC BY-SA 2.5",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+  "artist": "Pratheepps",
+  "credit": "Own work",
+  "sketch": "/media/herbs/bing_lang/sketch.png",
+  "source": "/media/herbs/bing_lang/source.jpg",
+  "attribution": "Image: Pratheepps / CC BY-SA 2.5; pencil sketch derived locally for Herba Atlas."
+}

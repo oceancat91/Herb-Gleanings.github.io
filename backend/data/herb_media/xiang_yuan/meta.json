@@ -1,0 +1,16 @@
+{
+  "key": "xiang_yuan",
+  "name_zh": "香橼",
+  "ok": true,
+  "resolve": "wikidata-search:Q150064",
+  "filename": "Citrus medicus fruit.jpg",
+  "commons_title": "File:Citrus medicus fruit.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACitrus%20medicus%20fruit.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "de:Benutzer:K reger (Klaus Reger)",
+  "credit": "German Wikipedia",
+  "sketch": "/media/herbs/xiang_yuan/sketch.png",
+  "source": "/media/herbs/xiang_yuan/source.jpg",
+  "attribution": "Image: de:Benutzer:K reger (Klaus Reger) / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

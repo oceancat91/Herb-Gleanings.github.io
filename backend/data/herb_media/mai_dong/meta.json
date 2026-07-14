@@ -1,0 +1,16 @@
+{
+  "key": "mai_dong",
+  "name_zh": "麦冬",
+  "ok": true,
+  "resolve": "wikidata-search:Q537448",
+  "filename": "Japonska kačja brada.jpg",
+  "commons_title": "File:Japonska kačja brada.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AJaponska%20ka%C4%8Dja%20brada.jpg",
+  "license": "CC0",
+  "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "artist": "Shabicht",
+  "credit": "Own work",
+  "sketch": "/media/herbs/mai_dong/sketch.png",
+  "source": "/media/herbs/mai_dong/source.jpg",
+  "attribution": "Image: Shabicht / CC0; pencil sketch derived locally for Herba Atlas."
+}

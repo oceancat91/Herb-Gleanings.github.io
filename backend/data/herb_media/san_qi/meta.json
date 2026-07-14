@@ -1,0 +1,16 @@
+{
+  "key": "san_qi",
+  "name_zh": "三七",
+  "ok": true,
+  "resolve": "wikidata-search:Q15551438",
+  "filename": "Panax notoginseng.png",
+  "commons_title": "File:Panax notoginseng.png",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3APanax%20notoginseng.png",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "中国科学院植物研究所",
+  "credit": "《中国植物志》",
+  "sketch": "/media/herbs/san_qi/sketch.png",
+  "source": "/media/herbs/san_qi/source.png",
+  "attribution": "Image: 中国科学院植物研究所 / Public domain; pencil sketch derived locally for Herba Atlas."
+}

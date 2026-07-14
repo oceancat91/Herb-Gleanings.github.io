@@ -1,0 +1,16 @@
+{
+  "key": "pi_pa_ye",
+  "name_zh": "枇杷叶",
+  "ok": true,
+  "resolve": "wikidata-search:Q11105294",
+  "filename": "Callicarpa kochiana 319370829.jpg",
+  "commons_title": "File:Callicarpa kochiana 319370829.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACallicarpa%20kochiana%20319370829.jpg",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0",
+  "artist": "Andrew Lai",
+  "credit": "https://www.inaturalist.org/photos/319370829",
+  "sketch": "/media/herbs/pi_pa_ye/sketch.png",
+  "source": "/media/herbs/pi_pa_ye/source.jpg",
+  "attribution": "Image: Andrew Lai / CC BY 4.0; pencil sketch derived locally for Herba Atlas."
+}

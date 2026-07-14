@@ -1,0 +1,16 @@
+{
+  "key": "xian_mao",
+  "name_zh": "仙茅",
+  "ok": true,
+  "resolve": "wikidata-search:Q5194664",
+  "filename": "Curculigo orchioides.jpg",
+  "commons_title": "File:Curculigo orchioides.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACurculigo%20orchioides.jpg",
+  "license": "CC BY-SA 2.5",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+  "artist": "Viren Vaz (self)",
+  "credit": "Made by 'self' at CEC, Mumbai",
+  "sketch": "/media/herbs/xian_mao/sketch.png",
+  "source": "/media/herbs/xian_mao/source.jpg",
+  "attribution": "Image: Viren Vaz (self) / CC BY-SA 2.5; pencil sketch derived locally for Herba Atlas."
+}

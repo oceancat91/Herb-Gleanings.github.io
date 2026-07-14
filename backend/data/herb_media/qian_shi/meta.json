@@ -1,0 +1,16 @@
+{
+  "key": "qian_shi",
+  "name_zh": "芡实",
+  "ok": true,
+  "resolve": "wikidata-search:Q310795",
+  "filename": "Euryale ferox.jpg",
+  "commons_title": "File:Euryale ferox.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AEuryale%20ferox.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "John Sims",
+  "credit": "Curtis's botanical magazine vol. 35-36 tabl. 1477 from www.botanicus.org",
+  "sketch": "/media/herbs/qian_shi/sketch.png",
+  "source": "/media/herbs/qian_shi/source.jpg",
+  "attribution": "Image: John Sims / Public domain; pencil sketch derived locally for Herba Atlas."
+}

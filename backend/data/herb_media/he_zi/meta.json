@@ -1,0 +1,16 @@
+{
+  "key": "he_zi",
+  "name_zh": "诃子",
+  "ok": true,
+  "resolve": "wikidata:Q311577",
+  "filename": "Khizr.JPG",
+  "commons_title": "File:Khizr.JPG",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AKhizr.JPG",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "AnonymousUnknown author",
+  "credit": "https://collections.vam.ac.uk/item/O85611/painting-khwaja-khizr-khan/",
+  "sketch": "/media/herbs/he_zi/sketch.png",
+  "source": "/media/herbs/he_zi/source.jpg",
+  "attribution": "Image: AnonymousUnknown author / Public domain; pencil sketch derived locally for Herba Atlas."
+}

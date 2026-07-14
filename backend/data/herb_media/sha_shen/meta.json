@@ -1,0 +1,16 @@
+{
+  "key": "sha_shen",
+  "name_zh": "北沙参",
+  "ok": true,
+  "resolve": "wikidata-search:Q15548072",
+  "filename": "Glehnia littoralis.jpg",
+  "commons_title": "File:Glehnia littoralis.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AGlehnia%20littoralis.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Pieria(Uploader and Photographer)",
+  "credit": "Pieria(Uploader and Photographer)",
+  "sketch": "/media/herbs/sha_shen/sketch.png",
+  "source": "/media/herbs/sha_shen/source.jpg",
+  "attribution": "Image: Pieria(Uploader and Photographer) / Public domain; pencil sketch derived locally for Herba Atlas."
+}

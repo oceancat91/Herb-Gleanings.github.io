@@ -1,0 +1,16 @@
+{
+  "key": "cao_guo",
+  "name_zh": "草果",
+  "ok": true,
+  "resolve": "wikidata-search:Q1369048",
+  "filename": "BlackCardamom.jpg",
+  "commons_title": "File:BlackCardamom.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ABlackCardamom.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "Brian Arthur",
+  "credit": "en:file:BlackCardamom.jpg",
+  "sketch": "/media/herbs/cao_guo/sketch.png",
+  "source": "/media/herbs/cao_guo/source.jpg",
+  "attribution": "Image: Brian Arthur / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

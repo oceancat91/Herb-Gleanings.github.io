@@ -1,0 +1,16 @@
+{
+  "key": "bai_ji",
+  "name_zh": "白及",
+  "ok": true,
+  "resolve": "wikidata-search:Q159003",
+  "filename": "Bletilla striata2.jpg",
+  "commons_title": "File:Bletilla striata2.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ABletilla%20striata2.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "KENPEI",
+  "credit": "KENPEI's photo",
+  "sketch": "/media/herbs/bai_ji/sketch.png",
+  "source": "/media/herbs/bai_ji/source.jpg",
+  "attribution": "Image: KENPEI / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

@@ -1,0 +1,16 @@
+{
+  "key": "wu_wei_zi",
+  "name_zh": "五味子",
+  "ok": true,
+  "resolve": "wikidata:Q900986",
+  "filename": "Schisandra sinensis.jpg",
+  "commons_title": "File:Schisandra sinensis.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ASchisandra%20sinensis.jpg",
+  "license": "CC BY 2.5",
+  "license_url": "https://creativecommons.org/licenses/by/2.5",
+  "artist": "Doronenko",
+  "credit": "Own work",
+  "sketch": "/media/herbs/wu_wei_zi/sketch.png",
+  "source": "/media/herbs/wu_wei_zi/source.jpg",
+  "attribution": "Image: Doronenko / CC BY 2.5; pencil sketch derived locally for Herba Atlas."
+}

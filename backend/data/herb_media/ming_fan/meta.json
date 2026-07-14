@@ -1,0 +1,16 @@
+{
+  "key": "ming_fan",
+  "name_zh": "明矾",
+  "ok": true,
+  "resolve": "wikidata-search:Q26840944",
+  "filename": "Potassium alum.jpg",
+  "commons_title": "File:Potassium alum.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3APotassium%20alum.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "W. Oelen",
+  "credit": "http://woelen.homescience.net/science/index.html",
+  "sketch": "/media/herbs/ming_fan/sketch.png",
+  "source": "/media/herbs/ming_fan/source.jpg",
+  "attribution": "Image: W. Oelen / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

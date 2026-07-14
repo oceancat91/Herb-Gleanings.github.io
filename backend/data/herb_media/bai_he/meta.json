@@ -1,0 +1,16 @@
+{
+  "key": "bai_he",
+  "name_zh": "百合",
+  "ok": true,
+  "resolve": "wikidata-search:Q5194627",
+  "filename": "LiliumBulbiferumCroceumBologna.jpg",
+  "commons_title": "File:LiliumBulbiferumCroceumBologna.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ALiliumBulbiferumCroceumBologna.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Denis Barthel",
+  "credit": "Own work",
+  "sketch": "/media/herbs/bai_he/sketch.png",
+  "source": "/media/herbs/bai_he/source.jpg",
+  "attribution": "Image: Denis Barthel / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

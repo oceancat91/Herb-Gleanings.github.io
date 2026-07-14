@@ -1,0 +1,16 @@
+{
+  "key": "wu_mei",
+  "name_zh": "乌梅",
+  "ok": true,
+  "resolve": "wikidata-search:Q157763",
+  "filename": "Prunus mume.JPG",
+  "commons_title": "File:Prunus mume.JPG",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3APrunus%20mume.JPG",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "Kakidai",
+  "credit": "Own work",
+  "sketch": "/media/herbs/wu_mei/sketch.png",
+  "source": "/media/herbs/wu_mei/source.jpg",
+  "attribution": "Image: Kakidai / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

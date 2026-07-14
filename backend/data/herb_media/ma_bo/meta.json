@@ -1,0 +1,16 @@
+{
+  "key": "ma_bo",
+  "name_zh": "马勃",
+  "ok": true,
+  "resolve": "wikidata-search:Q1759052",
+  "filename": "Lycoperdon umbrinum.JPG",
+  "commons_title": "File:Lycoperdon umbrinum.JPG",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ALycoperdon%20umbrinum.JPG",
+  "license": "CC BY-SA 2.5",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+  "artist": "MichaelMaggs",
+  "credit": "Own work",
+  "sketch": "/media/herbs/ma_bo/sketch.png",
+  "source": "/media/herbs/ma_bo/source.jpg",
+  "attribution": "Image: MichaelMaggs / CC BY-SA 2.5; pencil sketch derived locally for Herba Atlas."
+}

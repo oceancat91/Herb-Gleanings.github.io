@@ -1,0 +1,16 @@
+{
+  "key": "shi_gao_sheng",
+  "name_zh": "生石膏",
+  "ok": true,
+  "resolve": "wikidata-search:Q82658",
+  "filename": "Gypse Caresse.jpg",
+  "commons_title": "File:Gypse Caresse.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AGypse%20Caresse.jpg",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "artist": "Didier Descouens",
+  "credit": "Own work",
+  "sketch": "/media/herbs/shi_gao_sheng/sketch.png",
+  "source": "/media/herbs/shi_gao_sheng/source.jpg",
+  "attribution": "Image: Didier Descouens / CC BY-SA 4.0; pencil sketch derived locally for Herba Atlas."
+}

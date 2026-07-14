@@ -1,0 +1,16 @@
+{
+  "key": "feng_mi",
+  "name_zh": "蜂蜜",
+  "ok": true,
+  "resolve": "wikidata-search:Q10987",
+  "filename": "Runny hunny.jpg",
+  "commons_title": "File:Runny hunny.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ARunny%20hunny.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Scott Bauer, USDA ARS",
+  "credit": "This image was released by the Agricultural Research Service, the research agency of the United States Department of Agriculture, with the ID K7240-6 (next).",
+  "sketch": "/media/herbs/feng_mi/sketch.png",
+  "source": "/media/herbs/feng_mi/source.jpg",
+  "attribution": "Image: Scott Bauer, USDA ARS / Public domain; pencil sketch derived locally for Herba Atlas."
+}

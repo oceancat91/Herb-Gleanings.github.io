@@ -1,0 +1,16 @@
+{
+  "key": "kun_bu",
+  "name_zh": "昆布",
+  "ok": true,
+  "resolve": "wikidata-search:Q11260230",
+  "filename": "Kelp in Neskowin.jpg",
+  "commons_title": "File:Kelp in Neskowin.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AKelp%20in%20Neskowin.jpg",
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0",
+  "artist": "Anna Maj Michelson, Portland, United States",
+  "credit": "https://www.flickr.com/photos/63242143@N00/382953",
+  "sketch": "/media/herbs/kun_bu/sketch.png",
+  "source": "/media/herbs/kun_bu/source.jpg",
+  "attribution": "Image: Anna Maj Michelson, Portland, United States / CC BY 2.0; pencil sketch derived locally for Herba Atlas."
+}

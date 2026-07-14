@@ -1,0 +1,16 @@
+{
+  "key": "lu_rong",
+  "name_zh": "鹿茸",
+  "ok": true,
+  "resolve": "wikidata-search:Q4344358",
+  "filename": "Velvet-antler.jpg",
+  "commons_title": "File:Velvet-antler.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AVelvet-antler.jpg",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "artist": "Jazzix",
+  "credit": "Own work",
+  "sketch": "/media/herbs/lu_rong/sketch.png",
+  "source": "/media/herbs/lu_rong/source.jpg",
+  "attribution": "Image: Jazzix / CC BY-SA 4.0; pencil sketch derived locally for Herba Atlas."
+}

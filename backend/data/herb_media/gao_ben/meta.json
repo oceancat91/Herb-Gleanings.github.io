@@ -1,0 +1,16 @@
+{
+  "key": "gao_ben",
+  "name_zh": "藁本",
+  "ok": true,
+  "resolve": "commons-search:Ligustici",
+  "filename": "Otiorhynchus ligustici.jpg",
+  "commons_title": "File:Otiorhynchus ligustici.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AOtiorhynchus%20ligustici.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Encyclopædia Britannica",
+  "credit": "Encyclopædia Britannica (vol. 6, p. 675)",
+  "sketch": "/media/herbs/gao_ben/sketch.png",
+  "source": "/media/herbs/gao_ben/source.jpg",
+  "attribution": "Image: Encyclopædia Britannica / Public domain; pencil sketch derived locally for Herba Atlas."
+}

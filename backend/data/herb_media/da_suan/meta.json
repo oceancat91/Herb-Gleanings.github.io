@@ -1,0 +1,16 @@
+{
+  "key": "da_suan",
+  "name_zh": "大蒜",
+  "ok": true,
+  "resolve": "wikidata-search:Q23400",
+  "filename": "Garlic bulbs and cloves.jpg",
+  "commons_title": "File:Garlic bulbs and cloves.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AGarlic%20bulbs%20and%20cloves.jpg",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "artist": "Ivar Leidus",
+  "credit": "Own work",
+  "sketch": "/media/herbs/da_suan/sketch.png",
+  "source": "/media/herbs/da_suan/source.jpg",
+  "attribution": "Image: Ivar Leidus / CC BY-SA 4.0; pencil sketch derived locally for Herba Atlas."
+}

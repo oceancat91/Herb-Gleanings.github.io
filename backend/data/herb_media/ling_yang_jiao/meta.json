@@ -1,0 +1,16 @@
+{
+  "key": "ling_yang_jiao",
+  "name_zh": "羚羊角",
+  "ok": true,
+  "resolve": "commons-search:羚羊角",
+  "filename": "Ling yang.jpg",
+  "commons_title": "File:Ling yang.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ALing%20yang.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "ProjectManhattan",
+  "credit": "Own work",
+  "sketch": "/media/herbs/ling_yang_jiao/sketch.png",
+  "source": "/media/herbs/ling_yang_jiao/source.jpg",
+  "attribution": "Image: ProjectManhattan / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

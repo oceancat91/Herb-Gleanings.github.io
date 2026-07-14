@@ -1,0 +1,16 @@
+{
+  "key": "su_mu",
+  "name_zh": "苏木",
+  "ok": true,
+  "resolve": "wikidata-search:Q56088062",
+  "filename": "Caesalpinia sappan1.jpg",
+  "commons_title": "File:Caesalpinia sappan1.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACaesalpinia%20sappan1.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "Vinayaraj",
+  "credit": "Own work",
+  "sketch": "/media/herbs/su_mu/sketch.png",
+  "source": "/media/herbs/su_mu/source.jpg",
+  "attribution": "Image: Vinayaraj / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

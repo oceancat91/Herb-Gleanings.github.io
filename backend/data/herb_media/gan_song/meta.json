@@ -1,0 +1,16 @@
+{
+  "key": "gan_song",
+  "name_zh": "甘松",
+  "ok": true,
+  "resolve": "wikidata-search:Q24853263",
+  "filename": "Nardostachys grandiflora.jpg",
+  "commons_title": "File:Nardostachys grandiflora.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ANardostachys%20grandiflora.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Joseph Dalton Hooker (1817-1911)",
+  "credit": "Curtis's botanical magazine vol. 107 ser. 3 nr. 37 tabl. 6564 from www.botanicus.org",
+  "sketch": "/media/herbs/gan_song/sketch.png",
+  "source": "/media/herbs/gan_song/source.jpg",
+  "attribution": "Image: Joseph Dalton Hooker (1817-1911) / Public domain; pencil sketch derived locally for Herba Atlas."
+}

@@ -1,0 +1,16 @@
+{
+  "key": "bai_tou_weng",
+  "name_zh": "白头翁",
+  "ok": true,
+  "resolve": "wikidata-search:Q24853180",
+  "filename": "Pulsatilla chinensis.jpg",
+  "commons_title": "File:Pulsatilla chinensis.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3APulsatilla%20chinensis.jpg",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0",
+  "artist": "zhangshen",
+  "credit": "https://www.inaturalist.org/photos/65876488",
+  "sketch": "/media/herbs/bai_tou_weng/sketch.png",
+  "source": "/media/herbs/bai_tou_weng/source.jpg",
+  "attribution": "Image: zhangshen / CC BY 4.0; pencil sketch derived locally for Herba Atlas."
+}

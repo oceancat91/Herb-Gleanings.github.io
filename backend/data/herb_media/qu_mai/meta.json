@@ -1,0 +1,16 @@
+{
+  "key": "qu_mai",
+  "name_zh": "瞿麦",
+  "ok": true,
+  "resolve": "wikidata-search:Q161878",
+  "filename": "Dianthus superbus 140805a.jpg",
+  "commons_title": "File:Dianthus superbus 140805a.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ADianthus%20superbus%20140805a.jpg",
+  "license": "CC BY-SA 2.5",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+  "artist": "Bernd Haynold",
+  "credit": "Own work",
+  "sketch": "/media/herbs/qu_mai/sketch.png",
+  "source": "/media/herbs/qu_mai/source.jpg",
+  "attribution": "Image: Bernd Haynold / CC BY-SA 2.5; pencil sketch derived locally for Herba Atlas."
+}

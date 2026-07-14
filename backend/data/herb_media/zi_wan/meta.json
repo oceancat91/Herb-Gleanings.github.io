@@ -1,0 +1,16 @@
+{
+  "key": "zi_wan",
+  "name_zh": "紫菀",
+  "ok": true,
+  "resolve": "wikidata-search:Q189368",
+  "filename": "Aster tataricus1.jpg",
+  "commons_title": "File:Aster tataricus1.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AAster%20tataricus1.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "KENPEI",
+  "credit": "KENPEI's photo",
+  "sketch": "/media/herbs/zi_wan/sketch.png",
+  "source": "/media/herbs/zi_wan/source.jpg",
+  "attribution": "Image: KENPEI / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

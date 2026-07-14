@@ -1,0 +1,16 @@
+{
+  "key": "wu_gong",
+  "name_zh": "蜈蚣",
+  "ok": true,
+  "resolve": "wikidata-search:Q43447",
+  "filename": "Lithobius forficatus.jpg",
+  "commons_title": "File:Lithobius forficatus.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ALithobius%20forficatus.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "",
+  "credit": "",
+  "sketch": "/media/herbs/wu_gong/sketch.png",
+  "source": "/media/herbs/wu_gong/source.jpg",
+  "attribution": "Image: Wikimedia Commons / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

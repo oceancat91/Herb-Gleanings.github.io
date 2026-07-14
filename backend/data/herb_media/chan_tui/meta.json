@@ -1,0 +1,16 @@
+{
+  "key": "chan_tui",
+  "name_zh": "蝉蜕",
+  "ok": true,
+  "resolve": "commons-search:Cicadae Periostracum",
+  "filename": "Cicada molting animated-2.gif",
+  "commons_title": "File:Cicada molting animated-2.gif",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACicada%20molting%20animated-2.gif",
+  "license": "CC BY 2.5",
+  "license_url": "https://creativecommons.org/licenses/by/2.5",
+  "artist": "T. N. Mundhenk",
+  "credit": "Edited version of File:Cicada molting animated.gif",
+  "sketch": "/media/herbs/chan_tui/sketch.png",
+  "source": "/media/herbs/chan_tui/source.jpg",
+  "attribution": "Image: T. N. Mundhenk / CC BY 2.5; pencil sketch derived locally for Herba Atlas."
+}

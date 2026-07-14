@@ -1,0 +1,16 @@
+{
+  "key": "huang_lian",
+  "name_zh": "黄连",
+  "ok": true,
+  "resolve": "wikidata-search:Q156807",
+  "filename": "Chelidonium majus bgiu.jpg",
+  "commons_title": "File:Chelidonium majus bgiu.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AChelidonium%20majus%20bgiu.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "",
+  "credit": "",
+  "sketch": "/media/herbs/huang_lian/sketch.png",
+  "source": "/media/herbs/huang_lian/source.jpg",
+  "attribution": "Image: Wikimedia Commons / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

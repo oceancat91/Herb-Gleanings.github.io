@@ -1,0 +1,16 @@
+{
+  "key": "ai_ye",
+  "name_zh": "艾叶",
+  "ok": true,
+  "resolve": "wikidata-search:Q26663",
+  "filename": "ArtemisiaVulgaris.jpg",
+  "commons_title": "File:ArtemisiaVulgaris.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AArtemisiaVulgaris.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "",
+  "credit": "",
+  "sketch": "/media/herbs/ai_ye/sketch.png",
+  "source": "/media/herbs/ai_ye/source.jpg",
+  "attribution": "Image: Wikimedia Commons / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

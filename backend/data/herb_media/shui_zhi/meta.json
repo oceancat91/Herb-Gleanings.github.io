@@ -1,0 +1,16 @@
+{
+  "key": "shui_zhi",
+  "name_zh": "水蛭",
+  "ok": true,
+  "resolve": "wikidata-search:Q43012",
+  "filename": "Leech-china.JPG",
+  "commons_title": "File:Leech-china.JPG",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ALeech-china.JPG",
+  "license": "CC BY-SA 2.5",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.5",
+  "artist": "Shizhao",
+  "credit": "Own work",
+  "sketch": "/media/herbs/shui_zhi/sketch.png",
+  "source": "/media/herbs/shui_zhi/source.jpg",
+  "attribution": "Image: Shizhao / CC BY-SA 2.5; pencil sketch derived locally for Herba Atlas."
+}

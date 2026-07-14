@@ -1,0 +1,16 @@
+{
+  "key": "yuan_hua",
+  "name_zh": "芫花",
+  "ok": true,
+  "resolve": "wikidata-search:Q1044438",
+  "filename": "Daphne genkwa01.jpg",
+  "commons_title": "File:Daphne genkwa01.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ADaphne%20genkwa01.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "",
+  "credit": "",
+  "sketch": "/media/herbs/yuan_hua/sketch.png",
+  "source": "/media/herbs/yuan_hua/source.jpg",
+  "attribution": "Image: Wikimedia Commons / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

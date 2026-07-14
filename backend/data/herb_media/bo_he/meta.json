@@ -1,0 +1,16 @@
+{
+  "key": "bo_he",
+  "name_zh": "薄荷",
+  "ok": true,
+  "resolve": "wikidata-search:Q47859",
+  "filename": "Mentha longifolia 2005.08.02 09.53.56.jpg",
+  "commons_title": "File:Mentha longifolia 2005.08.02 09.53.56.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AMentha%20longifolia%202005.08.02%2009.53.56.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Michael Becker",
+  "credit": "taken by Michael Becker",
+  "sketch": "/media/herbs/bo_he/sketch.png",
+  "source": "/media/herbs/bo_he/source.jpg",
+  "attribution": "Image: Michael Becker / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

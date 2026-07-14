@@ -1,0 +1,16 @@
+{
+  "key": "gui_zhi_mu",
+  "name_zh": "桂枝加芍",
+  "ok": true,
+  "resolve": "commons-search:桂枝加芍",
+  "filename": "CADAL11106078 粵桂印象.djvu",
+  "commons_title": "File:CADAL11106078 粵桂印象.djvu",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACADAL11106078%20%E7%B2%B5%E6%A1%82%E5%8D%B0%E8%B1%A1.djvu",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "潘文安",
+  "credit": "Sichuan University",
+  "sketch": "/media/herbs/gui_zhi_mu/sketch.png",
+  "source": "/media/herbs/gui_zhi_mu/source.jpg",
+  "attribution": "Image: 潘文安 / Public domain; pencil sketch derived locally for Herba Atlas."
+}

@@ -1,0 +1,16 @@
+{
+  "key": "shan_zha",
+  "name_zh": "山楂",
+  "ok": true,
+  "resolve": "wikidata-search:Q1141735",
+  "filename": "HawthornFruit.JPG",
+  "commons_title": "File:HawthornFruit.JPG",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AHawthornFruit.JPG",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Yongxinge",
+  "credit": "Own work",
+  "sketch": "/media/herbs/shan_zha/sketch.png",
+  "source": "/media/herbs/shan_zha/source.jpg",
+  "attribution": "Image: Yongxinge / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

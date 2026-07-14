@@ -1,0 +1,16 @@
+{
+  "key": "ge_gen",
+  "name_zh": "葛根",
+  "ok": true,
+  "resolve": "wikidata-search:Q15198502",
+  "filename": "Flowering kudzu.jpg",
+  "commons_title": "File:Flowering kudzu.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AFlowering%20kudzu.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Photo by Peggy Greb.",
+  "credit": "This image was released by the Agricultural Research Service, the research agency of the United States Department of Agriculture, with the ID k9675-1 (next).",
+  "sketch": "/media/herbs/ge_gen/sketch.png",
+  "source": "/media/herbs/ge_gen/source.jpg",
+  "attribution": "Image: Photo by Peggy Greb. / Public domain; pencil sketch derived locally for Herba Atlas."
+}

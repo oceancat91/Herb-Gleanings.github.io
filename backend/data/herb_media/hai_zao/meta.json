@@ -1,0 +1,16 @@
+{
+  "key": "hai_zao",
+  "name_zh": "海藻",
+  "ok": true,
+  "resolve": "wikidata-search:Q237169",
+  "filename": "Seaweed.jpg",
+  "commons_title": "File:Seaweed.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ASeaweed.jpg",
+  "license": "CC BY-SA 1.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/1.0",
+  "artist": "",
+  "credit": "",
+  "sketch": "/media/herbs/hai_zao/sketch.png",
+  "source": "/media/herbs/hai_zao/source.jpg",
+  "attribution": "Image: Wikimedia Commons / CC BY-SA 1.0; pencil sketch derived locally for Herba Atlas."
+}

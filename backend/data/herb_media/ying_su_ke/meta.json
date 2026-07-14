@@ -1,0 +1,16 @@
+{
+  "key": "ying_su_ke",
+  "name_zh": "罂粟壳",
+  "ok": true,
+  "resolve": "wikidata-search:Q131584",
+  "filename": "Papaver somniferum flowers.jpg",
+  "commons_title": "File:Papaver somniferum flowers.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3APapaver%20somniferum%20flowers.jpg",
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0",
+  "artist": "tanja niggendijker from apeldoorn, the netherlands",
+  "credit": "poppies\n\nUploaded by Epibase",
+  "sketch": "/media/herbs/ying_su_ke/sketch.png",
+  "source": "/media/herbs/ying_su_ke/source.jpg",
+  "attribution": "Image: tanja niggendijker from apeldoorn, the netherlands / CC BY 2.0; pencil sketch derived locally for Herba Atlas."
+}

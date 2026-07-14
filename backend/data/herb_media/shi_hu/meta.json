@@ -1,0 +1,16 @@
+{
+  "key": "shi_hu",
+  "name_zh": "石斛",
+  "ok": true,
+  "resolve": "wikidata-search:Q636713",
+  "filename": "Dendrobium nobile (12863000234).jpg",
+  "commons_title": "File:Dendrobium nobile (12863000234).jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ADendrobium%20nobile%20%2812863000234%29.jpg",
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0",
+  "artist": "Maja Dumat from Deutschland (Germany)",
+  "credit": "Dendrobium nobile",
+  "sketch": "/media/herbs/shi_hu/sketch.png",
+  "source": "/media/herbs/shi_hu/source.jpg",
+  "attribution": "Image: Maja Dumat from Deutschland (Germany) / CC BY 2.0; pencil sketch derived locally for Herba Atlas."
+}

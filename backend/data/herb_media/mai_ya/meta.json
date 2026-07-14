@@ -1,0 +1,16 @@
+{
+  "key": "mai_ya",
+  "name_zh": "麦芽",
+  "ok": true,
+  "resolve": "wikidata-search:Q11577",
+  "filename": "Champ d'Orge carrée (Hordeum vulgare).jpg",
+  "commons_title": "File:Champ d'Orge carrée (Hordeum vulgare).jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AChamp%20d%27Orge%20carr%C3%A9e%20%28Hordeum%20vulgare%29.jpg",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "artist": "JackyM59",
+  "credit": "Own work",
+  "sketch": "/media/herbs/mai_ya/sketch.png",
+  "source": "/media/herbs/mai_ya/source.jpg",
+  "attribution": "Image: JackyM59 / CC BY-SA 4.0; pencil sketch derived locally for Herba Atlas."
+}

@@ -1,0 +1,16 @@
+{
+  "key": "ban_mao",
+  "name_zh": "斑蝥",
+  "ok": true,
+  "resolve": "wikidata-search:Q297115",
+  "filename": "Hycleus lugens, Meloidae.jpg",
+  "commons_title": "File:Hycleus lugens, Meloidae.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AHycleus%20lugens%2C%20Meloidae.jpg",
+  "license": "GFDL 1.2",
+  "license_url": "http://www.gnu.org/licenses/old-licenses/fdl-1.2.html",
+  "artist": "Muhammad Mahdi Karim",
+  "credit": "Own work",
+  "sketch": "/media/herbs/ban_mao/sketch.png",
+  "source": "/media/herbs/ban_mao/source.jpg",
+  "attribution": "Image: Muhammad Mahdi Karim / GFDL 1.2; pencil sketch derived locally for Herba Atlas."
+}

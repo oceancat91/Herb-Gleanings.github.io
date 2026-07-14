@@ -1,0 +1,16 @@
+{
+  "key": "fei_zi",
+  "name_zh": "榧子",
+  "ok": true,
+  "resolve": "wikidata-search:Q1548337",
+  "filename": "Torreya grandis.jpg",
+  "commons_title": "File:Torreya grandis.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ATorreya%20grandis.jpg",
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0",
+  "artist": "Farm",
+  "credit": "Own work",
+  "sketch": "/media/herbs/fei_zi/sketch.png",
+  "source": "/media/herbs/fei_zi/source.jpg",
+  "attribution": "Image: Farm / CC BY 3.0; pencil sketch derived locally for Herba Atlas."
+}

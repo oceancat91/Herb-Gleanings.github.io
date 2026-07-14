@@ -1,0 +1,16 @@
+{
+  "key": "ma_huang",
+  "name_zh": "麻黄",
+  "ok": true,
+  "resolve": "wikidata:Q2602813",
+  "filename": "Ephedra sinica alexlomas.jpg",
+  "commons_title": "File:Ephedra sinica alexlomas.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AEphedra%20sinica%20alexlomas.jpg",
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0",
+  "artist": "alexlomas on Flickr",
+  "credit": "Flickr",
+  "sketch": "/media/herbs/ma_huang/sketch.png",
+  "source": "/media/herbs/ma_huang/source.jpg",
+  "attribution": "Image: alexlomas on Flickr / CC BY 2.0; pencil sketch derived locally for Herba Atlas."
+}

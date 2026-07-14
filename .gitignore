@@ -1,0 +1,24 @@
+# 密钥与本地配置
+backend/.env
+.env
+.backend.pid
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 数据库运行文件
+backend/data/*.db-journal
+backend/data/*.db-wal
+backend/data/*.db-shm
+
+# 编辑器
+.vscode/
+.idea/
+
+# 视频/大文件
+*.mp4
+
+# 数据库运行文件
+backend/data/herbs.db

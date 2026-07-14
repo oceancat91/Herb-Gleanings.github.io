@@ -1,0 +1,16 @@
+{
+  "key": "gui_jia",
+  "name_zh": "龟甲",
+  "ok": true,
+  "resolve": "wikidata-search:Q1306285",
+  "filename": "P1080933 Cassida nebulosa.jpg",
+  "commons_title": "File:P1080933 Cassida nebulosa.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AP1080933%20Cassida%20nebulosa.jpg",
+  "license": "Attribution",
+  "license_url": "",
+  "artist": "Darius Baužys",
+  "credit": "Own work",
+  "sketch": "/media/herbs/gui_jia/sketch.png",
+  "source": "/media/herbs/gui_jia/source.jpg",
+  "attribution": "Image: Darius Baužys / Attribution; pencil sketch derived locally for Herba Atlas."
+}

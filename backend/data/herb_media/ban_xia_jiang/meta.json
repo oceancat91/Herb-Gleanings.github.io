@@ -1,0 +1,16 @@
+{
+  "key": "ban_xia_jiang",
+  "name_zh": "姜半夏",
+  "ok": true,
+  "resolve": "commons-search:姜半夏",
+  "filename": "NDL1047073 皇漢医学 第2巻 part3.pdf",
+  "commons_title": "File:NDL1047073 皇漢医学 第2巻 part3.pdf",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ANDL1047073%20%E7%9A%87%E6%BC%A2%E5%8C%BB%E5%AD%A6%20%E7%AC%AC2%E5%B7%BB%20part3.pdf",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "湯本, 求真, 1876-1941",
+  "credit": "National Diet Library",
+  "sketch": "/media/herbs/ban_xia_jiang/sketch.png",
+  "source": "/media/herbs/ban_xia_jiang/source.jpg",
+  "attribution": "Image: 湯本, 求真, 1876-1941 / Public domain; pencil sketch derived locally for Herba Atlas."
+}

@@ -1,0 +1,16 @@
+{
+  "key": "ban_bian_lian",
+  "name_zh": "半边莲",
+  "ok": true,
+  "resolve": "wikidata-search:Q3268084",
+  "filename": "Lobelia chinensis 01.jpg",
+  "commons_title": "File:Lobelia chinensis 01.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ALobelia%20chinensis%2001.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "Lokionly",
+  "credit": "Own work",
+  "sketch": "/media/herbs/ban_bian_lian/sketch.png",
+  "source": "/media/herbs/ban_bian_lian/source.jpg",
+  "attribution": "Image: Lokionly / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

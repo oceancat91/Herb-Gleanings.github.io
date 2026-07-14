@@ -1,0 +1,16 @@
+{
+  "key": "dang_shen",
+  "name_zh": "党参",
+  "ok": true,
+  "resolve": "wikidata:Q1076269",
+  "filename": "Codonopsis pilosula flowers.jpg",
+  "commons_title": "File:Codonopsis pilosula flowers.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACodonopsis%20pilosula%20flowers.jpg",
+  "license": "CC BY 2.5",
+  "license_url": "https://creativecommons.org/licenses/by/2.5",
+  "artist": "Doronenko",
+  "credit": "Own work",
+  "sketch": "/media/herbs/dang_shen/sketch.png",
+  "source": "/media/herbs/dang_shen/source.jpg",
+  "attribution": "Image: Doronenko / CC BY 2.5; pencil sketch derived locally for Herba Atlas."
+}

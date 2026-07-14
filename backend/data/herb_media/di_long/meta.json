@@ -1,0 +1,16 @@
+{
+  "key": "di_long",
+  "name_zh": "地龙",
+  "ok": true,
+  "resolve": "wikidata-search:Q1368905",
+  "filename": "Pterocactus kuntzei.jpg",
+  "commons_title": "File:Pterocactus kuntzei.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3APterocactus%20kuntzei.jpg",
+  "license": "CC BY 2.5",
+  "license_url": "https://creativecommons.org/licenses/by/2.5",
+  "artist": "Michael Wolf",
+  "credit": "Own work",
+  "sketch": "/media/herbs/di_long/sketch.png",
+  "source": "/media/herbs/di_long/source.jpg",
+  "attribution": "Image: Michael Wolf / CC BY 2.5; pencil sketch derived locally for Herba Atlas."
+}

@@ -1,0 +1,16 @@
+{
+  "key": "huang_qin",
+  "name_zh": "黄芩",
+  "ok": true,
+  "resolve": "wikidata:Q803769",
+  "filename": "Scutellaria baicalensis flowers.jpg",
+  "commons_title": "File:Scutellaria baicalensis flowers.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AScutellaria%20baicalensis%20flowers.jpg",
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0",
+  "artist": "Doronenko",
+  "credit": "Own work",
+  "sketch": "/media/herbs/huang_qin/sketch.png",
+  "source": "/media/herbs/huang_qin/source.jpg",
+  "attribution": "Image: Doronenko / CC BY 3.0; pencil sketch derived locally for Herba Atlas."
+}

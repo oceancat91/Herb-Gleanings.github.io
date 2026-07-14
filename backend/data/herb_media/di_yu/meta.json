@@ -1,0 +1,16 @@
+{
+  "key": "di_yu",
+  "name_zh": "地榆",
+  "ok": true,
+  "resolve": "wikidata-search:Q157347",
+  "filename": "Sanguisorba officinalis.jpg",
+  "commons_title": "File:Sanguisorba officinalis.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ASanguisorba%20officinalis.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Carl Axel Magnus Lindman",
+  "credit": "Bilder ur Nordens Flora, no. 296",
+  "sketch": "/media/herbs/di_yu/sketch.png",
+  "source": "/media/herbs/di_yu/source.jpg",
+  "attribution": "Image: Carl Axel Magnus Lindman / Public domain; pencil sketch derived locally for Herba Atlas."
+}

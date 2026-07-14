@@ -1,0 +1,16 @@
+{
+  "key": "pu_huang",
+  "name_zh": "蒲黄",
+  "ok": true,
+  "resolve": "wikidata-search:Q147520",
+  "filename": "Typha flwrs.jpg",
+  "commons_title": "File:Typha flwrs.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ATypha%20flwrs.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Photographed by Eric Guinther (Marshman at en.wikipedia) in Hawaii.",
+  "credit": "http://en.wikipedia.org/wiki/Image:Typha_flwrs.jpg",
+  "sketch": "/media/herbs/pu_huang/sketch.png",
+  "source": "/media/herbs/pu_huang/source.jpg",
+  "attribution": "Image: Photographed by Eric Guinther (Marshman at en.wikipedia) in Hawaii. / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

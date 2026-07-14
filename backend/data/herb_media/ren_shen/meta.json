@@ -1,0 +1,16 @@
+{
+  "key": "ren_shen",
+  "name_zh": "人参",
+  "ok": true,
+  "resolve": "wikidata:Q182881",
+  "filename": "Ginsengpflanze.jpg",
+  "commons_title": "File:Ginsengpflanze.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AGinsengpflanze.jpg",
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0",
+  "artist": "FloraFarm GmbH / Katharina Lohrie",
+  "credit": "Self-photographed",
+  "sketch": "/media/herbs/ren_shen/sketch.png",
+  "source": "/media/herbs/ren_shen/source.jpg",
+  "attribution": "Image: FloraFarm GmbH / Katharina Lohrie / CC BY 3.0; pencil sketch derived locally for Herba Atlas."
+}

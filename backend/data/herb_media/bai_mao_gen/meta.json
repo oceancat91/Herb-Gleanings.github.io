@@ -1,0 +1,16 @@
+{
+  "key": "bai_mao_gen",
+  "name_zh": "白茅根",
+  "ok": true,
+  "resolve": "commons-search:Imperatae",
+  "filename": "Euphorbia imperatae kz01.jpg",
+  "commons_title": "File:Euphorbia imperatae kz01.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AEuphorbia%20imperatae%20kz01.jpg",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "artist": "Krzysztof Ziarnek, Kenraiz",
+  "credit": "Own work",
+  "sketch": "/media/herbs/bai_mao_gen/sketch.png",
+  "source": "/media/herbs/bai_mao_gen/source.jpg",
+  "attribution": "Image: Krzysztof Ziarnek, Kenraiz / CC BY-SA 4.0; pencil sketch derived locally for Herba Atlas."
+}

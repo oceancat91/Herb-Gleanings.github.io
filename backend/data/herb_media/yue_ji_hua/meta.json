@@ -1,0 +1,16 @@
+{
+  "key": "yue_ji_hua",
+  "name_zh": "月季花",
+  "ok": true,
+  "resolve": "wikidata-search:Q344900",
+  "filename": "Rosa chinensis.jpg",
+  "commons_title": "File:Rosa chinensis.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ARosa%20chinensis.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Sakurai Midori",
+  "credit": "Own work",
+  "sketch": "/media/herbs/yue_ji_hua/sketch.png",
+  "source": "/media/herbs/yue_ji_hua/source.jpg",
+  "attribution": "Image: Sakurai Midori / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

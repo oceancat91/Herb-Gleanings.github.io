@@ -1,0 +1,16 @@
+{
+  "key": "lian_qiao",
+  "name_zh": "连翘",
+  "ok": true,
+  "resolve": "wikidata-search:Q1275024",
+  "filename": "Forsythia suspensa1.jpg",
+  "commons_title": "File:Forsythia suspensa1.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AForsythia%20suspensa1.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "KENPEI",
+  "credit": "KENPEI's photo",
+  "sketch": "/media/herbs/lian_qiao/sketch.png",
+  "source": "/media/herbs/lian_qiao/source.jpg",
+  "attribution": "Image: KENPEI / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

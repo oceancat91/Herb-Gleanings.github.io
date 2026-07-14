@@ -1,0 +1,16 @@
+{
+  "key": "dan_fan",
+  "name_zh": "胆矾",
+  "ok": true,
+  "resolve": "wikidata-search:Q107184",
+  "filename": "Copper sulfate anhydrous.jpg",
+  "commons_title": "File:Copper sulfate anhydrous.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACopper%20sulfate%20anhydrous.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "W. Oelen",
+  "credit": "http://woelen.homescience.net/science/index.html",
+  "sketch": "/media/herbs/dan_fan/sketch.png",
+  "source": "/media/herbs/dan_fan/source.jpg",
+  "attribution": "Image: W. Oelen / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

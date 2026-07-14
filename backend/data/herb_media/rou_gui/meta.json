@@ -1,0 +1,16 @@
+{
+  "key": "rou_gui",
+  "name_zh": "肉桂",
+  "ok": true,
+  "resolve": "wikidata-search:Q204148",
+  "filename": "Cinnamomum aromaticum - Köhler–s Medizinal-Pflanzen-039 cropped.jpg",
+  "commons_title": "File:Cinnamomum aromaticum - Köhler–s Medizinal-Pflanzen-039 cropped.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACinnamomum%20aromaticum%20-%20K%C3%B6hler%E2%80%93s%20Medizinal-Pflanzen-039%20cropped.jpg",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
+  "credit": "List of Koehler Images",
+  "sketch": "/media/herbs/rou_gui/sketch.png",
+  "source": "/media/herbs/rou_gui/source.jpg",
+  "attribution": "Image: Franz Eugen Köhler, Köhler's Medizinal-Pflanzen / Public domain; pencil sketch derived locally for Herba Atlas."
+}

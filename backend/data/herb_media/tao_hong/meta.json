@@ -1,0 +1,16 @@
+{
+  "key": "tao_hong",
+  "name_zh": "桃红",
+  "ok": true,
+  "resolve": "wikidata-search:Q12979",
+  "filename": "Sancerre rose Wine.jpg",
+  "commons_title": "File:Sancerre rose Wine.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ASancerre%20rose%20Wine.jpg",
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0",
+  "artist": "THOR",
+  "credit": "Flickr: Sancerre Wine",
+  "sketch": "/media/herbs/tao_hong/sketch.png",
+  "source": "/media/herbs/tao_hong/source.jpg",
+  "attribution": "Image: THOR / CC BY 2.0; pencil sketch derived locally for Herba Atlas."
+}

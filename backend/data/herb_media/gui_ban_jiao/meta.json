@@ -1,0 +1,16 @@
+{
+  "key": "gui_ban_jiao",
+  "name_zh": "龟甲胶",
+  "ok": true,
+  "resolve": "commons-search:龟甲胶",
+  "filename": "CADAL09013030 甲寅.djvu",
+  "commons_title": "File:CADAL09013030 甲寅.djvu",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ACADAL09013030%20%E7%94%B2%E5%AF%85.djvu",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "",
+  "credit": "Wuhan University",
+  "sketch": "/media/herbs/gui_ban_jiao/sketch.png",
+  "source": "/media/herbs/gui_ban_jiao/source.jpg",
+  "attribution": "Image: Wikimedia Commons / Public domain; pencil sketch derived locally for Herba Atlas."
+}

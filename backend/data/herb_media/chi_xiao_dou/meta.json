@@ -1,0 +1,16 @@
+{
+  "key": "chi_xiao_dou",
+  "name_zh": "赤小豆",
+  "ok": true,
+  "resolve": "wikidata-search:Q380279",
+  "filename": "Azuki Beans.jpg",
+  "commons_title": "File:Azuki Beans.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3AAzuki%20Beans.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "Sanjay Acharya",
+  "credit": "Own work",
+  "sketch": "/media/herbs/chi_xiao_dou/sketch.png",
+  "source": "/media/herbs/chi_xiao_dou/source.jpg",
+  "attribution": "Image: Sanjay Acharya / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}

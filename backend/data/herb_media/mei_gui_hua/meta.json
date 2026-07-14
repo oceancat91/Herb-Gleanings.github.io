@@ -1,0 +1,16 @@
+{
+  "key": "mei_gui_hua",
+  "name_zh": "玫瑰花",
+  "ok": true,
+  "resolve": "wikidata-search:Q634975",
+  "filename": "Rosa rugosa Sakhalin 1.JPG",
+  "commons_title": "File:Rosa rugosa Sakhalin 1.JPG",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ARosa%20rugosa%20Sakhalin%201.JPG",
+  "license": "Public domain",
+  "license_url": "",
+  "artist": "Vihljun",
+  "credit": "Own work",
+  "sketch": "/media/herbs/mei_gui_hua/sketch.png",
+  "source": "/media/herbs/mei_gui_hua/source.jpg",
+  "attribution": "Image: Vihljun / Public domain; pencil sketch derived locally for Herba Atlas."
+}

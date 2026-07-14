@@ -1,0 +1,16 @@
+{
+  "key": "qian_cao",
+  "name_zh": "茜草",
+  "ok": true,
+  "resolve": "wikidata-search:Q3237818",
+  "filename": "Rubia cordifolia.jpg",
+  "commons_title": "File:Rubia cordifolia.jpg",
+  "source_page": "https://commons.wikimedia.org/wiki/File%3ARubia%20cordifolia.jpg",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "artist": "Vinayaraj",
+  "credit": "Own work",
+  "sketch": "/media/herbs/qian_cao/sketch.png",
+  "source": "/media/herbs/qian_cao/source.jpg",
+  "attribution": "Image: Vinayaraj / CC BY-SA 3.0; pencil sketch derived locally for Herba Atlas."
+}
