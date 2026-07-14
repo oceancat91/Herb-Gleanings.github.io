@@ -2234,6 +2234,7 @@
       });
       setStatus('已载入 ' + allHerbs.length + ' 味药材 · 数据源：本草典 CC BY-SA 4.0');
       renderHome();
+      restorePageState();
       handleHash();
     }).catch(function (err) {
       console.error(err);
@@ -3231,6 +3232,7 @@
     tabs.querySelectorAll('.group-tab').forEach(function (btn) {
       btn.addEventListener('click', function () {
         currentGroup = btn.dataset.group;
+        savePageState();
         renderGroupTabs(pageId);
         renderHerbList(pageId);
       });
@@ -5057,6 +5059,7 @@
 
   function renderAnalysisTab(tab) {
     analysisTab = tab;
+    savePageState();
     document.querySelectorAll('.analysis-tab').forEach(function (b) {
       b.classList.toggle('active', b.dataset.tab === tab);
     });
@@ -5084,6 +5087,22 @@
       setStatus('析图 · 交叉 / 探查 / 用量 / 词频 / 方剂配伍 / 质量');
     });
     history.replaceState(null, '', '#analysis');
+    savePageState();
+  }
+
+  function savePageState() {
+    var state = { page: currentPage, group: currentGroup, atab: analysisTab };
+    try { sessionStorage.setItem('herba_state', JSON.stringify(state)); } catch (e) {}
+  }
+
+  function restorePageState() {
+    try {
+      var raw = sessionStorage.getItem('herba_state');
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s.group) currentGroup = s.group;
+      if (s.atab) analysisTab = s.atab;
+    } catch (e) {}
   }
 
   /* ---------- 路由 ---------- */
@@ -5096,6 +5115,7 @@
       });
       history.replaceState(null, '', '#home');
       setStatus('已载入 ' + allHerbs.length + ' 味药材 · 数据源：本草典 CC BY-SA 4.0');
+      savePageState();
       return;
     }
     if (pageId === 'analysis') {
@@ -5107,6 +5127,7 @@
     lastListPage = pageId;
     renderCategoryPage(pageId);
     history.replaceState(null, '', '#' + pageId);
+    savePageState();
   }
 
   function handleHash() {
@@ -5381,17 +5402,28 @@
   })();
 
   bootstrapApp();
+
+  window.addEventListener('beforeunload', function () {
+    savePageState();
+  });
 })();
 </script>
 
 </div><!-- /#app-content -->
 
 <script>
+(function(){
+  if (sessionStorage.getItem('splash_done') === '1') {
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('app-content').classList.add('show');
+  }
+})();
 function dismissSplash() {
   var s = document.getElementById('splash');
   if (s.classList.contains('dismiss')) return;
   s.classList.add('dismiss');
   document.getElementById('app-content').classList.add('show');
+  sessionStorage.setItem('splash_done', '1');
 }
 </script>
 
