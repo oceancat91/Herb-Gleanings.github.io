@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>本草拾珍 · Herba Atlas</title>
+<style>
+  :root {
+    --bg: #f9f6f0;
+    --card: #ffffff;
+    --text: #2d2a26;
+    --sub: #6b6156;
+    --accent: #5a7d5a;
+    --accent-2: #8b6f47;
+    --border: #e2d9c8;
+    --tag-bg: #eef5ec;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "Songti SC", Georgia, serif;
+    background: var(--bg); color: var(--text); line-height: 1.75;
+  }
+  .hero {
+    text-align: center; padding: 80px 24px 60px;
+    background: linear-gradient(135deg, #e8ede4 0%, #f5f2e8 50%, #ede4d4 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero h1 {
+    font-size: 42px; font-weight: 700; letter-spacing: 4px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero .en { font-size: 20px; color: var(--sub); letter-spacing: 2px; margin-top: 8px; }
+  .hero .tagline { font-size: 17px; color: var(--sub); margin-top: 20px; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .hero .badges { margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .badge {
+    display: inline-block; padding: 6px 16px; border-radius: 20px;
+    font-size: 14px; background: var(--tag-bg); color: var(--accent); border: 1px solid #c3d7c3;
+  }
+  .badge.filled { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  section { padding: 56px 0; }
+  section + section { border-top: 1px dashed var(--border); }
+
+  h2 { font-size: 26px; font-weight: 700; margin-bottom: 28px; text-align: center; letter-spacing: 2px; }
+  h2 span { border-bottom: 3px solid var(--accent); padding-bottom: 4px; }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .feat-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 28px 24px; transition: box-shadow .2s;
+  }
+  .feat-card:hover { box-shadow: 0 6px 24px rgba(90,125,90,.10); }
+  .feat-card .icon { font-size: 32px; margin-bottom: 12px; }
+  .feat-card h3 { font-size: 17px; margin-bottom: 8px; }
+  .feat-card p { font-size: 14px; color: var(--sub); }
+
+  .tech-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .tech-tag {
+    padding: 8px 18px; background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; font-size: 14px; font-family: "SF Mono", "Consolas", monospace;
+  }
+
+  .quickstart {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 32px; font-family: "SF Mono", "Consolas", monospace; font-size: 14px;
+    overflow-x: auto; white-space: pre-wrap; color: #3a3a3a;
+  }
+  .quickstart .cm { color: #888; }
+
+  .screenshots { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .screen-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden;
+  }
+  .screen-card .ph {
+    aspect-ratio: 16/10; background: linear-gradient(135deg, #eef5ec, #f5f2e8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px; color: #b0c4b0;
+  }
+  .screen-card .lbl { padding: 14px 16px; font-size: 14px; color: var(--sub); text-align: center; }
+
+  .links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 12px 28px; border-radius: 8px; font-size: 15px; text-decoration: none;
+    transition: background .2s, transform .1s;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-pri { background: var(--accent); color: #fff; }
+  .btn-pri:hover { background: #4d6d4d; }
+  .btn-out { border: 1.5px solid var(--accent); color: var(--accent); }
+  .btn-out:hover { background: var(--tag-bg); }
+
+  footer {
+    text-align: center; padding: 40px 24px;
+    font-size: 13px; color: #aaa; border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>本草拾珍</h1>
+  <div class="en">Herba Atlas</div>
+  <p class="tagline">
+    以约五百味药材与百余首经典方剂为数据基础，沿「史 · 方 · 药」叙事呈现本草沿革，
+    并围绕四气、五味、归经、升降沉浮、功效与配伍构建交互图谱，辅以交叉分析、用量安全、
+    词频探查与方剂配伍网络，帮助读者从属性结构、禁忌警示到经典组方理解中药知识体系。
+  </p>
+  <div class="badges">
+    <span class="badge filled">交互可视化</span>
+    <span class="badge">ECharts 5</span>
+    <span class="badge">FastAPI</span>
+    <span class="badge">SQLite</span>
+    <span class="badge">500+ 药材</span>
+    <span class="badge">100+ 方剂</span>
+  </div>
+</header>
+
+<div class="container">
+
+<section>
+  <h2><span>核心功能</span></h2>
+  <div class="features">
+    <div class="feat-card">
+      <div class="icon">📜</div>
+      <h3>穿越药 · 历史名片</h3>
+      <p>收录 46 味具有历史渊源的本草药材，附经典方剂全文、方解与组成分析，追溯千年用药智慧。</p>
+    </div>
+    <div class="feat-card">
+      <div class="icon">🌡️</div>
+      <h3>四气五味 · 归经图谱</h3>
+      <p>交互式环形图展示药材属性分布，支持按分类探索。交叉分析热力图揭示四气 × 五味、归经等属性关联。</p>
+    </div>
+    <div class="feat-card">
+      <div class="icon">⚖️</div>
+      <h3>用量安全 · 风险标注</h3>
+      <p>用量中位数散点图标注毒性风险等级，直观呈现不同分类药材的安全范围与警戒信息。</p>
+    </div>
+    <div class="feat-card">
+      <div class="icon">🔗</div>
+      <h3>配伍网络 · 禁忌警示</h3>
+      <p>基于十八反、十九畏等配伍禁忌数据构建药材关系网络图，清晰标注不宜联用的药材组合。</p>
+    </div>
+    <div class="feat-card">
+      <div class="icon">🤖</div>
+      <h3>DeepSeek AI · 辨症用药</h3>
+      <p>接入 DeepSeek 大语言模型，用户描述症状后 AI 可归纳症状标签，推荐对应的中药并试拟参考方剂。</p>
+    </div>
+    <div class="feat-card">
+      <div class="icon">🔍</div>
+      <h3>功效词频 · 方剂配伍</h3>
+      <p>对药材功效关键词进行词频统计与探索，方剂配伍关系以交互网络呈现，一目了然。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span>技术栈</span></h2>
+  <div class="tech-list">
+    <span class="tech-tag">Python 3 + FastAPI</span>
+    <span class="tech-tag">SQLite</span>
+    <span class="tech-tag">ECharts 5</span>
+    <span class="tech-tag">Vanilla JavaScript (ES6)</span>
+    <span class="tech-tag">HTML5 + CSS3</span>
+    <span class="tech-tag">DeepSeek API</span>
+    <span class="tech-tag">Uvicorn</span>
+  </div>
+</section>
+
+<section>
+  <h2><span>界面预览</span></h2>
+  <div class="screenshots">
+    <div class="screen-card">
+      <div class="ph">🏠</div>
+      <div class="lbl">首页 · 史方药叙事</div>
+    </div>
+    <div class="screen-card">
+      <div class="ph">📊</div>
+      <div class="lbl">分类分析 · 环形图</div>
+    </div>
+    <div class="screen-card">
+      <div class="ph">🔥</div>
+      <div class="lbl">交叉分析 · 热力图</div>
+    </div>
+    <div class="screen-card">
+      <div class="ph">🔗</div>
+      <div class="lbl">配伍 · 关系网络图</div>
+    </div>
+    <div class="screen-card">
+      <div class="ph">📋</div>
+      <div class="lbl">药材详情 · 属性卡片</div>
+    </div>
+    <div class="screen-card">
+      <div class="ph">🤖</div>
+      <div class="lbl">AI 辨症助手</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span>快速启动</span></h2>
+  <div class="quickstart">
+<span class="cm"># 1. 克隆仓库</span>
+git clone https://github.com/oceancat91/Herb-Gleanings.git
+cd Herb-Gleanings
+
+<span class="cm"># 2. 安装依赖</span>
+pip install -r requirements.txt
+
+<span class="cm"># 3. 导入数据（生成 herbs.db）</span>
+python scripts/import_herbs.py
+
+<span class="cm"># 4. 配置 AI 助手（可选）</span>
+<span class="cm">#    在 backend/.env 中设置 DEEPSEEK_API_KEY</span>
+
+<span class="cm"># 5. 启动后端</span>
+python run.py
+
+<span class="cm"># 6. 浏览器访问 http://127.0.0.1:8000</span>
+<span class="cm">#    或在 Windows 上双击 打开前端.bat / index.bat</span>
+  </div>
+</section>
+
+<section style="text-align:center;">
+  <h2><span>了解更多</span></h2>
+  <div class="links">
+    <a class="btn btn-pri" href="https://github.com/oceancat91/Herb-Gleanings" target="_blank">
+      ⭐ GitHub 仓库
+    </a>
+    <a class="btn btn-out" href="https://github.com/oceancat91/Herb-Gleanings/blob/main/README.md" target="_blank">
+      📖 项目文档
+    </a>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>© 2025 <a href="https://github.com/oceancat91/Herb-Gleanings">Herba Atlas · 本草拾珍</a> &nbsp;|&nbsp;
+     数据仅供学习研究，不构成用药建议。如有需要请到医院就诊。</p>
+</footer>
+
+</body>
+</html>
