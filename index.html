@@ -1575,9 +1575,76 @@
     #home-tab .logo-char.ben { font-size: 40px; left: 0; top: 0; }
     #home-tab .logo-char.cao { font-size: 40px; left: 28px; top: 24px; }
   }
+
+  /* ===== 进入展示页（Splash） ===== */
+  #splash {
+    position: fixed; inset: 0; z-index: 10000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, #ede8dc 0%, #f5f2e8 40%, #e8ede4 100%);
+    cursor: pointer;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+  }
+  #splash.dismiss { opacity: 0; visibility: hidden; pointer-events: none; }
+  #splash .splash-inner { text-align: center; padding: 40px 24px; }
+  #splash .splash-seal {
+    width: 100px; height: 100px;
+    margin: 0 auto 28px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px; color: var(--accent);
+    background: rgba(168,90,60,0.06);
+    box-shadow: 0 0 0 10px rgba(168,90,60,0.04), 0 0 0 20px rgba(168,90,60,0.02);
+    animation: splashPulse 3s ease-in-out infinite;
+  }
+  @keyframes splashPulse {
+    0%, 100% { box-shadow: 0 0 0 10px rgba(168,90,60,0.04), 0 0 0 20px rgba(168,90,60,0.02); }
+    50%      { box-shadow: 0 0 0 16px rgba(168,90,60,0.07), 0 0 0 30px rgba(168,90,60,0.03); }
+  }
+  #splash h1 {
+    font-size: 56px; font-weight: 700; letter-spacing: 8px;
+    color: var(--ink-dark);
+    margin-bottom: 8px;
+  }
+  #splash .splash-sub {
+    font-size: 20px; color: var(--ink-light); letter-spacing: 4px;
+    margin-bottom: 28px;
+  }
+  #splash .splash-desc {
+    font-size: 16px; color: var(--ink-medium); letter-spacing: 2px;
+    max-width: 520px; line-height: 1.9;
+    margin-bottom: 36px;
+  }
+  #splash .splash-hint {
+    font-size: 14px; color: #aaa; letter-spacing: 2px;
+    animation: hintBlink 2s ease-in-out infinite;
+  }
+  @keyframes hintBlink {
+    0%, 100% { opacity: 0.4; }
+    50%      { opacity: 1; }
+  }
+  /* app 内容初始隐藏 */
+  #app-content { opacity: 0; transition: opacity 0.8s ease 0.4s; }
+  #app-content.show { opacity: 1; }
 </style>
 </head>
 <body>
+
+<!-- 进入展示页 -->
+<div id="splash" onclick="dismissSplash()">
+  <div class="splash-inner">
+    <div class="splash-seal">🌿</div>
+    <h1>本草拾珍</h1>
+    <div class="splash-sub">Herba Atlas</div>
+    <p class="splash-desc">
+      以约五百味药材与百余首经典方剂为数据基础，<br>
+      沿「史 · 方 · 药」叙事呈现本草沿革。
+    </p>
+    <div class="splash-hint">— 点击任意处进入 —</div>
+  </div>
+</div>
+
+<div id="app-content">
 
 <button id="home-tab" aria-label="本草拾珍">
   <span class="logo-char ben">本</span>
@@ -5316,5 +5383,24 @@
   bootstrapApp();
 })();
 </script>
+
+</div><!-- /#app-content -->
+
+<script>
+(function(){
+  if (sessionStorage.getItem('splash_done') === '1') {
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('app-content').classList.add('show');
+  }
+})();
+function dismissSplash() {
+  var s = document.getElementById('splash');
+  if (s.classList.contains('dismiss')) return;
+  s.classList.add('dismiss');
+  document.getElementById('app-content').classList.add('show');
+  sessionStorage.setItem('splash_done', '1');
+}
+</script>
+
 </body>
 </html>
