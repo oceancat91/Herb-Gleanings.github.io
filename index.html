@@ -208,11 +208,12 @@
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: translateY(10px);
+    transform: translateY(8px);
     transition:
-      opacity 0.42s ease,
-      transform 0.42s ease,
-      visibility 0s linear 0.42s;
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0.55s;
+    will-change: opacity, transform;
   }
   #home-stage.visible,
   #main-stage.visible,
@@ -223,17 +224,40 @@
     pointer-events: auto;
     transform: translateY(0);
     transition:
-      opacity 0.42s ease,
-      transform 0.42s ease,
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
       visibility 0s linear 0s;
   }
+  /* 离场：略向上淡出，与入场形成交叉感 */
+  #home-stage.is-leaving,
+  #main-stage.is-leaving,
+  #detail-stage.is-leaving,
+  #analysis-stage.is-leaving {
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+  }
+  /* 同舞台内容刷新：轻柔隐去 */
   #home-stage.is-fading,
   #main-stage.is-fading,
   #detail-stage.is-fading,
   #analysis-stage.is-fading {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(4px);
     pointer-events: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #home-stage,
+    #main-stage,
+    #detail-stage,
+    #analysis-stage,
+    #home-stage.visible,
+    #main-stage.visible,
+    #detail-stage.visible,
+    #analysis-stage.visible {
+      transition-duration: 0.01ms !important;
+      transform: none !important;
+    }
   }
 
   #main-stage {
@@ -1904,10 +1928,13 @@
   var lastListPage = 'siqi';
   var detailFrom = 'home';
   var STAGE_IDS = ['home-stage', 'main-stage', 'detail-stage', 'analysis-stage'];
-  var STAGE_FADE_MS = 420;
+  var STAGE_FADE_MS = 550;
   var stageTimer = null;
+  var stageTimer2 = null;
   var stageToken = 0;
   var stageBootstrapped = false;
+  var prefersReducedMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var probeSelectedKey = null;
   var compareKeys = [];
   var analysisTab = 'cross';
@@ -2086,58 +2113,101 @@
     return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
+  function clearStageTimers() {
+    clearTimeout(stageTimer);
+    clearTimeout(stageTimer2);
+    stageTimer = null;
+    stageTimer2 = null;
+  }
+
+  function afterStagePaint(fn) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(fn);
+    });
+  }
+
   function showStage(id, prepareFn) {
     var token = ++stageToken;
     var next = document.getElementById(id);
+    var fadeMs = prefersReducedMotion ? 0 : STAGE_FADE_MS;
     var prev = STAGE_IDS
       .map(function (sid) { return document.getElementById(sid); })
-      .find(function (el) { return el.classList.contains('visible'); });
+      .find(function (el) {
+        return el.classList.contains('visible') && !el.classList.contains('is-leaving');
+      });
 
-    function enter() {
+    function finishEnter() {
+      if (token !== stageToken) return;
+      if (id === 'main-stage' && chart) {
+        try { chart.resize(); } catch (e) { /* ignore */ }
+      }
+    }
+
+    function enter(instant) {
       if (token !== stageToken) return;
       STAGE_IDS.forEach(function (sid) {
         var el = document.getElementById(sid);
-        el.classList.remove('is-fading');
+        el.classList.remove('is-fading', 'is-leaving');
         el.classList.toggle('visible', sid === id);
       });
       if (typeof prepareFn === 'function') prepareFn();
-      requestAnimationFrame(function () {
-        if (token !== stageToken) return;
-        if (id === 'main-stage' && chart) chart.resize();
-      });
+      if (instant) {
+        finishEnter();
+        return;
+      }
+      afterStagePaint(finishEnter);
     }
 
     // 首次路由：直接显示，避免开场闪一下
     if (!stageBootstrapped) {
       stageBootstrapped = true;
-      enter();
+      enter(true);
       return;
     }
 
     // 同一舞台内切换内容：先隐去再淡入
     if (prev && prev.id === id) {
       prev.classList.add('is-fading');
-      clearTimeout(stageTimer);
+      clearStageTimers();
       stageTimer = setTimeout(function () {
         if (token !== stageToken) return;
         if (typeof prepareFn === 'function') prepareFn();
-        requestAnimationFrame(function () {
+        afterStagePaint(function () {
           if (token !== stageToken) return;
           prev.classList.remove('is-fading');
-          if (id === 'main-stage' && chart) chart.resize();
+          finishEnter();
         });
-      }, Math.round(STAGE_FADE_MS * 0.55));
+      }, Math.round(fadeMs * 0.45));
       return;
     }
 
+    // 不同舞台：离场与入场交叉淡化，避免「全黑一下」
     if (prev) {
-      prev.classList.remove('visible');
-      clearTimeout(stageTimer);
-      stageTimer = setTimeout(enter, STAGE_FADE_MS);
+      prev.classList.add('is-leaving');
+      clearStageTimers();
+      var overlapAt = Math.round(fadeMs * 0.32);
+      var cleanupAt = fadeMs;
+      stageTimer = setTimeout(function () {
+        if (token !== stageToken) return;
+        if (typeof prepareFn === 'function') prepareFn();
+        next.classList.remove('is-fading', 'is-leaving', 'visible');
+        // 强制从透明态起步，保证淡入动画可播放
+        void next.offsetWidth;
+        next.classList.add('visible');
+        afterStagePaint(finishEnter);
+        stageTimer2 = setTimeout(function () {
+          if (token !== stageToken) return;
+          STAGE_IDS.forEach(function (sid) {
+            if (sid === id) return;
+            var el = document.getElementById(sid);
+            el.classList.remove('visible', 'is-leaving', 'is-fading');
+          });
+        }, Math.max(0, cleanupAt - overlapAt));
+      }, overlapAt);
       return;
     }
 
-    enter();
+    enter(false);
   }
 
   function updateNavActive(pageId) {
