@@ -992,7 +992,6 @@
     border-radius: 8px;
     box-shadow: 0 8px 30px rgba(44,36,22,0.18);
     overflow: hidden;
-    font-family: 'Zhi Mang Xing', 'Liu Jian Mao Cao', 'STXingkai', cursive;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -1035,20 +1034,18 @@
     border-bottom: 1px solid rgba(60,48,36,0.1);
   }
   .asst-title {
-    font-family: 'Zhi Mang Xing', 'Liu Jian Mao Cao', cursive;
-    font-size: 20px;
-    letter-spacing: 0.06em;
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 15px;
+    letter-spacing: 0.08em;
     color: var(--ink-dark);
-    font-weight: 400;
   }
   .asst-badge {
-    font-family: 'Zhi Mang Xing', 'Liu Jian Mao Cao', cursive;
-    font-size: 12px;
+    font-size: 9px;
     color: var(--ink-light);
     border: 1px solid rgba(60,48,36,0.2);
-    padding: 0 5px;
+    padding: 0 4px;
     border-radius: 2px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     margin-left: 4px;
     vertical-align: middle;
     transition: color 0.2s, border-color 0.2s, background 0.2s;
@@ -1061,13 +1058,12 @@
   #assistant-close {
     background: none;
     border: none;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1;
     color: var(--ink-light);
     cursor: pointer;
     padding: 2px 6px;
     border-radius: 4px;
-    font-family: 'Zhi Mang Xing', cursive;
     transition: color 0.2s, background 0.2s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
   #assistant-close:hover {
@@ -1077,11 +1073,11 @@
   }
   .asst-disclaimer {
     padding: 7px 14px;
-    font-size: 14px;
-    line-height: 1.65;
+    font-size: 11px;
+    line-height: 1.55;
     color: var(--ink-light);
     border-bottom: 1px solid rgba(60,48,36,0.08);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
   }
   .asst-messages {
     flex: 1;
@@ -1100,9 +1096,9 @@
   .asst-messages::-webkit-scrollbar-thumb:hover { background: rgba(168,90,60,0.45); }
   .asst-msg {
     max-width: 90%;
-    font-size: 16px;
-    line-height: 1.85;
-    letter-spacing: 0.04em;
+    font-size: 13px;
+    line-height: 1.75;
+    letter-spacing: 0.02em;
     animation: asstMsgIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   @keyframes asstMsgIn {
@@ -1125,27 +1121,26 @@
     white-space: normal;
   }
   .asst-msg.bot h6 {
-    font-family: 'Zhi Mang Xing', 'Liu Jian Mao Cao', cursive;
-    font-size: 18px;
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 13px;
     color: var(--ink-dark);
     letter-spacing: 0.08em;
     margin: 8px 0 3px;
-    font-weight: 400;
   }
   .asst-msg.bot h6:first-child { margin-top: 0; }
   .asst-msg.bot a.herb-link {
-    font-weight: 400;
+    font-weight: 600;
     transition: color 0.2s, border-color 0.2s;
   }
   .asst-msg.bot a.herb-link:hover {
     color: var(--accent);
     border-bottom-color: var(--accent);
   }
-  .asst-msg.tip { align-self: center; color: var(--ink-light); font-size: 15px; }
+  .asst-msg.tip { align-self: center; color: var(--ink-light); font-size: 12px; }
   .asst-msg.error {
     align-self: flex-start;
     color: #A85A3C;
-    font-size: 15px;
+    font-size: 12px;
     border-left: 2px solid #A85A3C;
     padding-left: 8px;
   }
@@ -1182,9 +1177,9 @@
   #assistant-text {
     flex: 1;
     resize: none;
-    font-family: 'Zhi Mang Xing', 'Liu Jian Mao Cao', 'STXingkai', cursive;
-    font-size: 16px;
-    line-height: 1.7;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    line-height: 1.6;
     padding: 8px 10px;
     border: 1px solid rgba(60,48,36,0.18);
     border-radius: 6px;
@@ -1201,15 +1196,15 @@
   #assistant-send {
     flex-shrink: 0;
     align-self: stretch;
-    font-family: 'Zhi Mang Xing', 'Liu Jian Mao Cao', cursive;
-    font-size: 18px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
     padding: 0 16px;
     border: 1px solid rgba(168,90,60,0.4);
     background: var(--accent);
     color: #F5F0E8;
     border-radius: 6px;
     cursor: pointer;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     transition:
       background 0.2s,
       transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
