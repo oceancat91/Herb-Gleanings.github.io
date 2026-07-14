@@ -19,7 +19,64 @@
   body {
     font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "Songti SC", Georgia, serif;
     background: var(--bg); color: var(--text); line-height: 1.85; font-size: 16px;
+    overflow-x: hidden;
   }
+
+  /* ===== 进入展示页 ===== */
+  #splash {
+    position: fixed; inset: 0; z-index: 1000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, #ede8dc 0%, #f5f2e8 40%, #e8ede4 100%);
+    cursor: pointer;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+  }
+  #splash.dismiss { opacity: 0; visibility: hidden; pointer-events: none; }
+  #splash .splash-inner {
+    text-align: center; padding: 40px 24px;
+  }
+  #splash .splash-seal {
+    width: 120px; height: 120px;
+    margin: 0 auto 32px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px; color: var(--accent);
+    background: rgba(90,125,90,0.06);
+    box-shadow: 0 0 0 12px rgba(90,125,90,0.04), 0 0 0 24px rgba(90,125,90,0.02);
+    animation: splashPulse 3s ease-in-out infinite;
+  }
+  @keyframes splashPulse {
+    0%, 100% { box-shadow: 0 0 0 12px rgba(90,125,90,0.04), 0 0 0 24px rgba(90,125,90,0.02); }
+    50%      { box-shadow: 0 0 0 20px rgba(90,125,90,0.06), 0 0 0 36px rgba(90,125,90,0.03); }
+  }
+  #splash h1 {
+    font-size: 64px; font-weight: 700; letter-spacing: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+  }
+  #splash .splash-sub {
+    font-size: 22px; color: var(--sub); letter-spacing: 6px;
+    margin-bottom: 36px;
+  }
+  #splash .splash-desc {
+    font-size: 18px; color: var(--sub); letter-spacing: 2px;
+    max-width: 580px; line-height: 1.9;
+    margin-bottom: 40px;
+  }
+  #splash .splash-hint {
+    font-size: 15px; color: #aaa; letter-spacing: 3px;
+    animation: hintBlink 2s ease-in-out infinite;
+  }
+  @keyframes hintBlink {
+    0%, 100% { opacity: 0.4; }
+    50%      { opacity: 1; }
+  }
+
+  /* 主内容初始隐藏 */
+  #main-content { opacity: 0; transition: opacity 0.8s ease 0.5s; }
+  #main-content.show { opacity: 1; }
   .hero {
     text-align: center; padding: 80px 24px 60px;
     background: linear-gradient(135deg, #e8ede4 0%, #f5f2e8 50%, #ede4d4 100%);
@@ -103,6 +160,23 @@
 </style>
 </head>
 <body>
+
+<!-- 进入展示页 -->
+<div id="splash" onclick="dismissSplash()">
+  <div class="splash-inner">
+    <div class="splash-seal">🌿</div>
+    <h1>本草拾珍</h1>
+    <div class="splash-sub">Herba Atlas</div>
+    <p class="splash-desc">
+      以约五百味药材与百余首经典方剂为数据基础，<br>
+      沿「史 · 方 · 药」叙事呈现本草沿革。
+    </p>
+    <div class="splash-hint">— 点击任意处进入 —</div>
+  </div>
+</div>
+
+<!-- 主内容 -->
+<div id="main-content">
 
 <header class="hero">
   <h1>本草拾珍</h1>
@@ -245,6 +319,17 @@ python run.py
   <p>© 2025 <a href="https://github.com/oceancat91/Herb-Gleanings">Herba Atlas · 本草拾珍</a> &nbsp;|&nbsp;
      数据仅供学习研究，不构成用药建议。如有需要请到医院就诊。</p>
 </footer>
+
+</div><!-- /#main-content -->
+
+<script>
+function dismissSplash() {
+  var s = document.getElementById('splash');
+  if (s.classList.contains('dismiss')) return;
+  s.classList.add('dismiss');
+  document.getElementById('main-content').classList.add('show');
+}
+</script>
 
 </body>
 </html>
