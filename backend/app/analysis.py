@@ -31,9 +31,28 @@ GONGXIAO_KEYS = [
 ]
 
 ZHUZHI_KEYS = [
-    "咳嗽", "发热", "头痛", "腹痛", "腹泻", "便秘", "水肿", "黄疸", "眩晕", "失眠",
-    "痛经", "闭经", "崩漏", "风湿", "痹痛", "痈肿", "疮疡", "吐血", "衄血", "消渴",
-    "淋证", "遗精", "带下", "疟疾", "痢疾",
+    # 表里外感 / 寒热
+    "恶寒", "恶风", "发热", "高热", "潮热", "往来寒热", "五心烦热", "骨蒸",
+    # 头面五官
+    "头痛", "眩晕", "目赤", "目糊", "耳鸣", "牙痛", "口疮", "咽痛", "鼻塞", "流涕",
+    # 心肺胸胁
+    "咳嗽", "喘息", "哮喘", "痰多", "咯血", "胸闷", "心悸", "气短", "胁痛",
+    # 脾胃肠
+    "呕吐", "恶心", "呃逆", "嗳气", "纳呆", "腹胀", "腹痛", "腹泻", "泄泻", "便秘",
+    "痢疾", "久痢", "便血", "积食", "伤食", "疳积",
+    # 肝肾精血 / 二阴
+    "黄疸", "水肿", "淋证", "尿频", "尿急", "尿血", "遗尿", "遗精", "阳痿",
+    "带下", "痛经", "闭经", "崩漏", "月经不调", "产后", "乳少", "乳痈",
+    # 肢体筋骨
+    "风湿", "痹痛", "腰痛", "抽搐", "中风", "半身不遂",
+    # 神志睡眠
+    "失眠", "不寐", "多梦", "健忘", "惊悸", "虚烦", "小儿惊风",
+    # 气血津液
+    "乏力", "盗汗", "自汗", "口渴", "消渴", "吐血", "衄血",
+    # 疮疡皮肤
+    "痈肿", "疮疡", "疔疮", "丹毒", "湿疹", "瘙痒", "瘰疬", "瘿瘤", "癥瘕", "积聚",
+    # 时疫及其他
+    "疟疾", "霍乱",
 ]
 
 
@@ -59,6 +78,58 @@ def _ordered_present(order: list[str], present: set[str]) -> list[str]:
 
 
 ROLE_ZH = {"jun": "君", "chen": "臣", "zuo": "佐", "shi": "使"}
+
+# 典籍 text_key → 中文书名（课程通识）
+CLASSICAL_TITLE_ZH: dict[str, str] = {
+    "shen_nong_ben_cao_jing": "《神农本草经》",
+    "ming_yi_bie_lu": "《名医别录》",
+    "ben_cao_gang_mu": "《本草纲目》",
+    "ben_cao_gang_mu_shi_yi": "《本草纲目拾遗》",
+    "zheng_lei_ben_cao": "《证类本草》",
+    "yao_xing_lun": "《药性论》",
+    "ri_hua_zi_ben_cao": "《日华子本草》",
+    "ben_cao_yan_yi": "《本草衍义》",
+    "ben_cao_cong_xin": "《本草从新》",
+    "ben_cao_zheng_yi": "《本草正义》",
+    "ben_cao_shi_yi": "《本草拾遗》",
+    "kai_bao_ben_cao": "《开宝本草》",
+    "xin_xiu_ben_cao": "《新修本草》",
+    "tang_ben_cao": "《唐本草》",
+    "hai_yao_ben_cao": "《海药本草》",
+    "shang_han_lun": "《伤寒论》",
+    "jin_gui_yao_lue": "《金匮要略》",
+    "huang_di_nei_jing": "《黄帝内经》",
+    "wen_bing_tiao_bian": "《温病条辨》",
+    "tai_ping_hui_min_he_ji_ju_fang": "《太平惠民和剂局方》",
+    "yi_fang_ji_jie": "《医方集解》",
+    "bin_hu_mai_xue": "《濒湖脉学》",
+    "si_bu_yi_dian": "《四部医典》",
+    "xian_dai_shi_yong_zhong_yao": "《现代实用中药》",
+    "course_tongshi": "课程通识摘要",
+}
+
+
+def _classical_zh_name(raw: str | None) -> str | None:
+    """把 text_key 或书名统一成中文呈现。"""
+    if not raw:
+        return None
+    s = str(raw).strip()
+    if not s:
+        return None
+    if s in CLASSICAL_TITLE_ZH:
+        return CLASSICAL_TITLE_ZH[s]
+    # 已是中文书名
+    if any("\u4e00" <= ch <= "\u9fff" for ch in s):
+        if not (s.startswith("《") and s.endswith("》")) and len(s) <= 20:
+            # 短中文书名补书名号；过长条文不加
+            if "《" not in s and "》" not in s and len(s) <= 12:
+                return f"《{s}》"
+        return s[:40]
+    # snake_case → 尝试映射；未知则尽量可读
+    key = s.lower().replace(" ", "_").replace("-", "_")
+    if key in CLASSICAL_TITLE_ZH:
+        return CLASSICAL_TITLE_ZH[key]
+    return s[:40]
 
 
 def _load_formulas() -> list[dict[str, Any]]:
@@ -405,7 +476,7 @@ def build_analysis(herbs: list[Herb]) -> dict[str, Any]:
         for k in ZHUZHI_KEYS:
             if k in zz:
                 zhuzhi_kw[k] += 1
-                if len(symptom_herbs[k]) < 12:
+                if len(symptom_herbs[k]) < 16:
                     symptom_herbs[k].append({"name_zh": h.name_zh, "key": h.key})
 
         vals = [v for v in (h.dosage_min, h.dosage_max) if v is not None]
@@ -511,20 +582,25 @@ def build_analysis(herbs: list[Herb]) -> dict[str, Any]:
         if isinstance(obj, list):
             for item in obj:
                 if isinstance(item, str):
-                    classical[item[:40]] += 1
+                    name = _classical_zh_name(item)
+                    if name:
+                        classical[name] += 1
                 elif isinstance(item, dict):
                     title = (
-                        item.get("title")
+                        item.get("text_key")
+                        or item.get("title")
                         or item.get("zh")
                         or item.get("name")
                         or item.get("book")
-                        or item.get("text_key")
                     )
-                    if title:
-                        classical[str(title)[:40]] += 1
+                    name = _classical_zh_name(title if title else None)
+                    if name:
+                        classical[name] += 1
         elif isinstance(obj, dict):
             for k in obj:
-                classical[str(k)[:40]] += 1
+                name = _classical_zh_name(str(k))
+                if name:
+                    classical[name] += 1
 
     missing_rate = {
         k: {"missing": missing[k], "rate": round(missing[k] / total, 3) if total else 0}
@@ -645,8 +721,8 @@ def build_analysis(herbs: list[Herb]) -> dict[str, Any]:
             "anquan": safety["anquan"],
         },
         "gongxiao_keywords": [{"name": k, "value": v} for k, v in gongxiao_kw.most_common(20)],
-        "zhuzhi_keywords": [{"name": k, "value": v} for k, v in zhuzhi_kw.most_common(20)],
-        "symptom_herbs": {k: symptom_herbs[k] for k, _ in zhuzhi_kw.most_common(15)},
+        "zhuzhi_keywords": [{"name": k, "value": v} for k, v in zhuzhi_kw.most_common(36)],
+        "symptom_herbs": {k: symptom_herbs[k] for k, _ in zhuzhi_kw.most_common(28)},
         "classical_refs": [{"name": k, "value": v} for k, v in classical.most_common(15)],
         "peiwu_network": {"nodes": [{"name": n} for n in peiwu_nodes], "links": peiwu_links},
         "formula_pairing": build_formula_pairing(herbs),

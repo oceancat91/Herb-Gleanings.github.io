@@ -34,6 +34,7 @@ python scripts/download_data.py
 
 # 导入数据库（自动合并 data/herbs_extra.json 扩充条目）
 python scripts/build_extra_herbs.py   # 生成扩充 JSON（可重复运行）
+python scripts/expand_to_1000.py      # 通识批量扩充至约 1000 味（不爬取《中华本草》）
 python scripts/import_herbs.py
 
 # 启动 API（同时托管前端页面）

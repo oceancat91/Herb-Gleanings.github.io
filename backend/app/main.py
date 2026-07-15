@@ -96,12 +96,101 @@ def api_root():
             "/api/analysis",
             "/api/assistant/consult",
             "/api/categories",
+            "/api/geo/density",
+            "/api/geo/province/{name}",
+            "/api/geo/china",
+            "/api/workshop/check",
             "/api/filter/siqi/{value}",
             "/api/filter/wuwei/{value}",
             "/api/filter/guijing/{value}",
         ],
         "attribution": "Bencaodian Editorial / 本草典编辑部 · CC BY-SA 4.0",
     }
+
+
+def _geo_density_path() -> Path:
+    return Path(__file__).resolve().parent.parent / "data" / "herb_geo_density.json"
+
+
+def _load_geo_density() -> dict:
+    path = _geo_density_path()
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="缺少 herb_geo_density.json")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _normalize_province_name(name: str) -> str:
+    import re
+
+    return re.sub(
+        r"壮族自治区$|回族自治区$|维吾尔自治区$|自治区$|特别行政区$|省$|市$",
+        "",
+        str(name or "").strip(),
+    )
+
+
+@app.get("/api/geo/density")
+def geo_density():
+    """中国大陆道地/主产区疏密示意（课程通识，非产量实测）。"""
+    data = _load_geo_density()
+    return {
+        "unit": data.get("unit"),
+        "note": data.get("_comment"),
+        "provinces": data.get("provinces") or [],
+    }
+
+
+@app.get("/api/geo/province/{name}")
+def geo_province(name: str, db: Session = Depends(get_db)):
+    """按省份返回道地/主产关联药材（课程通识映射）。"""
+    data = _load_geo_density()
+    short = _normalize_province_name(name)
+    row = None
+    for p in data.get("provinces") or []:
+        pn = _normalize_province_name(p.get("name") or "")
+        if pn == short or (p.get("name") or "") == name:
+            row = p
+            break
+    if not row:
+        raise HTTPException(status_code=404, detail=f"未找到产区：{name}")
+
+    herb_names = row.get("herbs") or row.get("samples") or []
+    items: list[HerbBrief] = []
+    seen: set[str] = set()
+    for hn in herb_names:
+        if not hn or hn in seen:
+            continue
+        herb = db.scalar(select(Herb).where(Herb.name_zh == hn))
+        if herb:
+            items.append(HerbBrief.model_validate(herb))
+            seen.add(hn)
+
+    return {
+        "name": row.get("name") or short,
+        "value": len(items),
+        "unit": data.get("unit"),
+        "note": data.get("_comment"),
+        "samples": row.get("samples") or [],
+        "herbs": items,
+    }
+
+
+@app.get("/api/geo/china")
+def geo_china():
+    """本机托管的中国地图 GeoJSON（避免浏览器跨域加载失败）。"""
+    path = Path(__file__).resolve().parent.parent / "data" / "china.json"
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="缺少 china.json")
+    return FileResponse(path, media_type="application/json; charset=utf-8")
+
+
+@app.get("/china-geo-embed.js")
+def china_geo_embed():
+    """前端内嵌地图脚本（API 未更新或 CDN 不可用时的兜底）。"""
+    path = PROJECT_ROOT / "china-geo-embed.js"
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="缺少 china-geo-embed.js")
+    return FileResponse(path, media_type="application/javascript; charset=utf-8")
 
 
 @app.get("/api/herbs", response_model=HerbListResponse)
@@ -501,6 +590,43 @@ _ASSISTANT_SYSTEM_PROMPT = (
     "参考方剂建议用「药材 克数」逐行列出。语气温和、克制；遇到危重或急症描述"
     "（如剧烈胸痛、大出血、呼吸困难、高热不退、意识不清等）时，应只建议立即就医，不再给出方剂。"
 )
+
+
+class WorkshopIn(BaseModel):
+    keys: list[str]
+
+
+@app.post("/api/workshop/check")
+def workshop_check_api(body: WorkshopIn, db: Session = Depends(get_db)):
+    """配伍工坊：禁忌校核、属性对照、共现方与教学结论（学习示意）。"""
+    from .workshop import workshop_check
+
+    raw_keys = [str(k).strip() for k in (body.keys or []) if str(k).strip()]
+    # 去重保序，最多 3 味
+    keys: list[str] = []
+    for k in raw_keys:
+        if k not in keys:
+            keys.append(k)
+        if len(keys) >= 3:
+            break
+    if not keys:
+        raise HTTPException(status_code=400, detail="请至少选择 1 味药材")
+
+    herbs: list[Herb] = []
+    missing: list[str] = []
+    for k in keys:
+        h = db.scalar(select(Herb).where(or_(Herb.key == k, Herb.slug == k, Herb.name_zh == k)))
+        if h:
+            herbs.append(h)
+        else:
+            missing.append(k)
+    if not herbs:
+        raise HTTPException(status_code=404, detail="未找到所选药材")
+
+    result = workshop_check(herbs)
+    if missing:
+        result["missing_keys"] = missing
+    return result
 
 
 class ConsultIn(BaseModel):

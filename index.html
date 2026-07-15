@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>本草拾珍——中医药材属性的可视化图谱</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script src="http://127.0.0.1:8000/china-geo-embed.js"></script>
+<script src="./china-geo-embed.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Liu+Jian+Mao+Cao&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600;700;900&family=Zhi+Mang+Xing&family=ZCOOL+XiaoWei&display=swap');
 
@@ -92,6 +94,7 @@
   #main-stage,
   #detail-stage,
   #analysis-stage,
+  #province-stage,
   #status-bar {
     z-index: 1;
   }
@@ -133,15 +136,17 @@
   .nav-item:hover span { color: #1A1510; }
   .nav-item span {
     position: absolute;
-    font-family: 'Ma Shan Zheng', 'STXingkai', cursive;
+    font-family: 'Zhi Mang Xing', 'Liu Jian Mao Cao', 'STXingkai', cursive;
     font-weight: 400;
-    font-size: 30px;
+    font-style: normal;
+    font-size: 32px;
     color: var(--nav-icon);
     line-height: 1;
+    letter-spacing: 0.02em;
+    transform: none;
     text-shadow:
-      0.3px 0 0 rgba(60,48,36,0.25),
-      -0.3px 0 0 rgba(60,48,36,0.25),
-      0.6px 0.6px 0 rgba(60,48,36,0.08);
+      0.35px 0 0 rgba(60,48,36,0.22),
+      -0.25px 0.25px 0 rgba(60,48,36,0.12);
   }
 
   /* 左上角 · 本草行草标识 */
@@ -201,7 +206,8 @@
   #home-stage,
   #main-stage,
   #detail-stage,
-  #analysis-stage {
+  #analysis-stage,
+  #province-stage {
     position: fixed;
     left: 4vw; right: 4vw;
     top: 14vh; bottom: 4vh;
@@ -218,7 +224,8 @@
   #home-stage.visible,
   #main-stage.visible,
   #detail-stage.visible,
-  #analysis-stage.visible {
+  #analysis-stage.visible,
+  #province-stage.visible {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -232,7 +239,8 @@
   #home-stage.is-leaving,
   #main-stage.is-leaving,
   #detail-stage.is-leaving,
-  #analysis-stage.is-leaving {
+  #analysis-stage.is-leaving,
+  #province-stage.is-leaving {
     opacity: 0;
     transform: translateY(-6px);
     pointer-events: none;
@@ -241,7 +249,8 @@
   #home-stage.is-fading,
   #main-stage.is-fading,
   #detail-stage.is-fading,
-  #analysis-stage.is-fading {
+  #analysis-stage.is-fading,
+  #province-stage.is-fading {
     opacity: 0;
     transform: translateY(4px);
     pointer-events: none;
@@ -251,10 +260,12 @@
     #main-stage,
     #detail-stage,
     #analysis-stage,
+    #province-stage,
     #home-stage.visible,
     #main-stage.visible,
     #detail-stage.visible,
-    #analysis-stage.visible {
+    #analysis-stage.visible,
+    #province-stage.visible {
       transition-duration: 0.01ms !important;
       transform: none !important;
     }
@@ -268,6 +279,164 @@
     display: block;
     overflow-y: auto;
     padding-right: 8px;
+  }
+  #province-stage {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #province-stage .back-row {
+    flex-shrink: 0;
+    margin-bottom: 10px;
+  }
+  #province-head {
+    flex-shrink: 0;
+    margin-bottom: 14px;
+  }
+  #province-head h2 {
+    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+    font-size: clamp(22px, 2.4vw, 30px);
+    letter-spacing: 0.14em;
+    color: var(--ink-dark);
+    margin-bottom: 6px;
+  }
+  #province-head .province-lead {
+    font-size: 14px;
+    color: var(--ink-medium);
+    line-height: 1.75;
+    letter-spacing: 0.04em;
+    max-width: 52em;
+  }
+  #province-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--ink-light);
+    letter-spacing: 0.06em;
+  }
+  #province-meta strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  #province-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 2vw;
+    overflow: hidden;
+  }
+  #province-side {
+    flex: 0 0 28%;
+    min-width: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 6px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  #province-side::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+  #province-side h3,
+  #province-main h3 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+    color: var(--ink-dark);
+  }
+  #province-stats {
+    font-size: 13px;
+    color: var(--ink-medium);
+    line-height: 1.8;
+  }
+  #province-stats .stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(60,48,36,0.06);
+  }
+  #province-stats .stat-bar {
+    display: inline-block;
+    height: 6px;
+    border-radius: 2px;
+    background: #C49A8A;
+    margin-right: 8px;
+    vertical-align: middle;
+    max-width: 72px;
+  }
+  #province-switch {
+    margin-top: 16px;
+  }
+  #province-switch .prov-chip {
+    display: inline-block;
+    margin: 0 6px 8px 0;
+    padding: 4px 10px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--ink-medium);
+    border: 1px solid rgba(60,48,36,0.12);
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    font-family: 'Noto Serif SC', serif;
+  }
+  #province-switch .prov-chip:hover,
+  #province-switch .prov-chip.active {
+    color: #7A3A22;
+    border-color: rgba(168,90,60,0.45);
+    background: rgba(168,90,60,0.08);
+  }
+  #province-main {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #province-toolbar {
+    flex-shrink: 0;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  #province-search {
+    flex: 1;
+    max-width: 280px;
+    padding: 7px 12px;
+    border: 1px solid rgba(60,48,36,0.15);
+    background: rgba(255,255,255,0.35);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    color: var(--ink-dark);
+    outline: none;
+  }
+  #province-list {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  #province-list::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+  #province-list .herb-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+  }
+  #chart-home-growth {
+    cursor: pointer;
   }
 
   #chart-panel {
@@ -292,8 +461,8 @@
     margin-bottom: 8px;
     line-height: 1.85;
     flex-shrink: 0;
-    max-height: 24vh;
-    overflow-y: auto;
+    max-height: none;
+    overflow: visible;
   }
   #chart-desc .attr-lead {
     font-size: 15px;
@@ -406,57 +575,30 @@
     letter-spacing: 0.06em;
   }
   .herb-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
-    gap: 8px 10px;
-  }
-  a.herb-link.herb-slip {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 10px 12px 11px;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+  a.herb-link.herb-chip {
+    display: inline-block;
+    padding: 3px 2px;
     text-decoration: none;
     color: var(--ink-dark);
     border: none;
-    border-bottom: none;
-    border-left: 2px solid rgba(168,90,60,0.35);
-    background:
-      linear-gradient(135deg, rgba(255,255,255,0.42) 0%, rgba(245,240,232,0.2) 100%);
+    border-bottom: 1px solid rgba(60,48,36,0.18);
+    background: transparent;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
-    min-height: 64px;
-  }
-  a.herb-link.herb-slip:hover {
-    background: rgba(168,90,60,0.08);
-    border-left-color: var(--accent);
-    color: var(--ink-dark);
-    border-bottom: none;
-    transform: translateY(-1px);
-  }
-  .herb-slip-name {
-    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
-    font-size: 16px;
-    letter-spacing: 0.14em;
-    line-height: 1.35;
-    color: var(--ink-dark);
-  }
-  .herb-slip-py {
+    font-family: 'Noto Serif SC', serif;
     font-size: 15px;
-    letter-spacing: 0.04em;
-    color: var(--ink-light);
-    line-height: 1.3;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    transition: color 0.2s, border-color 0.2s;
   }
-  .herb-slip-meta {
-    margin-top: 4px;
-    font-size: 15px;
-    line-height: 1.45;
-    letter-spacing: 0.04em;
-    color: var(--ink-medium);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  a.herb-link.herb-chip:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    background: transparent;
+    transform: none;
   }
 
   /* 首页 · 本草沿革 */
@@ -687,7 +829,7 @@
   }
   #chart-home-growth {
     width: 100%;
-    height: 200px;
+    height: 280px;
   }
 
   #home-travel {
@@ -1537,6 +1679,192 @@
   .analysis-chart.tall { height: 380px; }
   .analysis-chart.short { height: 260px; }
 
+  /* 配伍工坊 */
+  #panel-workshop .workshop-disclaimer {
+    font-size: 12px;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+    margin: -6px 0 14px;
+  }
+  .workshop-pick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .workshop-search-wrap {
+    flex: 1;
+    min-width: 220px;
+    position: relative;
+  }
+  #workshop-search {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid rgba(60,48,36,0.15);
+    background: rgba(255,255,255,0.4);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    color: var(--ink-dark);
+    outline: none;
+  }
+  #workshop-search:focus { border-color: var(--accent); }
+  #workshop-suggest {
+    position: absolute;
+    left: 0; right: 0; top: 100%;
+    z-index: 20;
+    max-height: 220px;
+    overflow-y: auto;
+    background: rgba(245,240,232,0.98);
+    border: 1px solid rgba(60,48,36,0.12);
+    display: none;
+  }
+  #workshop-suggest button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    color: var(--ink-dark);
+    cursor: pointer;
+  }
+  #workshop-suggest button:hover { background: rgba(168,90,60,0.1); }
+  #workshop-suggest .sug-meta {
+    color: var(--ink-light);
+    font-size: 11px;
+    margin-left: 8px;
+  }
+  #workshop-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .workshop-slot {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border: 1px solid rgba(168,90,60,0.35);
+    background: rgba(168,90,60,0.08);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--ink-dark);
+  }
+  .workshop-slot button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--ink-light);
+    font-size: 16px;
+    line-height: 1;
+    padding: 0 2px;
+  }
+  .workshop-slot button:hover { color: var(--accent); }
+  .workshop-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .workshop-presets button {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border: 1px dashed rgba(60,48,36,0.2);
+    background: rgba(255,255,255,0.25);
+    color: var(--ink-medium);
+    cursor: pointer;
+  }
+  .workshop-presets button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  #workshop-level {
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    border-left: 3px solid rgba(60,48,36,0.2);
+    background: rgba(255,255,255,0.28);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-medium);
+  }
+  #workshop-level.level-ok { border-left-color: #8FA99A; }
+  #workshop-level.level-info { border-left-color: #9AA8B4; }
+  #workshop-level.level-warn { border-left-color: #C49A6C; }
+  #workshop-level.level-danger { border-left-color: #A85A3C; background: rgba(168,90,60,0.08); }
+  #workshop-level strong { color: var(--ink-dark); }
+  .workshop-contrast-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+  .workshop-contrast-table th,
+  .workshop-contrast-table td {
+    border-bottom: 1px solid rgba(60,48,36,0.08);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .workshop-contrast-table th {
+    color: var(--ink-light);
+    font-weight: 500;
+    width: 4.5em;
+    letter-spacing: 0.08em;
+  }
+  #workshop-conflicts li {
+    margin: 0 0 8px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-medium);
+  }
+  #workshop-conflicts .c-kind {
+    display: inline-block;
+    margin-right: 6px;
+    padding: 1px 6px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(60,48,36,0.15);
+  }
+  #workshop-conflicts .c-kind.danger { color: #A85A3C; border-color: rgba(168,90,60,0.4); }
+  #workshop-conflicts .c-kind.warn { color: #8A6040; border-color: rgba(196,154,108,0.5); }
+  #workshop-formulas .wf-item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(60,48,36,0.08);
+  }
+  #workshop-formulas .wf-name {
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'Noto Serif SC', serif;
+    padding: 0;
+  }
+  #workshop-formulas .wf-name:hover { color: #7A3A22; }
+  #workshop-formulas .wf-meta {
+    font-size: 12px;
+    color: var(--ink-light);
+    margin-top: 4px;
+  }
+  #workshop-teaching {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--ink-medium);
+    letter-spacing: 0.03em;
+  }
+  #workshop-empty {
+    color: var(--ink-light);
+    font-size: 14px;
+    padding: 20px 0;
+  }
+
   .role-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1721,7 +2049,7 @@
     #chart-panel { flex: 0 0 auto; height: 36vh; }
     #ring-chart { min-height: 220px; }
     .detail-grid { grid-template-columns: 1fr; }
-    .herb-grid { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); }
+    .herb-grid { gap: 4px 8px; }
     #home-layout {
       grid-template-columns: 1fr;
       gap: 16px;
@@ -1736,7 +2064,11 @@
     #history-timeline::before { left: 72px; }
     .hist-body::before { left: -14px; }
     .hist-title { font-size: 16px; }
-    #chart-home-growth { height: 180px; }
+    #chart-home-growth { height: 240px; }
+    #province-body { flex-direction: column; overflow: hidden; }
+    #province-side { flex: none; min-width: 0; max-height: 28vh; }
+    #province-main { overflow: hidden; min-height: 0; }
+    #province-list { overflow-y: auto; }
     #herb-story .story-actions { margin-left: 0; width: 100%; }
     .nav-item { width: 38px; height: 38px; }
     .nav-item span { font-size: 18px; }
@@ -1779,8 +2111,8 @@
     </div>
     <aside id="home-side">
       <div id="home-growth">
-        <h3>本草知识量 · 载药规模</h3>
-        <p class="growth-note">自《本经》三百六十五种，至《纲目》近一千九百种——本草著录规模的阶梯式增长。</p>
+        <h3>药材产区 · 大陆疏密</h3>
+        <p class="growth-note">按道地、药名产地前缀与主产通识，尽量关联本库药材至各省（示意疏密，非产量实测）。点击省份进入产区子页。</p>
         <div id="chart-home-growth"></div>
       </div>
       <div id="home-travel">
@@ -1795,7 +2127,7 @@
 
   <div id="home-foot">
     <div class="foot-count" id="home-foot-count">图谱载入 <em>—</em> 味药材</div>
-    <div class="foot-hint">右上角进入属性分类，或点「析图」做交叉与多维分析</div>
+    <div class="foot-hint">右上角进入属性分类，或点「析图」做配伍校核与应用学习</div>
   </div>
 </section>
 
@@ -1824,25 +2156,89 @@
   <div id="detail-content"></div>
 </section>
 
+<!-- 产区省份子页 -->
+<section id="province-stage">
+  <div class="back-row">
+    <button class="back-btn" id="province-back">← 返回首页</button>
+  </div>
+  <div id="province-head">
+    <h2 id="province-title">产区</h2>
+    <p class="province-lead" id="province-lead"></p>
+    <div id="province-meta"></div>
+  </div>
+  <div id="province-body">
+    <aside id="province-side">
+      <h3>四气分布</h3>
+      <div id="province-stats"></div>
+      <div id="province-switch">
+        <h3>切换产区</h3>
+        <div id="province-chips"></div>
+      </div>
+    </aside>
+    <div id="province-main">
+      <h3>关联药材</h3>
+      <div id="province-toolbar">
+        <input id="province-search" type="search" placeholder="在本产区搜索…" />
+      </div>
+      <div id="province-list"></div>
+    </div>
+  </div>
+</section>
+
 <!-- 多维分析 -->
 <section id="analysis-stage">
   <div class="analysis-head">
-    <h2>析图 · 多维可视分析</h2>
+    <h2>析图 · 配伍与多维分析</h2>
     <p>
-      本草属性并非彼此孤立：四气定寒热趋向，五味标功效方向，归经示作用脏腑，升降言病势上下，功效与配伍则落到临床应用。
-      本页在单维统计之外，用交叉、筛选、用量、词频与网络回答「属性如何共现、数据能否支撑结论」，每图均附解释与可读结论。
+      默认进入配伍工坊：动手选药，校核十八反/十九畏，对照寒热归经，并连到经典方共现。
+      交叉关系、用量安全、从症到药与方剂网络仍可继续深入；学习示意，非诊疗建议。
     </p>
   </div>
   <div id="analysis-tabs">
-    <button class="analysis-tab active" data-tab="cross">交叉关系</button>
-    <button class="analysis-tab" data-tab="probe">条件探查</button>
+    <button class="analysis-tab active" data-tab="workshop">配伍工坊</button>
     <button class="analysis-tab" data-tab="dosage">用量 · 安全</button>
     <button class="analysis-tab" data-tab="text">词频 · 从症到药</button>
     <button class="analysis-tab" data-tab="network">方剂配伍</button>
-    <button class="analysis-tab" data-tab="quality">数据质量</button>
+    <button class="analysis-tab" data-tab="probe">条件探查</button>
+    <button class="analysis-tab" data-tab="cross">交叉关系</button>
   </div>
 
-  <div class="analysis-panel active" id="panel-cross">
+  <div class="analysis-panel active" id="panel-workshop">
+    <p class="workshop-disclaimer">学习示意，非诊疗或处方建议。禁忌按课程通识规则匹配，并辅以本库配伍条文互指。</p>
+    <div class="workshop-pick">
+      <div class="workshop-search-wrap">
+        <input id="workshop-search" type="search" placeholder="搜索并添加药材（最多 3 味）…" autocomplete="off" />
+        <div id="workshop-suggest"></div>
+      </div>
+      <div id="workshop-slots"></div>
+    </div>
+    <div class="workshop-presets">
+      <button type="button" data-preset="甘草,甘遂">示例：甘草 + 甘遂（十八反）</button>
+      <button type="button" data-preset="黄芪,当归">示例：黄芪 + 当归（共现方）</button>
+      <button type="button" data-preset="麻黄,桂枝">示例：麻黄 + 桂枝</button>
+    </div>
+    <div id="workshop-level">请选择 1–3 味药材，开始配伍校核。</div>
+    <div class="analysis-grid">
+      <div class="analysis-block">
+        <h3>禁忌校核</h3>
+        <ul id="workshop-conflicts"></ul>
+      </div>
+      <div class="analysis-block">
+        <h3>属性对照</h3>
+        <div id="workshop-contrast"></div>
+      </div>
+      <div class="analysis-block full">
+        <h3>共现经典方</h3>
+        <div id="workshop-formulas"></div>
+      </div>
+      <div class="analysis-block full">
+        <h3>教学结论</h3>
+        <div id="workshop-teaching"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="analysis-panel" id="panel-cross">
     <div class="analysis-grid">
       <div class="analysis-block">
         <h3>四气 × 五味</h3>
@@ -1954,14 +2350,14 @@
       </div>
       <div class="analysis-block full">
         <h3>从症到药</h3>
-        <p class="insight" id="insight-symptom">选择高频病症，查看本库中主治文本命中该词的药材，形成「症 → 药」的探索路径。</p>
+        <p class="insight" id="insight-symptom">先点选一个高频病症，再看本库主治文本命中的药材——练习「见症 → 联想可能药性与归经 → 点开验证」的阅读路径。</p>
         <div id="symptom-list"></div>
         <div id="symptom-herbs"></div>
       </div>
       <div class="analysis-block full" id="classical-block">
         <h3>典籍引用分布</h3>
         <p class="insight" id="insight-classical"></p>
-        <div class="analysis-chart short" id="chart-classical"></div>
+        <div class="analysis-chart tall" id="chart-classical" style="height:420px"></div>
       </div>
     </div>
   </div>
@@ -1984,6 +2380,7 @@
       <div class="analysis-block">
         <h3>高频药对 TOP</h3>
         <p class="insight" id="insight-formula-pairs"></p>
+        <p style="font-size:12px;color:#8C7A6A;margin:-4px 0 8px">点击柱条可将该药对送入「配伍工坊」校核。</p>
         <div class="analysis-chart tall" id="chart-formula-pairs"></div>
       </div>
       <div class="analysis-block">
@@ -2015,21 +2412,6 @@
         <h3>入方枢纽药材</h3>
         <p class="insight" id="insight-formula-hubs"></p>
         <div class="analysis-chart short" id="chart-formula-hubs"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="analysis-panel" id="panel-quality">
-    <div class="analysis-grid">
-      <div class="analysis-block">
-        <h3>字段缺失率</h3>
-        <p class="insight" id="insight-missing"></p>
-        <div class="analysis-chart tall" id="chart-missing"></div>
-      </div>
-      <div class="analysis-block">
-        <h3>完整标注子集 vs 全库 · 四气</h3>
-        <p class="insight" id="insight-complete"></p>
-        <div class="analysis-chart tall" id="chart-complete"></div>
       </div>
     </div>
   </div>
@@ -2072,7 +2454,10 @@
   var herbIndex = {}; // name_zh -> key
   var lastListPage = 'siqi';
   var detailFrom = 'home';
-  var STAGE_IDS = ['home-stage', 'main-stage', 'detail-stage', 'analysis-stage'];
+  var currentProvince = null;
+  var provinceHerbs = [];
+  var provinceSearchKw = '';
+  var STAGE_IDS = ['home-stage', 'main-stage', 'detail-stage', 'analysis-stage', 'province-stage'];
   var STAGE_FADE_MS = 550;
   var stageTimer = null;
   var stageTimer2 = null;
@@ -2082,7 +2467,9 @@
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var probeSelectedKey = null;
   var compareKeys = [];
-  var analysisTab = 'cross';
+  var analysisTab = 'workshop';
+  var workshopKeys = [];
+  var workshopTimer = null;
   var analysisRendered = {};
   var formulaNetRoleFilter = 'all';
 
@@ -2547,6 +2934,449 @@
 
   var homeGrowthChart = null;
   var travelStoryKey = null;
+  var chinaGeoReady = null;
+  var chinaGeoPromise = null;
+  var geoDensityCache = null;
+
+  function normalizeProvinceName(name) {
+    return String(name || '')
+      .replace(/壮族自治区$|回族自治区$|维吾尔自治区$|自治区$|特别行政区$|省$|市$/g, '');
+  }
+
+  function ensureChinaMap() {
+    if (chinaGeoReady) return Promise.resolve(chinaGeoReady);
+    if (chinaGeoPromise) return chinaGeoPromise;
+
+    function registerGeo(geo) {
+      if (!geo || !geo.features || !geo.features.length) {
+        throw new Error('地图数据为空');
+      }
+      echarts.registerMap('china', geo);
+      chinaGeoReady = geo;
+      return geo;
+    }
+
+    // 优先使用本机嵌入脚本（不依赖 CDN / 旧后端是否有 geo 路由）
+    if (typeof window.__CHINA_GEO__ === 'object' && window.__CHINA_GEO__ && window.__CHINA_GEO__.features) {
+      try {
+        chinaGeoPromise = Promise.resolve(registerGeo(window.__CHINA_GEO__));
+        return chinaGeoPromise;
+      } catch (e) {
+        /* fall through to network */
+      }
+    }
+
+    var urls = [
+      API + '/api/geo/china',
+      'https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/json/china.json',
+      'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json'
+    ];
+    function tryFetch(i) {
+      if (i >= urls.length) {
+        return Promise.reject(new Error('全部地图源均不可用'));
+      }
+      return fetch(urls[i])
+        .then(function (r) {
+          if (!r.ok) throw new Error('geo http ' + r.status);
+          return r.json();
+        })
+        .catch(function () {
+          return tryFetch(i + 1);
+        });
+    }
+    chinaGeoPromise = tryFetch(0)
+      .then(registerGeo)
+      .catch(function (err) {
+        chinaGeoPromise = null;
+        throw err;
+      });
+    return chinaGeoPromise;
+  }
+
+  function loadGeoDensity() {
+    if (geoDensityCache) return Promise.resolve(geoDensityCache);
+    return fetch(API + '/api/geo/density')
+      .then(function (r) {
+        if (!r.ok) throw new Error('density http ' + r.status);
+        return r.json();
+      })
+      .then(function (j) {
+        geoDensityCache = j;
+        return j;
+      })
+      .catch(function () {
+        // 内置兜底，避免接口未重启时整图失败
+        geoDensityCache = {
+          unit: '关联道地/主产药材条目数（示意）',
+          provinces: [
+            { name: '云南', value: 42, samples: ['三七', '天麻', '云木香', '重楼', '黄连'] },
+            { name: '四川', value: 48, samples: ['川芎', '黄连', '附子', '川贝母', '麦冬'] },
+            { name: '贵州', value: 28, samples: ['天麻', '杜仲', '吴茱萸', '石斛'] },
+            { name: '广西', value: 26, samples: ['肉桂', '八角', '罗汉果'] },
+            { name: '广东', value: 24, samples: ['陈皮', '砂仁', '广藿香'] },
+            { name: '吉林', value: 22, samples: ['人参', '鹿茸', '细辛'] },
+            { name: '辽宁', value: 16, samples: ['细辛', '五味子'] },
+            { name: '黑龙江', value: 14, samples: ['刺五加', '防风'] },
+            { name: '内蒙古', value: 30, samples: ['甘草', '黄芪', '麻黄'] },
+            { name: '宁夏', value: 12, samples: ['枸杞子', '甘草'] },
+            { name: '甘肃', value: 32, samples: ['当归', '党参', '黄芪', '大黄'] },
+            { name: '青海', value: 10, samples: ['大黄', '冬虫夏草'] },
+            { name: '西藏', value: 11, samples: ['冬虫夏草', '红景天'] },
+            { name: '新疆', value: 18, samples: ['红花', '甘草', '肉苁蓉'] },
+            { name: '陕西', value: 20, samples: ['丹参', '连翘', '黄芩'] },
+            { name: '山西', value: 18, samples: ['党参', '黄芪', '远志'] },
+            { name: '河北', value: 22, samples: ['酸枣仁', '板蓝根'] },
+            { name: '河南', value: 34, samples: ['地黄', '山药', '牛膝', '菊花'] },
+            { name: '山东', value: 26, samples: ['金银花', '丹参', '全蝎'] },
+            { name: '安徽', value: 24, samples: ['白芍', '牡丹皮', '茯苓'] },
+            { name: '浙江', value: 28, samples: ['浙贝母', '白芍', '杭菊'] },
+            { name: '江苏', value: 16, samples: ['薄荷', '苍术', '太子参'] },
+            { name: '江西', value: 14, samples: ['栀子', '枳壳'] },
+            { name: '福建', value: 15, samples: ['泽泻', '薏苡仁'] },
+            { name: '湖南', value: 20, samples: ['厚朴', '黄精'] },
+            { name: '湖北', value: 22, samples: ['苍术', '半夏', '茯苓'] },
+            { name: '重庆', value: 12, samples: ['黄连', '厚朴'] },
+            { name: '上海', value: 2, samples: ['薄荷'] },
+            { name: '北京', value: 3, samples: ['黄芩'] },
+            { name: '天津', value: 2, samples: ['酸枣仁'] },
+            { name: '海南', value: 10, samples: ['槟榔', '益智', '砂仁'] },
+            { name: '台湾', value: 0, samples: [] },
+            { name: '香港', value: 0, samples: [] },
+            { name: '澳门', value: 0, samples: [] }
+          ]
+        };
+        return geoDensityCache;
+      });
+  }
+
+  function renderHomeGrowth() {
+    var el = document.getElementById('chart-home-growth');
+    if (!el || typeof echarts === 'undefined') return;
+    if (!homeGrowthChart) homeGrowthChart = echarts.init(el);
+    homeGrowthChart.showLoading('default', {
+      text: '载入产区图…',
+      color: '#A85A3C',
+      textColor: '#5C4A3A',
+      maskColor: 'rgba(245,240,232,0.55)'
+    });
+
+    Promise.all([ensureChinaMap(), loadGeoDensity()])
+      .then(function (pair) {
+        var geo = pair[0];
+        var dens = pair[1] || {};
+        var byShort = {};
+        (dens.provinces || []).forEach(function (p) {
+          byShort[normalizeProvinceName(p.name)] = p;
+        });
+
+        var mapData = [];
+        var features = (geo && geo.features) || [];
+        if (features.length) {
+          features.forEach(function (f) {
+            var full = (f.properties && (f.properties.name || f.properties.NAME)) || '';
+            if (!full) return;
+            var short = normalizeProvinceName(full);
+            var row = byShort[short] || { value: 0, samples: [] };
+            mapData.push({
+              name: full,
+              value: row.value || 0,
+              samples: row.samples || []
+            });
+          });
+        } else {
+          // echarts built-in china.json uses short names
+          Object.keys(byShort).forEach(function (short) {
+            var row = byShort[short];
+            mapData.push({
+              name: short,
+              value: row.value || 0,
+              samples: row.samples || []
+            });
+          });
+        }
+
+        var maxV = 1;
+        mapData.forEach(function (d) {
+          if (d.value > maxV) maxV = d.value;
+        });
+
+        homeGrowthChart.hideLoading();
+        homeGrowthChart.setOption({
+          tooltip: {
+            trigger: 'item',
+            backgroundColor: 'rgba(245,240,232,0.96)',
+            borderColor: 'rgba(60,48,36,0.15)',
+            textStyle: { color: '#2C2416', fontFamily: 'Noto Serif SC, serif', fontSize: 12 },
+            formatter: function (p) {
+              if (!p || p.data == null) return (p.name || '') + '<br/>暂无示意数据';
+              var d = p.data;
+              var samples = (d.samples || []).slice(0, 5).join('、');
+              return '<b>' + (p.name || d.name || '') + '</b><br/>' +
+                '关联条目约 <b>' + (d.value || 0) + '</b> 味<br/>' +
+                (samples ? ('代表：' + samples + '<br/>') : '') +
+                '<span style="color:#8C7A6A">点击进入产区子页</span>';
+            }
+          },
+          visualMap: {
+            min: 0,
+            max: maxV,
+            left: 8,
+            bottom: 8,
+            text: ['密', '疏'],
+            textStyle: { color: '#8C7A6A', fontSize: 11 },
+            inRange: {
+              color: ['#F5F0E8', '#E8D5C4', '#D4A574', '#C47A4A', '#A85A3C', '#7A3A22']
+            },
+            calculable: false,
+            itemWidth: 10,
+            itemHeight: 70
+          },
+          series: [{
+            name: '产区疏密',
+            type: 'map',
+            map: 'china',
+            roam: true,
+            scaleLimit: { min: 0.85, max: 4 },
+            zoom: 1.15,
+            top: 12,
+            bottom: 8,
+            label: {
+              show: false,
+              color: '#5C4A3A',
+              fontSize: 9
+            },
+            emphasis: {
+              label: { show: true, color: '#2C2416', fontSize: 11 },
+              itemStyle: {
+                areaColor: '#B89082',
+                borderColor: '#A85A3C',
+                borderWidth: 1.2,
+                shadowBlur: 8,
+                shadowColor: 'rgba(168,90,60,0.25)'
+              }
+            },
+            itemStyle: {
+              borderColor: 'rgba(60,48,36,0.28)',
+              borderWidth: 0.6,
+              areaColor: '#F5F0E8'
+            },
+            data: mapData
+          }]
+        }, true);
+        bindHomeGrowthClick();
+      })
+      .catch(function (err) {
+        console.error(err);
+        homeGrowthChart.hideLoading();
+        // 回退：省级柱状疏密
+        loadGeoDensity().then(function (dens) {
+          var rows = (dens.provinces || [])
+            .filter(function (p) { return (p.value || 0) > 0; })
+            .sort(function (a, b) { return b.value - a.value; })
+            .slice(0, 12);
+          homeGrowthChart.setOption({
+            tooltip: {
+              trigger: 'axis',
+              backgroundColor: 'rgba(245,240,232,0.96)',
+              textStyle: { color: '#2C2416', fontFamily: 'Noto Serif SC, serif', fontSize: 12 },
+              formatter: function (params) {
+                var i = params[0].dataIndex;
+                var d = rows[i];
+                return d.name + '：约 ' + d.value + ' 味<br/>' +
+                  ((d.samples || []).slice(0, 4).join('、') || '') +
+                  '<br/><span style="color:#8C7A6A">点击进入产区子页</span>';
+              }
+            },
+            grid: { top: 24, left: 40, right: 16, bottom: 40 },
+            xAxis: {
+              type: 'category',
+              data: rows.map(function (d) { return d.name; }),
+              axisLabel: { color: '#5C4A3A', fontSize: 10, rotate: 30 }
+            },
+            yAxis: {
+              type: 'value',
+              name: '味',
+              axisLabel: { color: '#8C7A6A' },
+              splitLine: { lineStyle: { color: 'rgba(60,48,36,0.08)' } }
+            },
+            series: [{
+              type: 'bar',
+              data: rows.map(function (d) { return d.value; }),
+              itemStyle: {
+                color: {
+                  type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+                  colorStops: [
+                    { offset: 0, color: '#A85A3C' },
+                    { offset: 1, color: 'rgba(184,144,130,0.45)' }
+                  ]
+                }
+              },
+              barMaxWidth: 18
+            }]
+          }, true);
+          bindHomeGrowthClick(rows);
+        }).catch(function () {
+          el.innerHTML = '<p style="color:#8C7A6A;font-size:13px;padding:20px 8px;text-align:center">产区图暂时无法加载</p>';
+        });
+      });
+  }
+
+  function bindHomeGrowthClick(barRows) {
+    if (!homeGrowthChart) return;
+    homeGrowthChart.off('click');
+    homeGrowthChart.on('click', function (params) {
+      if (!params) return;
+      var name = null;
+      if (params.componentType === 'series' && params.seriesType === 'map') {
+        name = params.name;
+      } else if (params.componentType === 'series' && params.seriesType === 'bar' && barRows) {
+        var row = barRows[params.dataIndex];
+        name = row && row.name;
+      }
+      if (name) openProvince(name);
+    });
+  }
+
+  function findProvinceRow(dens, name) {
+    var short = normalizeProvinceName(name);
+    var list = (dens && dens.provinces) || [];
+    for (var i = 0; i < list.length; i++) {
+      var p = list[i];
+      if (normalizeProvinceName(p.name) === short || p.name === name) return p;
+    }
+    return null;
+  }
+
+  function matchHerbsByNames(names) {
+    var set = {};
+    (names || []).forEach(function (n) { if (n) set[n] = true; });
+    return (allHerbs || []).filter(function (h) {
+      return h.name_zh && set[h.name_zh];
+    });
+  }
+
+  function openProvince(name) {
+    var short = normalizeProvinceName(name);
+    if (!short) return;
+
+    function paint(row, herbs) {
+      currentProvince = row && row.name ? row.name : short;
+      provinceHerbs = herbs || [];
+      provinceSearchKw = '';
+      var searchEl = document.getElementById('province-search');
+      if (searchEl) searchEl.value = '';
+      currentPage = 'province';
+      updateNavActive('');
+      showStage('province-stage', function () {
+        renderProvincePage(currentProvince, row || { name: short }, provinceHerbs);
+      });
+      history.replaceState(null, '', '#province/' + encodeURIComponent(currentProvince));
+      setStatus('产区 · ' + currentProvince + ' · ' + provinceHerbs.length + ' 味关联药材');
+    }
+
+    fetch(API + '/api/geo/province/' + encodeURIComponent(short))
+      .then(function (r) {
+        if (!r.ok) throw new Error('province http ' + r.status);
+        return r.json();
+      })
+      .then(function (j) {
+        paint(j, j.herbs || []);
+      })
+      .catch(function () {
+        loadGeoDensity().then(function (dens) {
+          var row = findProvinceRow(dens, short) || { name: short, herbs: [], samples: [] };
+          var names = row.herbs && row.herbs.length ? row.herbs : (row.samples || []);
+          paint(row, matchHerbsByNames(names));
+        });
+      });
+  }
+
+  function renderProvinceHerbList() {
+    var box = document.getElementById('province-list');
+    if (!box) return;
+    var kw = (provinceSearchKw || '').trim();
+    var list = provinceHerbs.slice();
+    if (kw) {
+      list = list.filter(function (h) {
+        return (h.name_zh && h.name_zh.indexOf(kw) >= 0) ||
+          (h.name_pinyin && h.name_pinyin.toLowerCase().indexOf(kw.toLowerCase()) >= 0);
+      });
+    }
+    list.sort(function (a, b) {
+      return (a.name_zh || '').localeCompare(b.name_zh || '', 'zh');
+    });
+    if (!list.length) {
+      box.innerHTML = '<p style="color:#8C7A6A;font-size:14px;padding:12px 0">本产区暂无匹配药材（课程通识示意）。</p>';
+      return;
+    }
+    var html = '<div class="herb-grid">';
+    list.forEach(function (h) {
+      html += '<a class="herb-link herb-chip" href="#herb/' + encodeURIComponent(h.key) +
+        '" data-herb="' + escapeAttr(h.key) + '">' +
+        escapeHtml(h.name_zh || h.key) + '</a>';
+    });
+    html += '</div>';
+    box.innerHTML = html;
+  }
+
+  function renderProvincePage(name, row, herbs) {
+    document.getElementById('province-title').textContent = '产区 · ' + name;
+    document.getElementById('province-lead').textContent =
+      '按道地药材与主产区通识，汇集与「' + name +
+      '」关联的药材条目。此为课程示意分类，非精确产量或行政区划统计；点击药名可查看详情。';
+
+    var meta = document.getElementById('province-meta');
+    meta.innerHTML =
+      '<span>关联 <strong>' + herbs.length + '</strong> 味</span>' +
+      (row.samples && row.samples.length
+        ? ('<span>代表：' + escapeHtml(row.samples.slice(0, 5).join('、')) + '</span>')
+        : '');
+
+    // 四气分布
+    var siqiCount = {};
+    herbs.forEach(function (h) {
+      var q = h.siqi || '未标';
+      siqiCount[q] = (siqiCount[q] || 0) + 1;
+    });
+    var order = (PAGE_META.siqi && PAGE_META.siqi.order) || [];
+    var keys = order.filter(function (k) { return siqiCount[k]; })
+      .concat(Object.keys(siqiCount).filter(function (k) { return order.indexOf(k) < 0; }));
+    var maxC = 1;
+    keys.forEach(function (k) { if (siqiCount[k] > maxC) maxC = siqiCount[k]; });
+    var statsHtml = '';
+    if (!keys.length) {
+      statsHtml = '<p style="color:#8C7A6A">暂无四气数据</p>';
+    } else {
+      keys.forEach(function (k) {
+        var n = siqiCount[k];
+        var w = Math.max(8, Math.round(n / maxC * 72));
+        var color = (PAGE_META.siqi.colors && PAGE_META.siqi.colors[k]) || '#C49A8A';
+        statsHtml += '<div class="stat-row"><span><span class="stat-bar" style="width:' +
+          w + 'px;background:' + color + '"></span>' + escapeHtml(k) +
+          '</span><span>' + n + '</span></div>';
+      });
+    }
+    document.getElementById('province-stats').innerHTML = statsHtml;
+
+    // 其它产区快捷切换
+    loadGeoDensity().then(function (dens) {
+      var chips = document.getElementById('province-chips');
+      if (!chips) return;
+      var html = '';
+      (dens.provinces || [])
+        .filter(function (p) { return (p.value || 0) > 0 || (p.herbs && p.herbs.length); })
+        .sort(function (a, b) { return (b.value || 0) - (a.value || 0); })
+        .forEach(function (p) {
+          var active = normalizeProvinceName(p.name) === normalizeProvinceName(name) ? ' active' : '';
+          html += '<button type="button" class="prov-chip' + active + '" data-province="' +
+            escapeAttr(p.name) + '">' + escapeHtml(p.name) +
+            '<span style="opacity:.55;margin-left:4px">' + (p.value || 0) + '</span></button>';
+        });
+      chips.innerHTML = html || '<span style="color:#8C7A6A;font-size:12px">暂无产区列表</span>';
+    });
+
+    renderProvinceHerbList();
+  }
 
   function revealHistoryTimeline() {
     var items = document.querySelectorAll('#history-timeline .hist-item');
@@ -2604,59 +3434,6 @@
     });
   }
 
-  function renderHomeGrowth() {
-    var el = document.getElementById('chart-home-growth');
-    if (!el || typeof echarts === 'undefined') return;
-    if (!homeGrowthChart) homeGrowthChart = echarts.init(el);
-    homeGrowthChart.setOption({
-      tooltip: {
-        trigger: 'axis',
-        backgroundColor: 'rgba(245,240,232,0.96)',
-        borderColor: 'rgba(60,48,36,0.15)',
-        textStyle: { color: '#2C2416', fontFamily: 'Noto Serif SC, serif', fontSize: 12 },
-        formatter: function (params) {
-          var p = params[0];
-          var d = HOME_GROWTH[p.dataIndex];
-          return d.name + '（' + d.year + '）<br/>载药约 <b>' + d.value + '</b> 种';
-        }
-      },
-      grid: { top: 28, left: 48, right: 24, bottom: 36 },
-      xAxis: {
-        type: 'category',
-        data: HOME_GROWTH.map(function (d) { return d.name; }),
-        axisLabel: { color: '#5C4A3A', fontSize: 11 },
-        axisLine: { lineStyle: { color: 'rgba(60,48,36,0.2)' } }
-      },
-      yAxis: {
-        type: 'value', name: '种',
-        axisLabel: { color: '#8C7A6A' },
-        splitLine: { lineStyle: { color: 'rgba(60,48,36,0.08)' } }
-      },
-      series: [{
-        type: 'line',
-        smooth: 0.35,
-        symbol: 'circle',
-        symbolSize: 9,
-        data: HOME_GROWTH.map(function (d) { return d.value; }),
-        lineStyle: { color: '#B89082', width: 2.5 },
-        itemStyle: { color: '#A85A3C', borderColor: '#F5F0E8', borderWidth: 2 },
-        areaStyle: {
-          color: {
-            type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-            colorStops: [
-              { offset: 0, color: 'rgba(184,144,130,0.35)' },
-              { offset: 1, color: 'rgba(184,144,130,0.02)' }
-            ]
-          }
-        },
-        label: {
-          show: true, position: 'top', color: '#8C7A6A', fontSize: 10,
-          formatter: function (p) { return p.value; }
-        }
-      }]
-    }, true);
-  }
-
   function renderTravelHerbs() {
     var box = document.getElementById('travel-herbs');
     if (!box) return;
@@ -2672,15 +3449,11 @@
   }
 
   function classicalTitle(r) {
-    var map = {
-      shen_nong_ben_cao_jing: '《神农本草经》',
-      ming_yi_bie_lu: '《名医别录》',
-      ben_cao_gang_mu: '《本草纲目》',
-      zheng_lei_ben_cao: '《证类本草》',
-      course_tongshi: '课程通识'
-    };
-    if (typeof r === 'string') return r;
-    return r.title || map[r.text_key] || r.text_key || r.book || '典籍';
+    if (typeof r === 'string') {
+      return CLASSICAL_TITLE[r] || r;
+    }
+    if (!r) return '典籍';
+    return r.title || CLASSICAL_TITLE[r.text_key] || r.book || r.text_key || '典籍';
   }
 
   function openHerbStory(key) {
@@ -3385,29 +4158,6 @@
     });
   }
 
-  function herbListMeta(pageId, h) {
-    if (pageId === 'peiwu') {
-      var tip = (h.peiwu_jinji || '').replace(/\s+/g, ' ').trim();
-      return tip ? tip.slice(0, 36) + (tip.length > 36 ? '…' : '') : '暂无配伍警示条文';
-    }
-    if (pageId === 'siqi') {
-      return [h.wuwei, h.guijing ? ('归' + h.guijing) : ''].filter(Boolean).join(' · ') || '属性待补';
-    }
-    if (pageId === 'wuwei') {
-      return [h.siqi, h.category].filter(Boolean).join(' · ') || '属性待补';
-    }
-    if (pageId === 'guijing') {
-      return [h.siqi, h.wuwei, h.category].filter(Boolean).join(' · ') || '属性待补';
-    }
-    if (pageId === 'shengjiang') {
-      return [h.siqi, h.wuwei, h.category].filter(Boolean).join(' · ') || '属性待补';
-    }
-    if (pageId === 'gongxiao') {
-      return [h.siqi, h.wuwei, h.guijing ? ('归' + h.guijing) : ''].filter(Boolean).join(' · ') || '属性待补';
-    }
-    return [h.siqi, h.wuwei].filter(Boolean).join(' · ') || (h.category || '');
-  }
-
   function renderHerbList(pageId) {
     var groups = buildGroups(pageId);
     var keys = currentGroup === '全部' ? orderedGroupKeys(pageId, groups) : [currentGroup];
@@ -3431,17 +4181,9 @@
         '<span class="herb-group-count">' + list.length + ' 味</span></div>';
       html += '<div class="herb-grid">';
       list.forEach(function (h) {
-        var meta = herbListMeta(pageId, h);
-        html += '<a class="herb-link herb-slip" href="#herb/' + encodeURIComponent(h.key) +
-          '" data-herb="' + escapeAttr(h.key) + '" style="border-left-color:' + color + '">' +
-          '<span class="herb-slip-name">' + escapeHtml(h.name_zh || h.key) + '</span>' +
-          (h.name_pinyin
-            ? ('<span class="herb-slip-py">' + escapeHtml(h.name_pinyin) + '</span>')
-            : '') +
-          (meta
-            ? ('<span class="herb-slip-meta">' + escapeHtml(meta) + '</span>')
-            : '') +
-          '</a>';
+        html += '<a class="herb-link herb-chip" href="#herb/' + encodeURIComponent(h.key) +
+          '" data-herb="' + escapeAttr(h.key) + '">' +
+          escapeHtml(h.name_zh || h.key) + '</a>';
       });
       html += '</div></div>';
     });
@@ -3807,10 +4549,27 @@
     shen_nong_ben_cao_jing: '《神农本草经》',
     ming_yi_bie_lu: '《名医别录》',
     ben_cao_gang_mu: '《本草纲目》',
+    ben_cao_gang_mu_shi_yi: '《本草纲目拾遗》',
     zheng_lei_ben_cao: '《证类本草》',
     yao_xing_lun: '《药性论》',
     ri_hua_zi_ben_cao: '《日华子本草》',
     ben_cao_yan_yi: '《本草衍义》',
+    ben_cao_cong_xin: '《本草从新》',
+    ben_cao_zheng_yi: '《本草正义》',
+    ben_cao_shi_yi: '《本草拾遗》',
+    kai_bao_ben_cao: '《开宝本草》',
+    xin_xiu_ben_cao: '《新修本草》',
+    tang_ben_cao: '《唐本草》',
+    hai_yao_ben_cao: '《海药本草》',
+    shang_han_lun: '《伤寒论》',
+    jin_gui_yao_lue: '《金匮要略》',
+    huang_di_nei_jing: '《黄帝内经》',
+    wen_bing_tiao_bian: '《温病条辨》',
+    tai_ping_hui_min_he_ji_ju_fang: '《太平惠民和剂局方》',
+    yi_fang_ji_jie: '《医方集解》',
+    bin_hu_mai_xue: '《濒湖脉学》',
+    si_bu_yi_dian: '《四部医典》',
+    xian_dai_shi_yong_zhong_yao: '《现代实用中药》',
     course_tongshi: '课程通识摘要'
   };
 
@@ -4812,14 +5571,32 @@
 
   function renderTextTab() {
     if (!analysisData) return;
-    function barChart(id, list, color) {
+    function barChart(id, list, color, leftPad) {
       var c = ensureChart(id);
       var data = (list || []).slice().reverse();
+      var maxLen = 0;
+      data.forEach(function (d) {
+        var n = (d && d.name) ? String(d.name).length : 0;
+        if (n > maxLen) maxLen = n;
+      });
+      // 长中文名（如典籍书名）需更大左侧留白，图表整体右移
+      var left = leftPad != null
+        ? leftPad
+        : Math.max(88, Math.min(220, Math.round(maxLen * 14 + 24)));
       c.setOption({
         tooltip: Object.assign(inkTooltip(), { trigger: 'axis' }),
-        grid: { top: 8, left: 72, right: 24, bottom: 24 },
+        grid: { top: 8, left: left, right: 28, bottom: 24 },
         xAxis: { type: 'value', splitLine: { lineStyle: { color: 'rgba(60,48,36,0.08)' } }, axisLabel: { color: '#8C7A6A' } },
-        yAxis: { type: 'category', data: data.map(function (d) { return d.name; }), axisLabel: { color: '#5C4A3A', fontSize: 11 } },
+        yAxis: {
+          type: 'category',
+          data: data.map(function (d) { return d.name; }),
+          axisLabel: {
+            color: '#5C4A3A',
+            fontSize: 11,
+            interval: 0,
+            hideOverlap: false
+          }
+        },
         series: [{ type: 'bar', data: data.map(function (d) { return d.value; }), itemStyle: { color: color }, barMaxWidth: 16 }]
       }, true);
     }
@@ -4882,7 +5659,7 @@
         '统计 classical_refs 中出现的典籍/条目名称，观察知识来源偏向哪些文献传统。',
         '引用最多的条目为「' + classical[0].name + '」（' + classical[0].value + '）。文献维度可支撑「属性从何而来」的叙述。'
       );
-      barChart('chart-classical', classical, '#C4B08A');
+      barChart('chart-classical', classical, '#C4B08A', 200);
     }
   }
 
@@ -4926,14 +5703,16 @@
     var pc = ensureChart('chart-formula-pairs');
     var pairLabels = pairs.slice().reverse().map(function (p) { return p.source + ' + ' + p.target; });
     var pairVals = pairs.slice().reverse().map(function (p) { return p.value; });
+    var pairsRev = pairs.slice().reverse();
     pc.setOption({
       tooltip: Object.assign(inkTooltip(), {
         trigger: 'axis',
         formatter: function (params) {
           var i = params[0].dataIndex;
-          var p = pairs.slice().reverse()[i];
+          var p = pairsRev[i];
           var tip = p.source + ' + ' + p.target + '：' + p.value + ' 次';
           if (p.formulas && p.formulas.length) tip += '<br/>例：' + p.formulas.join('、');
+          tip += '<br/><span style="color:#8C7A6A">点击送入配伍工坊</span>';
           return tip;
         }
       }),
@@ -4942,6 +5721,13 @@
       yAxis: { type: 'category', data: pairLabels, axisLabel: { color: '#5C4A3A', fontSize: 11 } },
       series: [{ type: 'bar', data: pairVals, itemStyle: { color: '#7A9EAF' }, barMaxWidth: 14 }]
     }, true);
+    pc.off('click');
+    pc.on('click', function (params) {
+      if (params == null || params.dataIndex == null) return;
+      var p = pairsRev[params.dataIndex];
+      if (!p) return;
+      sendPairToWorkshop(p.source, p.target);
+    });
 
     var roles = fp.roles || [];
     var roleSum = roles.reduce(function (s, r) { return s + r.value; }, 0) || 1;
@@ -5130,77 +5916,262 @@
     });
   }
 
-  function renderQualityTab() {
-    if (!analysisData) return;
-    var miss = analysisData.missing || {};
-    var labels = {
-      siqi: '四气', wuwei: '五味', guijing: '归经', shengjiang: '升降沉浮',
-      category: '功效分类', dosage: '用量', peiwu_jinji: '配伍禁忌',
-      jinjizheng: '禁忌证', anquan: '安全说明', gongxiao: '功效', zhuzhi: '主治'
-    };
-    var keys = Object.keys(labels);
-    var worst = keys.slice().sort(function (a, b) {
-      return ((miss[b] && miss[b].rate) || 0) - ((miss[a] && miss[a].rate) || 0);
-    })[0];
-    var best = keys.slice().sort(function (a, b) {
-      return ((miss[a] && miss[a].rate) || 0) - ((miss[b] && miss[b].rate) || 0);
-    })[0];
-    setInsight(
-      'insight-missing',
-      '缺失率衡量该字段有多少药材未标注。核心属性（四气、五味、归经）缺失低，则交叉分析更可信；升降等若缺失高，相关结论应降权。',
-      '缺失最高为「' + labels[worst] + '」（约 ' + Math.round(((miss[worst] && miss[worst].rate) || 0) * 100) +
-        '%），最低为「' + labels[best] + '」（约 ' + Math.round(((miss[best] && miss[best].rate) || 0) * 100) +
-        '%）。答辩时可据此说明分析边界。'
-    );
-    var mc = ensureChart('chart-missing');
-    mc.setOption({
-      tooltip: Object.assign(inkTooltip(), {
-        formatter: function (p) {
-          var k = keys[p.dataIndex];
-          var m = miss[k] || {};
-          return labels[k] + '<br/>缺失 ' + (m.missing || 0) + ' · 缺失率 ' + Math.round((m.rate || 0) * 100) + '%';
-        }
-      }),
-      grid: { top: 16, left: 80, right: 24, bottom: 28 },
-      xAxis: {
-        type: 'value', max: 1, axisLabel: { formatter: function (v) { return Math.round(v * 100) + '%'; }, color: '#8C7A6A' },
-        splitLine: { lineStyle: { color: 'rgba(60,48,36,0.08)' } }
-      },
-      yAxis: { type: 'category', data: keys.map(function (k) { return labels[k]; }), axisLabel: { color: '#5C4A3A', fontSize: 11 } },
-      series: [{
-        type: 'bar',
-        data: keys.map(function (k) { return (miss[k] && miss[k].rate) || 0; }),
-        itemStyle: { color: '#C4A892' },
-        barMaxWidth: 14
-      }]
-    }, true);
+  function findHerbByNameOrKey(q) {
+    q = (q || '').trim();
+    if (!q) return null;
+    var hit = allHerbs.find(function (h) { return h.key === q || h.name_zh === q; });
+    if (hit) return hit;
+    return allHerbs.find(function (h) {
+      return (h.name_zh && h.name_zh.indexOf(q) >= 0) ||
+        (h.name_pinyin && h.name_pinyin.toLowerCase().indexOf(q.toLowerCase()) >= 0);
+    }) || null;
+  }
 
-    var sub = analysisData.complete_subset || {};
-    setInsight(
-      'insight-complete',
-      '「完整子集」要求四气、五味、归经、功效分类、用量均齐全，用以对照全库，检查分析是否被缺失值扭曲。',
-      '完整子集 ' + (sub.count || 0) + ' 味（' + Math.round((sub.rate || 0) * 100) +
-        '%）。若两侧四气占比接近，说明核心结论较稳健；若偏差大，应优先在完整子集上解读。'
-    );
-    var order = SIQI_HEAT.filter(function (k) {
-      return (sub.by_siqi && sub.by_siqi[k]) || (sub.all_by_siqi && sub.all_by_siqi[k]);
-    });
-    function norm(map) {
-      var sum = order.reduce(function (s, k) { return s + ((map && map[k]) || 0); }, 0) || 1;
-      return order.map(function (k) { return Math.round(((map && map[k]) || 0) / sum * 1000) / 10; });
+  function sendPairToWorkshop(nameA, nameB) {
+    var a = findHerbByNameOrKey(nameA);
+    var b = findHerbByNameOrKey(nameB);
+    workshopKeys = [];
+    if (a) workshopKeys.push(a.key);
+    if (b && workshopKeys.indexOf(b.key) < 0) workshopKeys.push(b.key);
+    renderAnalysisTab('workshop');
+  }
+
+  function renderWorkshopSlots() {
+    var box = document.getElementById('workshop-slots');
+    if (!box) return;
+    if (!workshopKeys.length) {
+      box.innerHTML = '<span style="color:#8C7A6A;font-size:13px">尚未选药</span>';
+      return;
     }
-    var cc = ensureChart('chart-complete');
-    cc.setOption({
-      tooltip: Object.assign(inkTooltip(), { trigger: 'axis' }),
-      legend: { data: ['全库占比%', '完整子集占比%'], bottom: 0, textStyle: { color: '#5C4A3A' } },
-      grid: { top: 24, left: 40, right: 16, bottom: 40 },
-      xAxis: { type: 'category', data: order, axisLabel: { color: '#5C4A3A' } },
-      yAxis: { type: 'value', name: '%', splitLine: { lineStyle: { color: 'rgba(60,48,36,0.08)' } } },
-      series: [
-        { name: '全库占比%', type: 'bar', data: norm(sub.all_by_siqi), itemStyle: { color: '#C4B7A0' } },
-        { name: '完整子集占比%', type: 'bar', data: norm(sub.by_siqi), itemStyle: { color: '#8FA99A' } }
-      ]
-    }, true);
+    box.innerHTML = workshopKeys.map(function (k) {
+      var h = allHerbs.find(function (x) { return x.key === k; });
+      var name = (h && h.name_zh) || k;
+      return '<span class="workshop-slot">' +
+        '<a class="herb-link" href="#herb/' + encodeURIComponent(k) + '" data-herb="' + escapeAttr(k) + '">' +
+        escapeHtml(name) + '</a>' +
+        '<button type="button" data-remove="' + escapeAttr(k) + '" aria-label="移除">×</button></span>';
+    }).join('');
+    box.querySelectorAll('[data-remove]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var key = btn.getAttribute('data-remove');
+        workshopKeys = workshopKeys.filter(function (k) { return k !== key; });
+        runWorkshopCheck();
+      });
+    });
+  }
+
+  function workshopAddHerb(key) {
+    if (!key) return;
+    if (workshopKeys.indexOf(key) >= 0) return;
+    if (workshopKeys.length >= 3) {
+      setStatus('配伍工坊最多选择 3 味', true);
+      return;
+    }
+    workshopKeys.push(key);
+    var search = document.getElementById('workshop-search');
+    var sug = document.getElementById('workshop-suggest');
+    if (search) search.value = '';
+    if (sug) { sug.style.display = 'none'; sug.innerHTML = ''; }
+    runWorkshopCheck();
+  }
+
+  function renderWorkshopSuggest(q) {
+    var sug = document.getElementById('workshop-suggest');
+    if (!sug) return;
+    q = (q || '').trim();
+    if (!q) {
+      sug.style.display = 'none';
+      sug.innerHTML = '';
+      return;
+    }
+    var ql = q.toLowerCase();
+    var hits = allHerbs.filter(function (h) {
+      return (h.name_zh && h.name_zh.indexOf(q) >= 0) ||
+        (h.name_pinyin && h.name_pinyin.toLowerCase().indexOf(ql) >= 0) ||
+        (h.key && h.key.indexOf(ql) >= 0);
+    }).slice(0, 12);
+    if (!hits.length) {
+      sug.style.display = 'none';
+      sug.innerHTML = '';
+      return;
+    }
+    sug.innerHTML = hits.map(function (h) {
+      return '<button type="button" data-key="' + escapeAttr(h.key) + '">' +
+        escapeHtml(h.name_zh) +
+        '<span class="sug-meta">' + escapeHtml(h.siqi || '') +
+        (h.category ? ' · ' + escapeHtml(h.category) : '') + '</span></button>';
+    }).join('');
+    sug.style.display = 'block';
+    sug.querySelectorAll('button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        workshopAddHerb(btn.getAttribute('data-key'));
+      });
+    });
+  }
+
+  function levelLabel(level) {
+    if (level === 'danger') return '十八反类警示';
+    if (level === 'warn') return '十九畏 / 不宜联用提示';
+    if (level === 'info') return '一般禁忌提示';
+    return '未见经典相反/相畏命中';
+  }
+
+  function renderWorkshopResult(data) {
+    var levelEl = document.getElementById('workshop-level');
+    var confEl = document.getElementById('workshop-conflicts');
+    var contrastEl = document.getElementById('workshop-contrast');
+    var formEl = document.getElementById('workshop-formulas');
+    var teachEl = document.getElementById('workshop-teaching');
+    if (!data || !data.herbs || !data.herbs.length) {
+      levelEl.className = '';
+      levelEl.textContent = '请选择 1–3 味药材，开始配伍校核。';
+      confEl.innerHTML = '';
+      contrastEl.innerHTML = '';
+      formEl.innerHTML = '';
+      teachEl.innerHTML = '';
+      return;
+    }
+
+    var level = data.level || 'ok';
+    levelEl.className = 'level-' + level;
+    levelEl.innerHTML = '<strong>' + levelLabel(level) + '</strong> · 已选 ' +
+      data.herbs.map(function (h) { return escapeHtml(h.name_zh); }).join('、') +
+      '（学习示意，非诊疗）';
+
+    var conflicts = data.conflicts || [];
+    if (!conflicts.length) {
+      confEl.innerHTML = '<li style="color:#8C7A6A">本库通识规则与互指条文中，未见十八反/十九畏命中。</li>';
+    } else {
+      confEl.innerHTML = conflicts.map(function (c) {
+        var cls = c.level === 'danger' ? 'danger' : 'warn';
+        return '<li><span class="c-kind ' + cls + '">' + escapeHtml(c.kind || '') + '</span>' +
+          escapeHtml((c.pair || []).join(' ↔ ')) + '：' +
+          escapeHtml(c.evidence || c.rule || '') + '</li>';
+      }).join('');
+    }
+
+    var herbs = data.herbs || [];
+    var rows = [
+      ['药名', herbs.map(function (h) {
+        return '<a class="herb-link" href="#herb/' + encodeURIComponent(h.key) + '" data-herb="' +
+          escapeAttr(h.key) + '">' + escapeHtml(h.name_zh) + '</a>';
+      })],
+      ['四气', herbs.map(function (h) { return escapeHtml(h.siqi || '—'); })],
+      ['五味', herbs.map(function (h) { return escapeHtml(h.wuwei || '—'); })],
+      ['归经', herbs.map(function (h) { return escapeHtml(h.guijing || '—'); })],
+      ['升降', herbs.map(function (h) { return escapeHtml(h.shengjiang || '—'); })],
+      ['功效类', herbs.map(function (h) { return escapeHtml(h.category || '—'); })]
+    ];
+    var table = '<table class="workshop-contrast-table"><tbody>';
+    rows.forEach(function (r) {
+      table += '<tr><th>' + r[0] + '</th>';
+      r[1].forEach(function (cell) { table += '<td>' + cell + '</td>'; });
+      table += '</tr>';
+    });
+    table += '</tbody></table>';
+    if (data.contrast_notes && data.contrast_notes.length) {
+      table += '<ul style="margin-top:10px;padding-left:1.2em;color:#5C4A3A;font-size:13px;line-height:1.7">';
+      data.contrast_notes.forEach(function (n) {
+        table += '<li>' + escapeHtml(n) + '</li>';
+      });
+      table += '</ul>';
+    }
+    contrastEl.innerHTML = table;
+
+    var formulas = data.formulas || [];
+    if (!formulas.length) {
+      formEl.innerHTML = '<p style="color:#8C7A6A;font-size:13px">本库方剂中暂无同时含所选全部药材的共现方' +
+        (herbs.length < 2 ? '（可再加一味以看共现）' : '') + '。</p>';
+    } else {
+      formEl.innerHTML = formulas.map(function (f) {
+        var roles = (f.roles || []).map(function (r) {
+          var h = herbs.find(function (x) { return x.key === r.herb_key; });
+          return escapeHtml((h && h.name_zh) || r.herb_key) +
+            (r.role ? '（' + escapeHtml(r.role) + '）' : '');
+        }).join('、');
+        return '<div class="wf-item">' +
+          '<button type="button" class="wf-name" data-formula="' + escapeAttr(f.key || '') + '">' +
+          escapeHtml(f.name_zh || f.key || '') + '</button>' +
+          '<div class="wf-meta">' + escapeHtml(f.source || f.category || '') +
+          (roles ? ' · ' + roles : '') + '</div></div>';
+      }).join('');
+      formEl.querySelectorAll('[data-formula]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var fk = btn.getAttribute('data-formula');
+          if (fk && typeof showFormulaPeek === 'function') showFormulaPeek(fk);
+        });
+      });
+    }
+
+    teachEl.textContent = data.teaching || '';
+  }
+
+  function runWorkshopCheck() {
+    renderWorkshopSlots();
+    if (!workshopKeys.length) {
+      renderWorkshopResult(null);
+      return;
+    }
+    fetch(API + '/api/workshop/check', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keys: workshopKeys })
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error('workshop ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        renderWorkshopResult(data);
+        setStatus('配伍工坊 · ' + workshopKeys.length + ' 味校核完成');
+      })
+      .catch(function () {
+        var herbs = workshopKeys.map(function (k) {
+          return allHerbs.find(function (h) { return h.key === k; });
+        }).filter(Boolean);
+        renderWorkshopResult({
+          level: 'info',
+          herbs: herbs,
+          conflicts: [],
+          contrast_notes: ['后端校核暂不可用，仅展示属性对照。'],
+          formulas: [],
+          teaching: '请确认后端已启动后再做禁忌与共现方校核。'
+        });
+      });
+  }
+
+  function initWorkshopPanel() {
+    var search = document.getElementById('workshop-search');
+    var sug = document.getElementById('workshop-suggest');
+    if (search && !search.dataset.bound) {
+      search.dataset.bound = '1';
+      search.addEventListener('input', function () {
+        renderWorkshopSuggest(search.value);
+      });
+      search.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          var first = sug && sug.querySelector('button');
+          if (first) workshopAddHerb(first.getAttribute('data-key'));
+        }
+      });
+    }
+    document.querySelectorAll('.workshop-presets [data-preset]').forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', function () {
+        var names = (btn.getAttribute('data-preset') || '').split(',');
+        workshopKeys = [];
+        names.forEach(function (n) {
+          var h = findHerbByNameOrKey(n.trim());
+          if (h && workshopKeys.indexOf(h.key) < 0 && workshopKeys.length < 3) {
+            workshopKeys.push(h.key);
+          }
+        });
+        runWorkshopCheck();
+      });
+    });
+    runWorkshopCheck();
   }
 
   function renderAnalysisTab(tab) {
@@ -5212,14 +6183,16 @@
       p.classList.toggle('active', p.id === 'panel-' + tab);
     });
     requestAnimationFrame(function () {
+      if (tab === 'workshop') initWorkshopPanel();
       if (tab === 'cross') renderCrossTab();
       if (tab === 'probe') { fillProbeSelects(); runProbe(); }
       if (tab === 'dosage') renderDosageTab();
       if (tab === 'text') renderTextTab();
       if (tab === 'network') renderNetworkTab();
-      if (tab === 'quality') renderQualityTab();
       Object.keys(analysisCharts).forEach(function (id) {
-        if (analysisCharts[id]) analysisCharts[id].resize();
+        if (analysisCharts[id]) {
+          try { analysisCharts[id].resize(); } catch (e) { /* ignore */ }
+        }
       });
     });
   }
@@ -5228,8 +6201,8 @@
     currentPage = 'analysis';
     updateNavActive('analysis');
     showStage('analysis-stage', function () {
-      renderAnalysisTab(analysisTab || 'cross');
-      setStatus('析图 · 交叉 / 探查 / 用量 / 词频 / 方剂配伍 / 质量');
+      renderAnalysisTab(analysisTab || 'workshop');
+      setStatus('析图 · 配伍工坊 / 用量安全 / 从症到药 / 方剂配伍');
     });
     history.replaceState(null, '', '#analysis');
   }
@@ -5263,6 +6236,10 @@
       openHerb(decodeURIComponent(hash.slice(5)));
       return;
     }
+    if (hash.indexOf('province/') === 0) {
+      openProvince(decodeURIComponent(hash.slice(9)));
+      return;
+    }
     if (hash === 'analysis') {
       switchPage('analysis');
       return;
@@ -5289,8 +6266,24 @@
 
   document.getElementById('detail-back').addEventListener('click', function () {
     if (detailFrom === 'analysis') switchPage('analysis');
+    else if (detailFrom === 'province' && currentProvince) openProvince(currentProvince);
     else if (detailFrom && PAGE_META[detailFrom]) switchPage(detailFrom);
     else switchPage('home');
+  });
+
+  document.getElementById('province-back').addEventListener('click', function () {
+    switchPage('home');
+  });
+
+  document.getElementById('province-search').addEventListener('input', function (e) {
+    provinceSearchKw = e.target.value;
+    renderProvinceHerbList();
+  });
+
+  document.getElementById('province-chips').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-province]');
+    if (!btn) return;
+    openProvince(btn.getAttribute('data-province'));
   });
 
   document.getElementById('search-box').addEventListener('input', function (e) {

@@ -7,7 +7,7 @@
 
 ## 项目简介
 
-《本草拾珍》是一款中医药材属性信息可视化系统。以约 **500** 味药材与 **100+** 首经典方剂为数据基础，沿「**史 · 方 · 药**」叙事呈现本草沿革，并围绕四气、五味、归经、升降沉浮、功效与配伍构建交互图谱；辅以交叉分析、用量安全、词频探查与方剂配伍网络，帮助读者从属性结构、禁忌警示到经典组方理解中药知识体系。
+《本草拾珍》是一款中医药材属性信息可视化系统。以约 **1000** 味药材与 **100+** 首经典方剂为数据基础，沿「**史 · 方 · 药**」叙事呈现本草沿革，并围绕四气、五味、归经、升降沉浮、功效与配伍构建交互图谱；辅以交叉分析、用量安全、词频探查与方剂配伍网络，帮助读者从属性结构、禁忌警示到经典组方理解中药知识体系。
 
 **English**  
 **Herba Atlas** (*Bencao Shizhen*) is an interactive visualization of traditional Chinese materia medica. It connects historical chronology, formulas, and individual drugs, and maps core properties—qi, flavor, meridian tropism, ascending/descending tendencies, therapeutic categories, and compatibility constraints.

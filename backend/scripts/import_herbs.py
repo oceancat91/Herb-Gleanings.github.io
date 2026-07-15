@@ -219,10 +219,12 @@ def main():
         rows = json.load(f)
 
     extra_path = ROOT / "data" / "herbs_extra.json"
-    if extra_path.exists():
-        extra = json.loads(extra_path.read_text(encoding="utf-8"))
-        print(f"合并扩充数据：{len(extra)} 味 ← {extra_path.name}")
-        rows = list(rows) + list(extra)
+    bulk_path = ROOT / "data" / "herbs_bulk.json"
+    for path in (extra_path, bulk_path):
+        if path.exists():
+            extra = json.loads(path.read_text(encoding="utf-8"))
+            print(f"合并扩充数据：{len(extra)} 味 ← {path.name}")
+            rows = list(rows) + list(extra)
 
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
