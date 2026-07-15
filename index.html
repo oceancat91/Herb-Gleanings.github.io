@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>本草拾珍——中医药材属性的可视化图谱</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
-<script src="http://127.0.0.1:8000/china-geo-embed.js"></script>
 <script src="./china-geo-embed.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Liu+Jian+Mao+Cao&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600;700;900&family=Zhi+Mang+Xing&family=ZCOOL+XiaoWei&display=swap');
@@ -2044,6 +2043,56 @@
   }
   #status-bar.error { color: #A85A3C; }
 
+  #local-bridge {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    max-width: min(520px, 92vw);
+    padding: 14px 18px 16px;
+    background: rgba(245, 240, 232, 0.96);
+    border: 1px solid rgba(60, 48, 36, 0.14);
+    box-shadow: 0 10px 28px rgba(44, 36, 22, 0.12);
+    font-family: 'Noto Serif SC', serif;
+    color: var(--ink-medium);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+  }
+  #local-bridge.is-on { display: block; }
+  #local-bridge h4 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 16px;
+    color: var(--ink-dark);
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+  #local-bridge p { font-size: 13px; margin: 0 0 10px; }
+  #local-bridge .bridge-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  #local-bridge button,
+  #local-bridge a.bridge-btn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    padding: 6px 12px;
+    border: 1px solid rgba(168, 90, 60, 0.45);
+    background: rgba(168, 90, 60, 0.1);
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  #local-bridge button.ghost,
+  #local-bridge a.bridge-btn.ghost {
+    border-color: rgba(60, 48, 36, 0.18);
+    background: transparent;
+    color: var(--ink-medium);
+  }
+
   @media (max-width: 900px) {
     #main-stage { flex-direction: column; top: 12vh; }
     #chart-panel { flex: 0 0 auto; height: 36vh; }
@@ -2418,6 +2467,18 @@
 </section>
 
 <div id="status-bar">正在连接药材数据库…</div>
+
+<div id="local-bridge" aria-live="polite">
+  <h4>连接本机数据库</h4>
+  <p id="local-bridge-msg">
+    网页无法直接启动电脑上的程序。请先允许「本草拾珍」协议启动后端，或双击项目里的「打开前端.bat」；就绪后将自动进入完整版。
+  </p>
+  <div class="bridge-actions">
+    <a class="bridge-btn" id="bridge-launch" href="herba://start">启动本机后端</a>
+    <a class="bridge-btn ghost" id="bridge-open-local" href="http://127.0.0.1:8000/">打开本地完整版</a>
+    <button type="button" class="ghost" id="bridge-retry">重新检测</button>
+  </div>
+</div>
 
 <!-- AI 辨症助手 · 悬浮问诊 -->
 <button id="assistant-fab" type="button" aria-label="AI 辨症助手" title="AI 辨症助手">
@@ -6338,52 +6399,114 @@
     }
   });
 
+  function showLocalBridge(on, msg) {
+    var el = document.getElementById('local-bridge');
+    var p = document.getElementById('local-bridge-msg');
+    if (!el) return;
+    el.classList.toggle('is-on', !!on);
+    if (p && msg) p.textContent = msg;
+  }
+
+  function tryLaunchHerbaProtocol() {
+    try {
+      if (sessionStorage.getItem('herbaProtocolTried') === '1') return;
+      sessionStorage.setItem('herbaProtocolTried', '1');
+    } catch (e) { /* ignore */ }
+    // 隐藏 iframe 触发 herba://（需本机已运行「注册本机启动协议.bat」）
+    var ifr = document.createElement('iframe');
+    ifr.style.cssText = 'position:absolute;width:0;height:0;border:0;visibility:hidden';
+    ifr.src = 'herba://start';
+    document.body.appendChild(ifr);
+    setTimeout(function () {
+      try { document.body.removeChild(ifr); } catch (e2) { /* ignore */ }
+    }, 2500);
+  }
+
+  function pollLocalBackendAndEnter(opts) {
+    opts = opts || {};
+    var maxTries = opts.maxTries != null ? opts.maxTries : 50;
+    var tries = 0;
+    var bridge = opts.showBridge !== false;
+
+    function goLocal() {
+      var target = API + '/' + (location.hash || '');
+      setStatus('本机后端已就绪，正在进入完整版…', false);
+      showLocalBridge(false);
+      location.replace(target);
+    }
+
+    function tick() {
+      fetch(API + '/api/stats', { mode: 'cors' })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          goLocal();
+        })
+        .catch(function () {
+          tries += 1;
+          if (bridge) {
+            showLocalBridge(
+              true,
+              '正在等待本机后端 ' + API + '（' + tries + '/' + maxTries +
+                '）。若尚未注册协议，请先双击项目中的「注册本机启动协议.bat」，或运行「打开前端.bat」。'
+            );
+          }
+          setStatus('等待本机后端（' + tries + '/' + maxTries + '）…', true);
+          if (tries >= maxTries) {
+            setStatus(
+              '未能连接本机后端。请运行「打开前端.bat」或注册 herba:// 协议后刷新本页。',
+              true
+            );
+            if (bridge) {
+              showLocalBridge(
+                true,
+                '仍未检测到本机服务。请双击仓库里的「打开前端.bat」启动数据库，或先运行「注册本机启动协议.bat」后再点「启动本机后端」。'
+              );
+            }
+            return;
+          }
+          setTimeout(tick, tries < 6 ? 700 : 1400);
+        });
+    }
+    tick();
+  }
+
   function bootstrapApp() {
     var host = (location.hostname || '').toLowerCase();
     var isStaticHost = /\.github\.io$/.test(host) || host.indexOf('pages.dev') >= 0;
     var onServer = location.protocol !== 'file:' && location.origin === API;
 
+    var retryBtn = document.getElementById('bridge-retry');
+    if (retryBtn && !retryBtn.dataset.bound) {
+      retryBtn.dataset.bound = '1';
+      retryBtn.addEventListener('click', function () {
+        try { sessionStorage.removeItem('herbaProtocolTried'); } catch (e) { /* ignore */ }
+        tryLaunchHerbaProtocol();
+        pollLocalBackendAndEnter({ maxTries: 50, showBridge: true });
+      });
+    }
+
     // 已由后端托管：直接加载
     if (onServer) {
+      showLocalBridge(false);
       loadData();
       return;
     }
 
-    // GitHub Pages 等静态托管：不再弹出连接遮罩，直接进入主站界面
+    // GitHub Pages：尝试协议拉起本机后端，并自动跳转至完整版
     if (isStaticHost) {
-      setStatus('静态预览模式：图表数据需本地启动后端（打开前端.bat）后访问 ' + API, true);
+      setStatus('GitHub 预览页：正在连接本机数据库…', false);
+      showLocalBridge(
+        true,
+        '浏览器不能直接启动电脑程序。将尝试通过 herba:// 协议启动本机后端；若弹出提示请点允许。也可先运行「打开前端.bat」。'
+      );
+      tryLaunchHerbaProtocol();
+      pollLocalBackendAndEnter({ maxTries: 60, showBridge: true });
       return;
     }
 
-    // 直接打开 index.html / Live Server：静默等待后端，就绪后自动跳转（不弹遮罩）
+    // 直接打开 index.html / Live Server：静默等待后端
     setStatus('正在连接后端 ' + API + ' …', false);
-    var tries = 0;
-    var maxTries = 40;
-    function poll() {
-      fetch(API + '/api/stats', { mode: 'cors' })
-        .then(function (r) {
-          if (!r.ok) throw new Error('HTTP ' + r.status);
-          var target = API + '/' + (location.hash || '');
-          setStatus('后端已就绪，正在进入…', false);
-          location.replace(target);
-        })
-        .catch(function () {
-          tries += 1;
-          if (tries >= maxTries) {
-            setStatus(
-              '未能连接后端。请双击项目里的「打开前端.bat」或「打开.vbs」，将自动启动数据库并打开页面。',
-              true
-            );
-            return;
-          }
-          setStatus(
-            '等待后端 ' + API + '（' + tries + '/' + maxTries + '）… 若未启动，请运行「打开前端.bat」',
-            true
-          );
-          setTimeout(poll, tries < 5 ? 800 : 1500);
-        });
-    }
-    poll();
+    pollLocalBackendAndEnter({ maxTries: 40, showBridge: false });
   }
 
   /* ---------- AI 辨症助手 ---------- */

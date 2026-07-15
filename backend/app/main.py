@@ -45,6 +45,30 @@ app.add_middleware(
 )
 
 
+@app.middleware("http")
+async def private_network_cors(request, call_next):
+    """允许 GitHub Pages (HTTPS) 探测本机后端（Chrome Private Network Access）。"""
+    if request.method == "OPTIONS" and request.headers.get(
+        "access-control-request-private-network"
+    ):
+        from fastapi.responses import Response
+
+        return Response(
+            status_code=204,
+            headers={
+                "Access-Control-Allow-Origin": request.headers.get("origin") or "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Allow-Private-Network": "true",
+                "Access-Control-Allow-Credentials": "true",
+            },
+        )
+    response = await call_next(request)
+    if request.headers.get("origin"):
+        response.headers["Access-Control-Allow-Private-Network"] = "true"
+    return response
+
+
 def _loads(text: str | None):
     if not text:
         return None
