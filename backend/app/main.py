@@ -124,6 +124,8 @@ def api_root():
             "/api/geo/province/{name}",
             "/api/geo/china",
             "/api/workshop/check",
+            "/api/alchemy/place",
+            "/api/alchemy/refine",
             "/api/filter/siqi/{value}",
             "/api/filter/wuwei/{value}",
             "/api/filter/guijing/{value}",
@@ -620,6 +622,11 @@ class WorkshopIn(BaseModel):
     keys: list[str]
 
 
+class AlchemyIn(BaseModel):
+    keys: list[str]
+    place_key: str | None = None
+
+
 @app.post("/api/workshop/check")
 def workshop_check_api(body: WorkshopIn, db: Session = Depends(get_db)):
     """配伍工坊：禁忌校核、属性对照、共现方与教学结论（学习示意）。"""
@@ -648,6 +655,62 @@ def workshop_check_api(body: WorkshopIn, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="未找到所选药材")
 
     result = workshop_check(herbs)
+    if missing:
+        result["missing_keys"] = missing
+    return result
+
+
+def _resolve_herbs_by_keys(db: Session, raw_keys: list[str], limit: int = 12) -> tuple[list[Herb], list[str]]:
+    keys: list[str] = []
+    for k in raw_keys:
+        k = str(k).strip()
+        if k and k not in keys:
+            keys.append(k)
+        if len(keys) >= limit:
+            break
+    herbs: list[Herb] = []
+    missing: list[str] = []
+    for k in keys:
+        h = db.scalar(select(Herb).where(or_(Herb.key == k, Herb.slug == k, Herb.name_zh == k)))
+        if h:
+            herbs.append(h)
+        else:
+            missing.append(k)
+    return herbs, missing
+
+
+@app.post("/api/alchemy/place")
+def alchemy_place_api(body: AlchemyIn, db: Session = Depends(get_db)):
+    """置入一味药：返回君臣佐使身份与七情提醒（不阻止）。"""
+    from .alchemy import place_herb_feedback
+
+    place_key = (body.place_key or "").strip()
+    if not place_key:
+        raise HTTPException(status_code=400, detail="请指定置入药材 place_key")
+    herbs, missing = _resolve_herbs_by_keys(db, body.keys or [], limit=12)
+    placed = list(herbs)
+    new_h = db.scalar(
+        select(Herb).where(or_(Herb.key == place_key, Herb.slug == place_key, Herb.name_zh == place_key))
+    )
+    if not new_h:
+        raise HTTPException(status_code=404, detail="未找到置入药材")
+    if all(h.key != new_h.key for h in placed):
+        placed.append(new_h)
+    result = place_herb_feedback(new_h, placed)
+    if missing:
+        result["missing_keys"] = missing
+    return result
+
+
+@app.post("/api/alchemy/refine")
+def alchemy_refine_api(body: AlchemyIn, db: Session = Depends(get_db)):
+    """炼药：方剂覆盖匹配、禁忌毒药判定、全方彩蛋。"""
+    from .alchemy import refine
+
+    herbs, missing = _resolve_herbs_by_keys(db, body.keys or [], limit=12)
+    if not herbs:
+        raise HTTPException(status_code=400, detail="请至少置入 1 味药材")
+    result = refine(herbs)
     if missing:
         result["missing_keys"] = missing
     return result

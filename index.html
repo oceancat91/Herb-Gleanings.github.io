@@ -439,12 +439,214 @@
   }
 
   #chart-panel {
-    flex: 0 0 42%;
+    flex: 1 1 56%;
     min-width: 280px;
     display: flex; flex-direction: column;
     height: 100%;
     overflow: visible;
   }
+  #main-stage.is-category #list-panel {
+    flex: 0 0 36%;
+    max-width: 440px;
+  }
+  #main-stage.is-category #list-panel.is-collapsed .herb-group-body {
+    display: none;
+  }
+  #main-stage.is-category #chart-desc .attr-detail { display: none; }
+  #main-stage.is-category #chart-desc .attr-lead {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  #main-stage.is-category #chart-conclusion { display: none; }
+  #main-stage.is-category #ring-chart {
+    flex: 1;
+    min-height: 360px;
+    height: auto;
+  }
+  #main-stage.is-peiwu {
+    display: block;
+    overflow-y: auto;
+  }
+  #main-stage.is-peiwu #chart-panel,
+  #main-stage.is-peiwu #list-panel {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+  #alchemy-root {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: 20px 28px;
+    width: 100%;
+  }
+  #alchemy-furnace {
+    background: rgba(255,255,255,0.28);
+    border: 1px solid rgba(60,48,36,0.1);
+    padding: 16px 18px 18px;
+    min-height: 320px;
+  }
+  #alchemy-furnace h3 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 20px;
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+  }
+  #alchemy-furnace .alchemy-lead {
+    font-size: 13px;
+    color: var(--ink-medium);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  #alchemy-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 48px;
+    margin-bottom: 12px;
+  }
+  .alchemy-slot {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid rgba(168,90,60,0.35);
+    background: rgba(168,90,60,0.08);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+  .alchemy-slot button {
+    border: 0;
+    background: transparent;
+    color: var(--ink-light);
+    cursor: pointer;
+    font-size: 14px;
+  }
+  #alchemy-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  #alchemy-actions button {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    padding: 7px 14px;
+    border: 1px solid rgba(168,90,60,0.45);
+    background: rgba(168,90,60,0.12);
+    color: var(--accent);
+    cursor: pointer;
+  }
+  #alchemy-actions button.ghost {
+    border-color: rgba(60,48,36,0.18);
+    background: transparent;
+    color: var(--ink-medium);
+  }
+  #alchemy-result {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-medium);
+    min-height: 72px;
+  }
+  #alchemy-result.is-danger {
+    color: #8B3A2A;
+    border-left: 2px solid rgba(168,60,40,0.55);
+    padding-left: 10px;
+  }
+  #alchemy-result.is-success {
+    color: var(--ink-dark);
+    border-left: 2px solid rgba(120,140,90,0.55);
+    padding-left: 10px;
+  }
+  #alchemy-cabinet {
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+  }
+  #alchemy-cat-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  #alchemy-cat-tabs button {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    padding: 3px 10px;
+    border: 1px solid rgba(60,48,36,0.15);
+    background: rgba(255,255,255,0.35);
+    color: var(--ink-medium);
+    cursor: pointer;
+  }
+  #alchemy-cat-tabs button.on {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(168,90,60,0.1);
+  }
+  #alchemy-group-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  #alchemy-pick-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 52vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    align-content: flex-start;
+  }
+  #alchemy-pick-list button {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    padding: 4px 10px;
+    border: 1px solid rgba(60,48,36,0.12);
+    background: rgba(255,255,255,0.4);
+    color: var(--ink-medium);
+    cursor: pointer;
+  }
+  #alchemy-pick-list button.in {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  #alchemy-popup {
+    display: none;
+    position: fixed;
+    z-index: 60;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(420px, 92vw);
+    padding: 18px 20px;
+    background: rgba(245, 240, 232, 0.98);
+    border: 1px solid rgba(60,48,36,0.14);
+    box-shadow: 0 12px 32px rgba(44,36,22,0.16);
+  }
+  #alchemy-popup.is-on { display: block; }
+  #alchemy-popup h4 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+  #alchemy-popup p { font-size: 14px; line-height: 1.75; color: var(--ink-medium); margin: 0 0 8px; }
+  #alchemy-popup .popup-close {
+    margin-top: 8px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    padding: 5px 12px;
+    border: 1px solid rgba(60,48,36,0.2);
+    background: transparent;
+    cursor: pointer;
+  }
+  #alchemy-net {
+    height: 220px;
+    margin-top: 12px;
+  }
+
   #chart-title {
     font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
     font-size: 22px;
@@ -564,6 +766,22 @@
     padding-bottom: 6px;
     border-bottom: 1px solid rgba(60,48,36,0.12);
     display: flex; align-items: center; gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+  }
+  .herb-group-title:hover { color: var(--accent); }
+  .herb-group-title::after {
+    content: '▾';
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--ink-light);
+    transition: transform 0.25s ease;
+  }
+  .herb-group.is-collapsed .herb-group-body { display: none; }
+  .herb-group.is-collapsed .herb-group-title { margin-bottom: 0; }
+  .herb-group.is-collapsed .herb-group-title::after {
+    transform: rotate(-90deg);
   }
   .herb-group-dot {
     width: 8px; height: 8px; border-radius: 1px; flex-shrink: 0;
@@ -610,6 +828,153 @@
   #home-stage::-webkit-scrollbar { width: 4px; }
   #home-stage::-webkit-scrollbar-thumb {
     background: rgba(60,48,36,0.2); border-radius: 2px;
+  }
+
+  #home-hero {
+    flex-shrink: 0;
+    margin-bottom: 12px;
+    max-width: none;
+  }
+  #home-era-layout {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 16px 24px;
+    align-items: stretch;
+  }
+  #home-dynasty-pane {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 4px;
+  }
+  #home-dynasty-name {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: clamp(42px, 5vw, 72px);
+    letter-spacing: 0.16em;
+    color: var(--ink-dark);
+    line-height: 1.1;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  #home-dynasty-name.is-on {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #home-dynasty-year {
+    margin-top: 8px;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--ink-light);
+    opacity: 0;
+    transition: opacity 0.55s ease 0.08s;
+  }
+  #home-dynasty-year.is-on { opacity: 1; }
+  #home-era-main {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+    gap: 16px 20px;
+    min-height: 0;
+  }
+  #home-era-map-wrap {
+    min-height: 0;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(60,48,36,0.08);
+  }
+  #chart-home-era-map {
+    width: 100%;
+    height: min(48vh, 420px);
+    min-height: 260px;
+  }
+  #home-era-panel {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 4px;
+  }
+  #home-era-panel .era-block h3 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+    color: var(--ink-dark);
+  }
+  #home-era-classic {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-medium);
+  }
+  #home-era-classic .classic-title {
+    font-size: 16px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+  #home-era-formulas,
+  #home-era-herbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+  }
+  #home-era-slider-wrap {
+    flex-shrink: 0;
+    margin-top: 10px;
+    padding: 4px 4px 0;
+  }
+  #home-era-slider {
+    width: 100%;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  #home-era-ticks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--ink-light);
+    letter-spacing: 0.06em;
+  }
+  #home-era-ticks span.on { color: var(--accent); }
+  #home-pick-bar {
+    flex-shrink: 0;
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-top: 1px solid rgba(60,48,36,0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  #home-pick-bar .pick-label {
+    flex-shrink: 0;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    padding-top: 4px;
+  }
+  #travel-herbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-height: 72px;
+    overflow-y: auto;
+  }
+  .travel-chip {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    padding: 3px 10px;
+    border: 1px solid rgba(60,48,36,0.14);
+    background: rgba(255,255,255,0.35);
+    color: var(--ink-medium);
+    cursor: pointer;
+  }
+  .travel-chip.on {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(168,90,60,0.1);
   }
 
   #home-hero {
@@ -1648,11 +2013,33 @@
     color: var(--ink-dark);
   }
   .analysis-block .insight {
-    font-size: 14px;
+    display: none;
+    position: absolute;
+    z-index: 8;
+    left: 12px;
+    right: 12px;
+    top: 42px;
+    font-size: 13px;
     color: var(--ink-medium);
     letter-spacing: 0.03em;
-    line-height: 1.75;
-    margin-bottom: 10px;
+    line-height: 1.7;
+    margin: 0;
+    padding: 10px 12px;
+    background: rgba(245, 240, 232, 0.97);
+    border: 1px solid rgba(60, 48, 36, 0.12);
+    box-shadow: 0 8px 20px rgba(44, 36, 22, 0.1);
+    pointer-events: none;
+  }
+  .analysis-block {
+    position: relative;
+  }
+  .analysis-block h3 {
+    cursor: help;
+  }
+  .analysis-block h3:hover + .insight,
+  .analysis-block h3:focus + .insight,
+  .analysis-block.is-insight-on .insight {
+    display: block;
   }
   .analysis-block .insight .insight-explain {
     display: block;
@@ -2109,11 +2496,21 @@
       padding-right: 0;
     }
     #home-stage { overflow-y: auto; }
-    .hist-item { grid-template-columns: 64px 1fr; gap: 20px; }
-    #history-timeline::before { left: 72px; }
-    .hist-body::before { left: -14px; }
-    .hist-title { font-size: 16px; }
-    #chart-home-growth { height: 240px; }
+    #home-era-layout {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    #home-dynasty-pane {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 12px;
+    }
+    #home-dynasty-name { font-size: 36px; }
+    #home-era-main {
+      grid-template-columns: 1fr;
+    }
+    #chart-home-era-map { height: 240px; min-height: 200px; }
+    #home-pick-bar { flex-direction: column; }
     #province-body { flex-direction: column; overflow: hidden; }
     #province-side { flex: none; min-width: 0; max-height: 28vh; }
     #province-main { overflow: hidden; min-height: 0; }
@@ -2149,34 +2546,50 @@
   <div id="home-hero">
     <h1>本草拾珍</h1>
     <div class="hero-kicker">史 · 方 · 药</div>
-    <p>
-      沿革不只是书名：左侧按时代展开代表药与经典方，右侧看载药规模增长，并以「穿越药」串起一味药在典籍与方剂中的线索。
-    </p>
+    <p>拖动时间轴，看不同时期的版图与典籍、代表方与常用药。右下 pick 栏可选「穿越药」，跳转对应时期。</p>
   </div>
 
-  <div id="home-layout">
-    <div id="home-main">
-      <div id="history-timeline"></div>
-    </div>
-    <aside id="home-side">
-      <div id="home-growth">
-        <h3>药材产区 · 大陆疏密</h3>
-        <p class="growth-note">按道地、药名产地前缀与主产通识，尽量关联本库药材至各省（示意疏密，非产量实测）。点击省份进入产区子页。</p>
-        <div id="chart-home-growth"></div>
-      </div>
-      <div id="home-travel">
-        <h3>穿越药 · 历史名片</h3>
-        <p class="travel-note">选一味药，查看典籍线索与入方角色；点方名可读药方全文（出处、组成、方解、煎服、加减）。</p>
-        <div id="travel-herbs"></div>
-      </div>
-      <div id="herb-story"></div>
-      <div id="formula-peek"></div>
+  <div id="home-era-layout">
+    <aside id="home-dynasty-pane">
+      <div id="home-dynasty-name"></div>
+      <div id="home-dynasty-year"></div>
     </aside>
+    <div id="home-era-main">
+      <div id="home-era-map-wrap">
+        <div id="chart-home-era-map"></div>
+      </div>
+      <div id="home-era-panel">
+        <div class="era-block">
+          <h3>典籍</h3>
+          <div id="home-era-classic"></div>
+        </div>
+        <div class="era-block">
+          <h3>代表药方</h3>
+          <div id="home-era-formulas"></div>
+        </div>
+        <div class="era-block">
+          <h3>常用药材</h3>
+          <div id="home-era-herbs"></div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div id="home-era-slider-wrap">
+    <input type="range" id="home-era-slider" min="0" max="7" value="2" step="1" />
+    <div id="home-era-ticks"></div>
+  </div>
+
+  <div id="home-pick-bar">
+    <span class="pick-label">pick · 穿越药</span>
+    <div id="travel-herbs"></div>
+  </div>
+
+  <div id="formula-peek"></div>
 
   <div id="home-foot">
     <div class="foot-count" id="home-foot-count">图谱载入 <em>—</em> 味药材</div>
-    <div class="foot-hint">右上角进入属性分类，或点「析图」做配伍校核与应用学习</div>
+    <div class="foot-hint">右上角进入属性分类；「配伍」炼药；「析图」看多维图表</div>
   </div>
 </section>
 
@@ -2237,54 +2650,16 @@
 <!-- 多维分析 -->
 <section id="analysis-stage">
   <div class="analysis-head">
-    <h2>析图 · 配伍与多维分析</h2>
+    <h2>析图 · 多维分析</h2>
     <p>
-      默认进入配伍工坊：动手选药，校核十八反/十九畏，对照寒热归经，并连到经典方共现。
-      交叉关系、用量安全、从症到药与方剂网络仍可继续深入；学习示意，非诊疗建议。
+      用量安全、从症到药、方剂网络与交叉关系。悬停图表标题可查看文字结论。炼药与配伍禁忌请到「配伍」页。学习示意，非诊疗建议。
     </p>
   </div>
   <div id="analysis-tabs">
-    <button class="analysis-tab active" data-tab="workshop">配伍工坊</button>
-    <button class="analysis-tab" data-tab="dosage">用量 · 安全</button>
+    <button class="analysis-tab active" data-tab="dosage">用量 · 安全</button>
     <button class="analysis-tab" data-tab="text">词频 · 从症到药</button>
     <button class="analysis-tab" data-tab="network">方剂配伍</button>
-    <button class="analysis-tab" data-tab="probe">条件探查</button>
     <button class="analysis-tab" data-tab="cross">交叉关系</button>
-  </div>
-
-  <div class="analysis-panel active" id="panel-workshop">
-    <p class="workshop-disclaimer">学习示意，非诊疗或处方建议。禁忌按课程通识规则匹配，并辅以本库配伍条文互指。</p>
-    <div class="workshop-pick">
-      <div class="workshop-search-wrap">
-        <input id="workshop-search" type="search" placeholder="搜索并添加药材（最多 3 味）…" autocomplete="off" />
-        <div id="workshop-suggest"></div>
-      </div>
-      <div id="workshop-slots"></div>
-    </div>
-    <div class="workshop-presets">
-      <button type="button" data-preset="甘草,甘遂">示例：甘草 + 甘遂（十八反）</button>
-      <button type="button" data-preset="黄芪,当归">示例：黄芪 + 当归（共现方）</button>
-      <button type="button" data-preset="麻黄,桂枝">示例：麻黄 + 桂枝</button>
-    </div>
-    <div id="workshop-level">请选择 1–3 味药材，开始配伍校核。</div>
-    <div class="analysis-grid">
-      <div class="analysis-block">
-        <h3>禁忌校核</h3>
-        <ul id="workshop-conflicts"></ul>
-      </div>
-      <div class="analysis-block">
-        <h3>属性对照</h3>
-        <div id="workshop-contrast"></div>
-      </div>
-      <div class="analysis-block full">
-        <h3>共现经典方</h3>
-        <div id="workshop-formulas"></div>
-      </div>
-      <div class="analysis-block full">
-        <h3>教学结论</h3>
-        <div id="workshop-teaching"></div>
-      </div>
-    </div>
   </div>
 
   <div class="analysis-panel" id="panel-cross">
@@ -2327,35 +2702,7 @@
     </div>
   </div>
 
-  <div class="analysis-panel" id="panel-probe">
-    <div class="probe-bar">
-      <label>四气</label>
-      <select id="probe-siqi"><option value="">全部</option></select>
-      <label>五味</label>
-      <select id="probe-wuwei"><option value="">全部</option></select>
-      <label>归经</label>
-      <select id="probe-guijing"><option value="">全部</option></select>
-      <label>功效</label>
-      <select id="probe-category"><option value="">全部</option></select>
-      <span id="probe-count">命中 0 味</span>
-    </div>
-    <div id="probe-results"></div>
-    <div class="analysis-grid">
-      <div class="analysis-block">
-        <h3>单味雷达画像</h3>
-        <p class="insight" id="insight-probe">四气定寒热，五味定作用方式，归经定脏腑靶向。组合筛选可模拟「寒 + 苦 + 入肺」这类经典搭配，观察本库命中规模。</p>
-        <div class="analysis-chart" id="chart-radar"></div>
-      </div>
-      <div class="analysis-block">
-        <h3>同类对比（最多 4 味）</h3>
-        <p class="insight" id="insight-compare">在相同筛选条件下对比多味药的属性轮廓，观察「同类不同气」或「同气不同经」的差异。</p>
-        <div class="compare-picks" id="compare-picks"></div>
-        <div class="analysis-chart" id="chart-compare"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="analysis-panel" id="panel-dosage">
+  <div class="analysis-panel active" id="panel-dosage">
     <div class="analysis-grid">
       <div class="analysis-block">
         <h3>各功效类常用剂量</h3>
@@ -2397,12 +2744,6 @@
         <p class="insight" id="insight-zhuzhi-kw"></p>
         <div class="analysis-chart tall" id="chart-zhuzhi-kw"></div>
       </div>
-      <div class="analysis-block full">
-        <h3>从症到药</h3>
-        <p class="insight" id="insight-symptom">先点选一个高频病症，再看本库主治文本命中的药材——练习「见症 → 联想可能药性与归经 → 点开验证」的阅读路径。</p>
-        <div id="symptom-list"></div>
-        <div id="symptom-herbs"></div>
-      </div>
       <div class="analysis-block full" id="classical-block">
         <h3>典籍引用分布</h3>
         <p class="insight" id="insight-classical"></p>
@@ -2429,7 +2770,7 @@
       <div class="analysis-block">
         <h3>高频药对 TOP</h3>
         <p class="insight" id="insight-formula-pairs"></p>
-        <p style="font-size:12px;color:#8C7A6A;margin:-4px 0 8px">点击柱条可将该药对送入「配伍工坊」校核。</p>
+        <p style="font-size:12px;color:#8C7A6A;margin:-4px 0 8px">点击柱条可将该药对送入「配伍 · 炼药」。</p>
         <div class="analysis-chart tall" id="chart-formula-pairs"></div>
       </div>
       <div class="analysis-block">
@@ -2471,11 +2812,10 @@
 <div id="local-bridge" aria-live="polite">
   <h4>连接本机数据库</h4>
   <p id="local-bridge-msg">
-    网页无法直接启动电脑上的程序。请先允许「本草拾珍」协议启动后端，或双击项目里的「打开前端.bat」；就绪后将自动进入完整版。
+    完整功能需本机后端。请双击项目里的「打开.vbs」或「启动.bat」启动服务，再打开本地完整版。
   </p>
   <div class="bridge-actions">
-    <a class="bridge-btn" id="bridge-launch" href="herba://start">启动本机后端</a>
-    <a class="bridge-btn ghost" id="bridge-open-local" href="http://127.0.0.1:8000/">打开本地完整版</a>
+    <a class="bridge-btn" id="bridge-open-local" href="http://127.0.0.1:8000/">打开本地完整版</a>
     <button type="button" class="ghost" id="bridge-retry">重新检测</button>
   </div>
 </div>
@@ -2528,8 +2868,12 @@
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var probeSelectedKey = null;
   var compareKeys = [];
-  var analysisTab = 'workshop';
+  var analysisTab = 'dosage';
   var workshopKeys = [];
+  var alchemyKeys = [];
+  var alchemyCat = 'gongxiao';
+  var alchemyGroup = '全部';
+  var homeEraIndex = 2;
   var workshopTimer = null;
   var analysisRendered = {};
   var formulaNetRoleFilter = 'all';
@@ -2549,13 +2893,8 @@
   var PAGE_META = {
     siqi: {
       title: '四气',
-      desc: '寒凉温热平——药性之温度维度，决定药物作用于人体的寒热趋向',
-      detail: [
-        '四气又称四性，源自《神农本草经》，把药物对人体寒热变化的影响归纳为寒、热、温、凉，并以「平」表示寒热不显。',
-        '寒凉药多用于热证（如发热、烦渴、炎症倾向），能清热泻火、凉血解毒；温热药多用于寒证，能温里散寒、助阳。',
-        '「微寒」「微温」等是程度上的细分：同属寒性，大寒、寒、微寒力度递减；热、温、微温亦然。',
-        '读图时关注寒凉与温热两端的占比，可判断本库药性整体偏清还是偏温。'
-      ],
+      desc: '寒凉温热平——药性之温度维度',
+      detail: [],
       statKey: 'by_siqi',
       field: 'siqi',
       order: ['寒', '微寒', '凉', '平', '微温', '温', '热', '大寒'],
@@ -2567,13 +2906,8 @@
     },
     wuwei: {
       title: '五味',
-      desc: '酸苦甘辛咸——药味之感觉分类，标示药物的基本功效特征',
-      detail: [
-        '五味不只是口感，更是功效符号：酸能收涩，苦能泄燥，甘能补缓，辛能散行，咸能软坚润下；另有淡渗利湿、涩固敛。',
-        '一味药常兼数味（如苦甘、辛苦），环形图按「提及次数」统计，故总和可大于药材总数。',
-        '临床常「气为味之帅，味为气之基」：气定寒热方向，味定作用方式，二者合参才完整。',
-        '读图时看哪一味最高频，可感知本库功效叙事更偏补益（甘）、清泄（苦）还是发散（辛）。'
-      ],
+      desc: '酸苦甘辛咸——药味与功效符号',
+      detail: [],
       statKey: 'by_wuwei',
       field: 'wuwei',
       multi: true,
@@ -2586,13 +2920,8 @@
     },
     shengjiang: {
       title: '升降沉浮',
-      desc: '药物在体内作用的趋向性——上行下达之运动规律',
-      detail: [
-        '升降沉浮描述药势方向：升、浮偏向上向外（如升阳、解表）；沉、降偏向下向内（如降气、泻下、潜阳）。',
-        '病位在上在表，多用升浮；病位在下在里，或气逆上冲，多用沉降。与四气五味相关：辛甘多升浮，苦酸咸多沉降。',
-        '本库升降属性部分由功效类别推断，读图时宜与功效、四气页对照，避免孤立解读。',
-        '若某一方向占比突出，说明数据中解表升提类或潜降类药相对集中。'
-      ],
+      desc: '升浮表上，沉降里下',
+      detail: [],
       statKey: 'by_shengjiang',
       field: 'shengjiang',
       order: ['升', '降', '沉', '浮'],
@@ -2600,13 +2929,8 @@
     },
     guijing: {
       title: '归经',
-      desc: '药物对特定脏腑经络的选择性作用——靶向归属',
-      detail: [
-        '归经理论认为，药物作用对脏腑经络有所选择：入肺者多治咳喘，入肝者多治胁痛、目疾，入心者多关神志血脉等。',
-        '一味药可归多经，表示作用范围较广；环形图同样按「提及」计次。',
-        '十二经与脏腑对应：心、肝、脾、肺、肾及六腑（胃、胆、膀胱、大小肠、三焦、心包）。',
-        '读图可观察本库更常「照顾」哪些脏腑——例如肺、胃、肝是否明显高于心包、三焦。'
-      ],
+      desc: '药物对脏腑经络的选择性作用',
+      detail: [],
       statKey: 'by_guijing',
       field: 'guijing',
       multi: true,
@@ -2619,26 +2943,16 @@
     },
     gongxiao: {
       title: '功效',
-      desc: '补益清热解表活血——药物的核心治疗功能分类',
-      detail: [
-        '功效分类是临床选药的第一入口：清热、解表、补虚、活血、化痰、利水等类别，对应不同病机。',
-        '本图按数据源给出的 category 字段统计；分类过多时合并为「其他」，以保证环形图可读。',
-        '同一味药在古籍中可有多条功效，此处取主分类，细节请点开药材详情查看功效摘要与主治。',
-        '占比靠前的类别，往往也是本库文本中最常出现的治疗叙事主题。'
-      ],
+      desc: '补益清热解表活血——核心治疗功能',
+      detail: [],
       statKey: 'by_category',
       field: 'category',
       colors: null
     },
     peiwu: {
-      title: '配伍',
-      desc: '药物的协同与禁忌——十八反、十九畏与不宜联用之配伍警示',
-      detail: [
-        '配伍是中药使用的核心智慧：相须、相使求增效，相畏、相杀求减毒，相反、相恶则提示禁忌。',
-        '左侧为「禁忌共现网络」：若甲药的配伍禁忌条文中出现乙药名，则连成一条边——可直观看到藜芦、人参等经典禁忌枢纽。',
-        '右侧按条文类型分栏（十八反 / 十九畏 / 不宜联用 / 证候禁忌等）；点网络节点可进入该药详情。',
-        '协同增效的经典药对与君臣佐使，请到「析图 · 方剂配伍」继续探索。'
-      ],
+      title: '配伍 · 炼药',
+      desc: '相须相使求增效，相畏相杀求减毒，相反相恶则禁忌。以君臣佐使为纲炼药。',
+      detail: [],
       field: 'peiwu',
       order: ['十八反相关', '十九畏相关', '不宜联用', '证候禁忌', '其他警示', '未见明确禁忌'],
       colors: {
@@ -2664,8 +2978,8 @@
     el.classList.toggle('error', !!isError);
   }
 
-  function api(path) {
-    return fetch(API + path).then(function (r) {
+  function api(path, options) {
+    return fetch(API + path, options || undefined).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     });
@@ -2888,59 +3202,83 @@
   var HOME_ERAS = [
     {
       dynasty: '远古', year: '传说时代', title: '神农尝百草',
-      desc: '传说神农遍尝草木，一日遇七十毒，始辨药性寒热与五味。虽属神话，却象征先民以身体实践认识药物的起点。',
+      desc: '传说神农遍尝草木，始辨药性寒热与五味。',
       tag: '起源 · 辨药',
+      mapTint: ['#EDE6DC', '#D4C4A8', '#B8A080', '#8A7060'],
+      classic: '《神农本草经》托名神农，为现存最早本草专著，分上中下三品，确立四气五味之纲。',
       herbs: [['gan_cao', '甘草'], ['ren_shen', '人参'], ['huang_qi', '黄芪'], ['sheng_jiang', '生姜']],
-      formulas: []
+      formulas: [],
+      travel: ['gan_cao', 'ren_shen', 'huang_qi', 'sheng_jiang']
     },
     {
       dynasty: '秦汉', year: '约公元前后', title: '《神农本草经》',
-      desc: '现存最早本草专著，载药三百六十五种，分上中下三品。奠定四气五味、君臣佐使等理论框架。',
+      desc: '现存最早本草专著，载药三百六十五种，分上中下三品。',
       tag: '三品 · 365 种',
+      mapTint: ['#E8E4DC', '#C4B08A', '#A89070', '#7A6550'],
+      classic: '《神农本草经》托名神农，分上中下三品。上品养命，中品养性，下品治病。',
       herbs: [['ren_shen', '人参'], ['gan_cao', '甘草'], ['fu_ling', '茯苓'], ['gui_zhi', '桂枝'], ['huang_lian', '黄连']],
-      formulas: []
+      formulas: [],
+      travel: ['ren_shen', 'gan_cao', 'fu_ling', 'gui_zhi', 'huang_lian', 'da_huang']
     },
     {
       dynasty: '东汉', year: '约 200 年', title: '《伤寒杂病论》',
-      desc: '张仲景以方证相应确立辨证论治，本草由单味认识迈向复方运用。下列代表方与方中要药，可见「史—方—药」一线。',
+      desc: '张仲景以方证相应确立辨证论治，本草迈向复方运用。',
       tag: '方剂 · 配伍',
+      mapTint: ['#EDE8E0', '#D4A574', '#C47A4A', '#8B4A30'],
+      classic: '《伤寒杂病论》为东汉张仲景所著，后世分为《伤寒论》《金匮要略》，创立六经辨证与方证相应体系，开方剂配伍之先河。',
       herbs: [['ma_huang', '麻黄'], ['gui_zhi', '桂枝'], ['ban_xia', '半夏'], ['sheng_jiang', '生姜'], ['da_zao', '大枣']],
-      formulas: ['ma_huang_tang', 'gui_zhi_tang']
+      formulas: ['ma_huang_tang', 'gui_zhi_tang'],
+      travel: ['ma_huang', 'gui_zhi', 'ban_xia', 'sheng_jiang', 'da_zao', 'xing_ren', 'fu_zi', 'gan_jiang']
     },
     {
       dynasty: '南朝', year: '约 500 年', title: '《本草经集注》',
-      desc: '陶弘景整理《本经》并广采名医别录，药数增至七百三十种，体例更系统，本草著录进入「集注」时代。',
+      desc: '陶弘景整理《本经》并广采名医别录，药数增至七百三十种。',
       tag: '730 种 · 体例',
+      mapTint: ['#E8EDE8', '#A0B090', '#7A9E8A', '#5A7A6A'],
+      classic: '《本草经集注》为陶弘景整理，以朱墨分写《本经》与《名医别录》文，首创按药物自然属性分类的体例。',
       herbs: [['dang_gui', '当归'], ['bai_shao', '白芍'], ['chai_hu', '柴胡'], ['chuan_xiong', '川芎'], ['bai_zhu', '白术']],
-      formulas: []
+      formulas: [],
+      travel: ['dang_gui', 'bai_shao', 'chai_hu', 'chuan_xiong', 'bai_zhu']
     },
     {
       dynasty: '唐', year: '659 年', title: '《新修本草》',
-      desc: '官修《唐本草》，约八百五十种，图文并茂，是世界上较早由国家颁行的药典，标志本草进入官方规范。',
+      desc: '官修《唐本草》，约八百五十种，世界上较早由国家颁行的药典。',
       tag: '官修 · 850 种',
+      mapTint: ['#E8ECF0', '#9AA8B4', '#7A9EAF', '#5A7080'],
+      classic: '《新修本草》为唐高宗敕修，苏敬等编纂，是世界上第一部由国家颁行的药典，较《纽伦堡药典》早九百余年。',
       herbs: [['huang_qi', '黄芪'], ['shu_di_huang', '熟地黄'], ['fu_ling', '茯苓'], ['gan_cao', '甘草']],
-      formulas: ['bai_hu_tang']
+      formulas: ['bai_hu_tang'],
+      travel: ['huang_qi', 'shu_di_huang', 'fu_ling', 'shi_gao', 'zhi_mu']
     },
     {
       dynasty: '宋', year: '1082–1108', title: '《证类本草》',
-      desc: '唐慎微汇集经史与民间经验，载药一千七百余种、附方甚众。宋代亦是局方与成药发达的时期。',
+      desc: '唐慎微汇集经史与民间经验，载药一千七百余种。局方与成药亦发达。',
       tag: '1746 种 · 证类',
+      mapTint: ['#F0E8E0', '#C4A892', '#B8887A', '#8A5A4A'],
+      classic: '《证类本草》唐慎微撰，集北宋以前本草之大成，附方三千余首。同期《太平惠民和剂局方》为成方制剂规范。',
       herbs: [['ren_shen', '人参'], ['bai_zhu', '白术'], ['fu_ling', '茯苓'], ['gan_cao', '甘草'], ['dang_gui', '当归']],
-      formulas: ['si_jun_zi_tang', 'xiao_yao_san']
+      formulas: ['si_jun_zi_tang', 'xiao_yao_san'],
+      travel: ['ren_shen', 'bai_zhu', 'chen_pi', 'dang_gui', 'bai_shao']
     },
     {
       dynasty: '明', year: '1596 年', title: '《本草纲目》',
-      desc: '李时珍集大成，载药一千八百九十二种。同时期东垣补土、丹溪滋阴等学派方药亦影响深远。',
+      desc: '李时珍集大成，载药一千八百九十二种。东垣补土、丹溪滋阴影响深远。',
       tag: '集大成 · 1892 种',
+      mapTint: ['#EDE6E0', '#C49A8A', '#A85A3C', '#6B3A28'],
+      classic: '《本草纲目》李时珍历时二十七载而成，收药一千八百九十二种，附图千余幅，附方万首，为十六世纪中国百科全书式本草巨著。',
       herbs: [['huang_qi', '黄芪'], ['shu_di_huang', '熟地黄'], ['dang_gui', '当归'], ['chai_hu', '柴胡']],
-      formulas: ['bu_zhong_yi_qi_tang', 'liu_wei_di_huang_wan']
+      formulas: ['bu_zhong_yi_qi_tang', 'liu_wei_di_huang_wan'],
+      travel: ['huang_qi', 'shu_di_huang', 'dang_gui', 'chai_hu', 'huang_qin']
     },
     {
       dynasty: '清', year: '1765 年', title: '《本草纲目拾遗》',
-      desc: '赵学敏补《纲目》未备，增录民间与外来药。温病学派方药亦在近世临床史中占据重要位置。',
+      desc: '赵学敏补《纲目》未备。温病学派方药在近世临床史中占重要位置。',
       tag: '拾遗 · 温病',
+      mapTint: ['#E8F0EC', '#8FA99A', '#6A8A7A', '#4A6A5A'],
+      classic: '《本草纲目拾遗》赵学敏著，补《纲目》之遗，收药九百余种。温病学派叶天士、吴鞠通等发展了卫气营血辨证。',
       herbs: [['jin_yin_hua', '金银花'], ['lian_qiao', '连翘'], ['bo_he', '薄荷'], ['ban_xia', '半夏']],
-      formulas: ['yin_qiao_san']
+      formulas: ['yin_qiao_san'],
+      travel: ['jin_yin_hua', 'lian_qiao', 'bo_he', 'jie_geng', 'niu_bang_zi', 'jing_jie']
     }
   ];
 
@@ -2953,7 +3291,6 @@
     { key: 'bai_zhu', name: '白术' },
     { key: 'huang_qi', name: '黄芪' },
     { key: 'shu_di_huang', name: '熟地' },
-    { key: 'sheng_di_huang', name: '生地' },
     { key: 'chuan_xiong', name: '川芎' },
     { key: 'ma_huang', name: '麻黄' },
     { key: 'gui_zhi', name: '桂枝' },
@@ -2965,35 +3302,35 @@
     { key: 'sheng_jiang', name: '生姜' },
     { key: 'da_zao', name: '大枣' },
     { key: 'da_huang', name: '大黄' },
-    { key: 'zhi_zi', name: '栀子' },
     { key: 'xing_ren', name: '杏仁' },
     { key: 'bo_he', name: '薄荷' },
     { key: 'jie_geng', name: '桔梗' },
-    { key: 'zhi_shi', name: '枳实' },
-    { key: 'hou_po', name: '厚朴' },
-    { key: 'gan_jiang', name: '干姜' },
-    { key: 'mu_dan_pi', name: '牡丹皮' },
     { key: 'fu_zi', name: '附子' },
     { key: 'shi_gao', name: '石膏' },
     { key: 'zhi_mu', name: '知母' },
-    { key: 'fang_feng', name: '防风' },
-    { key: 'rou_gui', name: '肉桂' },
-    { key: 'tao_ren', name: '桃仁' },
-    { key: 'shan_yao', name: '山药' },
-    { key: 'cang_zhu', name: '苍术' },
     { key: 'lian_qiao', name: '连翘' },
-    { key: 'xi_xin', name: '细辛' },
-    { key: 'mai_dong', name: '麦冬' },
-    { key: 'niu_xi', name: '牛膝' },
-    { key: 'wu_wei_zi', name: '五味子' },
-    { key: 'ze_xie', name: '泽泻' },
-    { key: 'ge_gen', name: '葛根' },
-    { key: 'ju_hua', name: '菊花' },
-    { key: 'bai_zhi', name: '白芷' },
-    { key: 'qiang_huo', name: '羌活' }
+    { key: 'jin_yin_hua', name: '金银花' },
+    { key: 'niu_bang_zi', name: '牛蒡子' },
+    { key: 'jing_jie', name: '荆芥' }
   ];
 
+  function travelHerbEraIndex(key) {
+    for (var i = 0; i < HOME_ERAS.length; i++) {
+      var t = HOME_ERAS[i].travel || [];
+      if (t.indexOf(key) >= 0) return i;
+    }
+    // 回退：看代表药
+    for (var j = 0; j < HOME_ERAS.length; j++) {
+      var hs = HOME_ERAS[j].herbs || [];
+      for (var k = 0; k < hs.length; k++) {
+        if (hs[k][0] === key) return j;
+      }
+    }
+    return 2;
+  }
+
   var homeGrowthChart = null;
+  var homeEraMapChart = null;
   var travelStoryKey = null;
   var chinaGeoReady = null;
   var chinaGeoPromise = null;
@@ -3504,10 +3841,176 @@
     }).join('');
     box.querySelectorAll('.travel-chip').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        openHerbStory(btn.getAttribute('data-travel'));
+        var key = btn.getAttribute('data-travel');
+        document.querySelectorAll('#travel-herbs .travel-chip').forEach(function (b) {
+          b.classList.toggle('on', b.getAttribute('data-travel') === key);
+        });
+        var idx = travelHerbEraIndex(key);
+        setHomeEra(idx, true);
+        setStatus('穿越药「' + (btn.textContent || '') + '」→ ' + HOME_ERAS[idx].dynasty);
       });
     });
   }
+
+  function setHomeEra(idx, fromPick) {
+    idx = Math.max(0, Math.min(HOME_ERAS.length - 1, idx | 0));
+    homeEraIndex = idx;
+    var era = HOME_ERAS[idx];
+    var nameEl = document.getElementById('home-dynasty-name');
+    var yearEl = document.getElementById('home-dynasty-year');
+    if (nameEl) {
+      nameEl.classList.remove('is-on');
+      yearEl && yearEl.classList.remove('is-on');
+      nameEl.textContent = era.dynasty;
+      if (yearEl) yearEl.textContent = era.year;
+      requestAnimationFrame(function () {
+        nameEl.classList.add('is-on');
+        if (yearEl) yearEl.classList.add('is-on');
+      });
+    }
+    var classic = document.getElementById('home-era-classic');
+    if (classic) {
+      classic.innerHTML = '<div class="classic-title">' + escapeHtml(era.title) + '</div>' +
+        '<p>' + escapeHtml(era.desc) + '</p>' +
+        (era.classic ? '<p style="margin-top:8px;font-size:13px;color:#8C7A6A;line-height:1.75">' + escapeHtml(era.classic) + '</p>' : '') +
+        '<span class="hist-tag">' + escapeHtml(era.tag) + '</span>';
+    }
+    var fbox = document.getElementById('home-era-formulas');
+    if (fbox) {
+      if (era.formulas && era.formulas.length) {
+        fbox.innerHTML = era.formulas.map(formulaChip).join('');
+        fbox.querySelectorAll('[data-formula]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            showFormulaPeek(btn.getAttribute('data-formula'));
+          });
+        });
+      } else {
+        fbox.innerHTML = '<span style="color:#8C7A6A;font-size:13px">本时期以本草著录为主，代表方见相邻时代</span>';
+      }
+    }
+    var hbox = document.getElementById('home-era-herbs');
+    if (hbox) {
+      hbox.innerHTML = (era.herbs || []).map(function (h) {
+        return herbChip(h[0], h[1]);
+      }).join('');
+      hbox.querySelectorAll('[data-herb]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          openHerb(btn.getAttribute('data-herb'));
+        });
+      });
+    }
+    var slider = document.getElementById('home-era-slider');
+    if (slider && Number(slider.value) !== idx) slider.value = String(idx);
+    var ticks = document.getElementById('home-era-ticks');
+    if (ticks) {
+      ticks.querySelectorAll('span').forEach(function (sp, i) {
+        sp.classList.toggle('on', i === idx);
+      });
+    }
+    renderHomeEraMap(era);
+    if (!fromPick) {
+      document.querySelectorAll('#travel-herbs .travel-chip').forEach(function (b) {
+        b.classList.remove('on');
+      });
+    }
+  }
+
+  function renderHomeEraMap(era) {
+    var el = document.getElementById('chart-home-era-map');
+    if (!el || typeof echarts === 'undefined') return;
+    if (!homeEraMapChart) homeEraMapChart = echarts.init(el);
+    var tint = (era && era.mapTint) || ['#F5F0E8', '#E8D5C4', '#D4A574', '#A85A3C'];
+    ensureChinaMap().then(function (geo) {
+      var mapData = [];
+      var features = (geo && geo.features) || [];
+      // 示意：按时期给各省随机但稳定的「版图活跃度」
+      var seed = (era.dynasty || '').length * 17 + homeEraIndex * 31;
+      features.forEach(function (f, i) {
+        var full = (f.properties && (f.properties.name || f.properties.NAME)) || '';
+        if (!full) return;
+        var v = ((seed + i * 13) % 40) + 10 + homeEraIndex * 4;
+        mapData.push({ name: full, value: v });
+      });
+      var maxV = 1;
+      mapData.forEach(function (d) { if (d.value > maxV) maxV = d.value; });
+      homeEraMapChart.setOption({
+        animationDuration: 600,
+        tooltip: {
+          trigger: 'item',
+          backgroundColor: 'rgba(245,240,232,0.96)',
+          textStyle: { color: '#2C2416', fontFamily: 'Noto Serif SC, serif', fontSize: 12 },
+          formatter: function (p) {
+            return '<b>' + (p.name || '') + '</b><br/>' +
+              escapeHtml(era.dynasty) + ' · 版图示意<br/>' +
+              '<span style="color:#8C7A6A">历史疆域示意，非精确历史地图</span>';
+          }
+        },
+        visualMap: {
+          show: false,
+          min: 0,
+          max: maxV,
+          inRange: { color: tint }
+        },
+        series: [{
+          type: 'map',
+          map: 'china',
+          roam: true,
+          zoom: 1.1 + homeEraIndex * 0.02,
+          scaleLimit: { min: 0.8, max: 4 },
+          label: { show: false },
+          itemStyle: {
+            borderColor: 'rgba(60,48,36,0.3)',
+            borderWidth: 0.6
+          },
+          emphasis: {
+            label: { show: true, color: '#2C2416', fontSize: 11 },
+            itemStyle: { areaColor: tint[2] || '#C47A4A' }
+          },
+          data: mapData
+        }]
+      }, true);
+    }).catch(function () {
+      homeEraMapChart.setOption({
+        title: {
+          text: '版图暂不可用',
+          left: 'center',
+          top: 'middle',
+          textStyle: { color: '#8C7A6A', fontSize: 14, fontWeight: 400 }
+        }
+      }, true);
+    });
+  }
+
+  function bindHomeEraSlider() {
+    var slider = document.getElementById('home-era-slider');
+    var ticks = document.getElementById('home-era-ticks');
+    if (ticks) {
+      ticks.innerHTML = HOME_ERAS.map(function (e) {
+        return '<span>' + escapeHtml(e.dynasty) + '</span>';
+      }).join('');
+    }
+    if (!slider || slider._bound) return;
+    slider._bound = true;
+    slider.max = String(HOME_ERAS.length - 1);
+    slider.addEventListener('input', function () {
+      setHomeEra(Number(slider.value) || 0, false);
+    });
+  }
+
+  function renderHome() {
+    var total = (stats && stats.total_herbs) || allHerbs.length || 0;
+    var el = document.getElementById('home-foot-count');
+    if (el) {
+      el.innerHTML = '图谱载入 <em>' + total + '</em> 味药材';
+    }
+    bindHomeEraSlider();
+    renderTravelHerbs();
+    setHomeEra(homeEraIndex, false);
+    requestAnimationFrame(function () {
+      if (homeEraMapChart) homeEraMapChart.resize();
+    });
+  }
+
 
   function classicalTitle(r) {
     if (typeof r === 'string') {
@@ -3519,12 +4022,12 @@
 
   function openHerbStory(key) {
     travelStoryKey = key;
-    document.querySelectorAll('#travel-herbs .travel-chip').forEach(function (b) {
-      b.classList.toggle('on', b.getAttribute('data-travel') === key);
-    });
     var panel = document.getElementById('herb-story');
-    panel.classList.add('open');
-    panel.innerHTML = '<div class="story-desc" style="color:#8C7A6A">加载历史名片…</div>';
+    if (!panel) {
+      // 首页已改为 pick 跳转时期；保留函数供兼容
+      setHomeEra(travelHerbEraIndex(key), true);
+      return;
+    }
     api('/api/herbs/' + encodeURIComponent(key) + '/story').then(function (s) {
       var refs = s.classical_refs;
       var refHtml = '';
@@ -3603,7 +4106,12 @@
     pi_wei_lun: '《脾胃论》',
     xiao_er_yao_zheng_zhi_jue: '《小儿药证直诀》',
     wen_bing_tiao_bian: '《温病条辨》',
-    yi_fang_ji_jie: '《医方集解》'
+    yi_fang_ji_jie: '《医方集解》',
+    nei_wai_shang_bian_huo_lun: '《内外伤辨惑论》',
+    yi_xue_qi_yuan: '《医学启源》',
+    san_yin_ji_yi_bing_zheng_fang_lun: '《三因极一病证方论》',
+    yi_lin_gai_cuo: '《医林改错》',
+    wai_tai_bi_yao: '《外台秘要》'
   };
 
   function closeFormulaPeek() {
@@ -3710,24 +4218,6 @@
       bindFormulaPeekChrome(peek);
       revealFormulaPeek(peek);
     });
-  }
-
-  function renderHome() {
-    var total = (stats && stats.total_herbs) || allHerbs.length || 0;
-    var el = document.getElementById('home-foot-count');
-    if (el) {
-      el.innerHTML = '图谱载入 <em>' + total + '</em> 味药材';
-    }
-    renderHistoryTimeline();
-    renderHomeGrowth();
-    renderTravelHerbs();
-    revealHistoryTimeline();
-    requestAnimationFrame(function () {
-      if (homeGrowthChart) homeGrowthChart.resize();
-    });
-    setTimeout(function () {
-      if (homeGrowthChart) homeGrowthChart.resize();
-    }, 80);
   }
 
   /* ---------- 分类页 ---------- */
@@ -3988,6 +4478,8 @@
     chart.on('click', function (params) {
       if (params.name) {
         currentGroup = params.name;
+        var listPanel = document.getElementById('list-panel');
+        if (listPanel) listPanel.classList.remove('is-collapsed');
         renderGroupTabs(pageId);
         renderHerbList(pageId);
       }
@@ -4095,108 +4587,359 @@
   }
 
   function renderPeiwuGraph(pageId) {
-    var el = document.getElementById('ring-chart');
-    if (!chart) {
-      chart = echarts.init(el);
-      window.addEventListener('resize', function () { if (chart) chart.resize(); });
-    }
+    // 配伍页已改炼药主界面；网络图作为炼药页内嵌示意
+    return;
+  }
 
-    var graph = buildPeiwuGraphData();
-    if (!graph.nodes.length) {
-      chart.clear();
-      chart.setOption({
-        title: {
-          text: '暂无足够的禁忌共现关系',
-          left: 'center',
-          top: 'middle',
-          textStyle: {
-            color: '#8C7A6A',
-            fontSize: 14,
-            fontFamily: 'Noto Serif SC, serif',
-            fontWeight: 400
-          }
-        }
-      }, true);
+  /* ---------- 炼药（配伍页） ---------- */
+  function closeAlchemyPopup() {
+    var pop = document.getElementById('alchemy-popup');
+    if (pop) pop.classList.remove('is-on');
+  }
+
+  function showAlchemyPopup(html) {
+    var pop = document.getElementById('alchemy-popup');
+    if (!pop) {
+      pop = document.createElement('div');
+      pop.id = 'alchemy-popup';
+      document.body.appendChild(pop);
+    }
+    pop.innerHTML = html + '<button type="button" class="popup-close">知道了</button>';
+    pop.classList.add('is-on');
+    pop.querySelector('.popup-close').onclick = closeAlchemyPopup;
+  }
+
+  function renderAlchemySlots() {
+    var box = document.getElementById('alchemy-slots');
+    if (!box) return;
+    if (!alchemyKeys.length) {
+      box.innerHTML = '<span style="color:#8C7A6A;font-size:13px">炉中尚空，从右侧抓药柜点选置入</span>';
       return;
     }
-
-    chart.setOption({
-      tooltip: {
-        trigger: 'item',
-        backgroundColor: 'rgba(245,240,232,0.96)',
-        borderColor: 'rgba(60,48,36,0.15)',
-        textStyle: { color: '#2C2416', fontFamily: 'Noto Serif SC, serif', fontSize: 12 },
-        formatter: function (p) {
-          if (p.dataType === 'edge') {
-            return (p.data.source || '') + ' ↔ ' + (p.data.target || '') +
-              '<br/>共现 ' + (p.data.value || 1) + ' 次';
-          }
-          var d = p.data || {};
-          return '<b>' + (d.name || '') + '</b><br/>' +
-            (d.tipKind || '') + '<br/>共现强度 ' + (d.value || 0) +
-            '<br/><span style="color:#8C7A6A">点击查看详情</span>';
-        }
-      },
-      legend: {
-        show: true,
-        bottom: 0,
-        left: 'center',
-        itemWidth: 10,
-        itemHeight: 10,
-        textStyle: { color: '#5C4A3A', fontSize: 11, fontFamily: 'Noto Serif SC, serif' },
-        data: (PAGE_META.peiwu.order || []).filter(function (k) {
-          return graph.nodes.some(function (n) { return n.category === k; });
-        })
-      },
-      series: [{
-        type: 'graph',
-        layout: 'force',
-        roam: true,
-        draggable: true,
-        categories: (PAGE_META.peiwu.order || []).map(function (k) {
-          return {
-            name: k,
-            itemStyle: { color: (PAGE_META.peiwu.colors && PAGE_META.peiwu.colors[k]) || '#8A7E72' }
-          };
-        }),
-        data: graph.nodes.map(function (n) {
-          var cats = PAGE_META.peiwu.order || [];
-          var idx = cats.indexOf(n.category);
-          return Object.assign({}, n, {
-            tipKind: n.category,
-            category: idx < 0 ? 0 : idx
-          });
-        }),
-        links: graph.links,
-        label: {
-          position: 'right',
-          formatter: '{b}'
-        },
-        force: {
-          repulsion: 180,
-          edgeLength: [40, 120],
-          gravity: 0.08
-        },
-        lineStyle: {
-          color: 'rgba(168,90,60,0.35)',
-          curveness: 0.12
-        },
-        emphasis: {
-          focus: 'adjacency',
-          lineStyle: { width: 3, color: 'rgba(168,90,60,0.7)' },
-          itemStyle: { shadowBlur: 8, shadowColor: 'rgba(60,48,36,0.2)' }
-        }
-      }]
-    }, true);
-
-    requestAnimationFrame(function () { chart.resize(); });
-
-    chart.off('click');
-    chart.on('click', function (params) {
-      if (params.dataType !== 'node' || !params.data) return;
-      var key = params.data.herbKey || herbIndex[params.data.name];
-      if (key) openHerb(key);
+    box.innerHTML = alchemyKeys.map(function (k) {
+      var h = allHerbs.find(function (x) { return x.key === k; });
+      var name = (h && h.name_zh) || k;
+      return '<span class="alchemy-slot">' + escapeHtml(name) +
+        '<button type="button" data-remove="' + escapeAttr(k) + '">×</button></span>';
+    }).join('');
+    box.querySelectorAll('[data-remove]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        alchemyKeys = alchemyKeys.filter(function (k) { return k !== btn.getAttribute('data-remove'); });
+        renderAlchemyUI();
+      });
     });
+  }
+
+  function alchemyCabinetHerbs() {
+    var meta = PAGE_META[alchemyCat];
+    if (!meta) return allHerbs.slice(0, 80);
+    var groups = buildGroups(alchemyCat);
+    if (alchemyGroup && alchemyGroup !== '全部' && groups[alchemyGroup]) {
+      return groups[alchemyGroup];
+    }
+    var keys = orderedGroupKeys(alchemyCat, groups);
+    var out = [];
+    keys.forEach(function (k) {
+      (groups[k] || []).forEach(function (h) {
+        if (out.indexOf(h) < 0) out.push(h);
+      });
+    });
+    return out;
+  }
+
+  function renderAlchemyCabinet() {
+    var catBox = document.getElementById('alchemy-cat-tabs');
+    var groupBox = document.getElementById('alchemy-group-tabs');
+    var list = document.getElementById('alchemy-pick-list');
+    if (!catBox || !list) return;
+    var cats = [
+      { id: 'gongxiao', label: '功效' },
+      { id: 'siqi', label: '四气' },
+      { id: 'wuwei', label: '五味' },
+      { id: 'guijing', label: '归经' },
+      { id: 'shengjiang', label: '升降' },
+      { id: 'peiwu', label: '禁忌类' }
+    ];
+    catBox.innerHTML = cats.map(function (c) {
+      return '<button type="button" class="' + (alchemyCat === c.id ? 'on' : '') +
+        '" data-cat="' + c.id + '">' + c.label + '</button>';
+    }).join('');
+    catBox.querySelectorAll('button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        alchemyCat = btn.getAttribute('data-cat');
+        alchemyGroup = '全部';
+        renderAlchemyCabinet();
+      });
+    });
+
+    var groups = buildGroups(alchemyCat);
+    var gkeys = orderedGroupKeys(alchemyCat, groups);
+    groupBox.innerHTML = '<button type="button" class="group-tab' +
+      (alchemyGroup === '全部' ? ' active' : '') + '" data-g="全部">全部</button>' +
+      gkeys.slice(0, 14).map(function (k) {
+        return '<button type="button" class="group-tab' + (alchemyGroup === k ? ' active' : '') +
+          '" data-g="' + escapeAttr(k) + '">' + escapeHtml(k) + '</button>';
+      }).join('');
+    groupBox.querySelectorAll('button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        alchemyGroup = btn.getAttribute('data-g');
+        renderAlchemyCabinet();
+      });
+    });
+
+    var herbs = alchemyCabinetHerbs().slice(0, 120);
+    list.innerHTML = herbs.map(function (h) {
+      var on = alchemyKeys.indexOf(h.key) >= 0;
+      return '<button type="button" class="' + (on ? 'in' : '') + '" data-key="' +
+        escapeAttr(h.key) + '">' + escapeHtml(h.name_zh) + '</button>';
+    }).join('');
+    list.querySelectorAll('button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        alchemyPlaceHerb(btn.getAttribute('data-key'));
+      });
+    });
+  }
+
+  function alchemyPlaceHerb(key) {
+    if (!key) return;
+    if (alchemyKeys.indexOf(key) >= 0) return;
+    if (alchemyKeys.length >= 10) {
+      setStatus('炼药炉最多置入 10 味', true);
+      return;
+    }
+    api('/api/alchemy/place', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keys: alchemyKeys, place_key: key })
+    }).then(function (res) {
+      alchemyKeys.push(key);
+      renderAlchemyUI();
+      var pop = res.popup || {};
+      var profile = res.role_profile || {};
+
+      // 构建示例方剂列表
+      var samplesHtml = '';
+      if (profile.sample_formulas && profile.sample_formulas.length) {
+        samplesHtml = '<p style="font-size:12px;color:#8C7A6A;margin-top:6px">入方示例：' +
+          profile.sample_formulas.map(function (f) {
+            return '<span style="margin-left:4px;border:1px solid rgba(168,90,60,0.2);padding:1px 6px;border-radius:2px">' +
+              escapeHtml(f.name_zh) + ' · ' + escapeHtml(f.role) + '</span>';
+          }).join('') + '</p>';
+      }
+
+      // 提醒信息分类
+      var warnings = [];
+      var boosts = [];
+      (res.relations || []).forEach(function (r) {
+        var kind = r.kind || '';
+        if (kind === '相须' || kind === '相使') boosts.push(r);
+        else warnings.push(r);
+      });
+
+      var warnHtml = '';
+      if (warnings.length) {
+        warnHtml = '<div style="margin-top:8px;padding:6px 10px;background:rgba(168,90,60,0.06);border-left:2px solid rgba(168,90,60,0.4);font-size:13px;color:#8B3A2A">' +
+          '⚠ 禁忌提醒（不阻止置入）：' +
+          warnings.map(function (r) {
+            return '<div style="margin-top:4px">' + escapeHtml(r.copy || r.rule || '') + '</div>';
+          }).join('') + '</div>';
+      }
+
+      var boostHtml = '';
+      if (boosts.length) {
+        boostHtml = '<div style="margin-top:6px;color:#6A8A7A;font-size:13px">' +
+          boosts.map(function (r) {
+            return '<div>' + escapeHtml(r.copy || r.rule || '') + '</div>';
+          }).join('') + '</div>';
+      }
+
+      showAlchemyPopup(
+        '<h4>' + escapeHtml(pop.title || '置入') + '</h4>' +
+        '<p style="font-size:14px;line-height:1.75">' + escapeHtml(pop.role_line || '') + '</p>' +
+        (pop.top_role ? '<p style="margin-top:4px"><strong>身份：' + escapeHtml(pop.top_role) + '</strong>' +
+          '（入方 ' + (profile.formula_hits || 0) + ' 次）</p>' : '') +
+        samplesHtml +
+        boostHtml +
+        warnHtml +
+        '<p style="font-size:12px;color:#8C7A6A;margin-top:8px">' + escapeHtml(pop.note || '冲突仅提醒，不阻止继续置入；点击炼药后再判定禁忌结果。') + '</p>'
+      );
+    }).catch(function () {
+      alchemyKeys.push(key);
+      var h = allHerbs.find(function (x) { return x.key === key; });
+      showAlchemyPopup(
+        '<h4>置入「' + escapeHtml((h && h.name_zh) || key) + '」</h4>' +
+        '<p>本机后端未连接时，仅本地置入。启动后端后可查看君臣佐使身份与七情提醒。</p>'
+      );
+      renderAlchemyUI();
+    });
+  }
+
+  function alchemyRefine() {
+    if (!alchemyKeys.length) {
+      setStatus('请先置入药材', true);
+      return;
+    }
+    var box = document.getElementById('alchemy-result');
+    if (box) box.innerHTML = '炉火正旺，炼制中…';
+    api('/api/alchemy/refine', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keys: alchemyKeys })
+    }).then(function (res) {
+      renderAlchemyResult(res);
+    }).catch(function (err) {
+      if (box) {
+        box.className = '';
+        box.innerHTML = '炼药失败：请确认后端已启动。' + (err && err.message ? escapeHtml(err.message) : '');
+      }
+    });
+  }
+
+  function renderAlchemyResult(res) {
+    var box = document.getElementById('alchemy-result');
+    if (!box) return;
+    box.className = res.taboo_poison ? 'is-danger' : (res.matches && res.matches.full && res.matches.full.length ? 'is-success' : '');
+
+    // 角色摘要
+    var rolesHtml = '';
+    if (res.roles_summary && res.roles_summary.length) {
+      rolesHtml = '<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">';
+      res.roles_summary.forEach(function (r) {
+        rolesHtml += '<span style="font-size:12px;padding:2px 8px;border:1px solid rgba(60,48,36,0.15);border-radius:3px">' +
+          escapeHtml(r.name_zh || r.key) +
+          (r.top_role ? ' · <span style="color:var(--accent)">' + escapeHtml(r.top_role) + '</span>' : '') +
+          '</span>';
+      });
+      rolesHtml += '</div>';
+    }
+
+    // 结果主体
+    var html = '<div style="font-size:16px;font-weight:600;margin-bottom:6px">' +
+      escapeHtml(res.result_title || '') + '</div>' +
+      '<p style="line-height:1.75">' + escapeHtml(res.result_body || '') + '</p>' +
+      rolesHtml;
+
+    if (res.easter_egg) {
+      html += '<div style="margin-top:10px;padding:8px 12px;background:rgba(168,90,60,0.08);border:1px dashed rgba(168,90,60,0.35);border-radius:4px">' +
+        '<span style="font-size:16px">✦</span> <strong>' + escapeHtml(res.easter_egg.title) + '</strong>' +
+        '<p style="margin-top:4px;color:var(--accent)">' + escapeHtml(res.easter_egg.message) + '</p></div>';
+    }
+
+    if (res.taboo_poison) {
+      html += '<div style="margin-top:10px;padding:8px 12px;background:rgba(139,58,42,0.08);border:1px solid rgba(139,58,42,0.3);border-radius:4px">' +
+        '<strong>⚠ 炼出禁忌毒药</strong><p style="margin-top:4px;font-size:13px;color:#8B3A2A">所选药材触发相反/相恶警示，学习上应记住禁忌组合。本页仅为课程示意，不构成处方建议。</p></div>';
+    }
+
+    var full = (res.matches && res.matches.full) || [];
+    var partial = (res.matches && res.matches.partial) || [];
+    var formulas = full.concat(partial).slice(0, 8);
+    if (formulas.length) {
+      html += '<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">';
+      formulas.forEach(function (f) {
+        var label = f.coverage === 'full' ? '✦ 全方 · ' + (f.principle || '') : '含药 · ' + (f.principle || '');
+        html += '<button type="button" class="hist-chip formula" data-formula="' +
+          escapeAttr(f.key) + '" title="' + escapeAttr(label) + '">' + escapeHtml(f.name_zh) +
+          (f.coverage === 'full' ? ' · 全方' : ' · 含药') + '</button>';
+      });
+      html += '</div>';
+    }
+    var taboo = (res.relations && res.relations.taboo) || [];
+    if (taboo.length) {
+      html += '<ul style="margin-top:8px;padding-left:1.1em;font-size:13px;color:#8B3A2A">';
+      taboo.slice(0, 4).forEach(function (t) {
+        html += '<li>' + escapeHtml(t.copy || t.rule || '') + '</li>';
+      });
+      html += '</ul>';
+    }
+
+    html += '<p style="margin-top:10px;font-size:12px;color:#8C7A6A;border-top:1px solid rgba(60,48,36,0.1);padding-top:8px">' +
+      escapeHtml(res.core_tip || '') + '</p>';
+
+    box.innerHTML = html;
+    box.querySelectorAll('[data-formula]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        showFormulaPeek(btn.getAttribute('data-formula'));
+      });
+    });
+    setStatus(res.taboo_poison ? '炼出禁忌毒药' : (res.result_title || '炼药完成'));
+  }
+
+  function renderAlchemyUI() {
+    renderAlchemySlots();
+    renderAlchemyCabinet();
+    var mini = document.getElementById('alchemy-net');
+    if (mini && typeof buildPeiwuGraphData === 'function') {
+      // 轻量网络示意：复用 peiwu 数据到小图
+      try {
+        var data = buildPeiwuGraphData();
+        var c = echarts.getInstanceByDom(mini) || echarts.init(mini);
+        c.setOption({
+          series: [{
+            type: 'graph',
+            layout: 'force',
+            roam: true,
+            data: (data.nodes || []).slice(0, 24),
+            links: (data.links || []).slice(0, 30),
+            label: { show: true, fontSize: 10 },
+            force: { repulsion: 80, edgeLength: 40 }
+          }]
+        }, true);
+      } catch (e) { /* ignore */ }
+    }
+  }
+
+  function renderAlchemyPage() {
+    var panel = document.getElementById('chart-panel');
+    var listPanel = document.getElementById('list-panel');
+    var ring = document.getElementById('ring-chart');
+    if (ring) ring.style.display = 'none';
+    if (listPanel) listPanel.style.display = 'none';
+    var root = document.getElementById('alchemy-root');
+    if (!root) {
+      root = document.createElement('div');
+      root.id = 'alchemy-root';
+      panel.appendChild(root);
+    }
+    root.innerHTML =
+      '<div id="alchemy-furnace">' +
+        '<h3>炼药炉</h3>' +
+        '<p class="alchemy-lead">以君臣佐使为搭配核心。置入时查看常任身份与七情提醒；冲突不阻止。点「炼药」才判定禁忌毒药或成方。</p>' +
+        '<div id="alchemy-slots"></div>' +
+        '<div id="alchemy-actions">' +
+          '<button type="button" id="alchemy-refine-btn">炼药</button>' +
+          '<button type="button" class="ghost" id="alchemy-clear-btn">倾炉</button>' +
+          '<button type="button" class="ghost" data-preset="ren_shen,bai_zhu,fu_ling,gan_cao">试炼：四君子</button>' +
+          '<button type="button" class="ghost" data-preset="gan_cao,gan_sui">试炼：甘草+甘遂</button>' +
+        '</div>' +
+        '<div id="alchemy-result">置入药材后点击炼药。</div>' +
+        '<div id="alchemy-net"></div>' +
+      '</div>' +
+      '<div id="alchemy-cabinet">' +
+        '<h3 style="font-family:ZCOOL XiaoWei,serif;letter-spacing:0.12em;margin-bottom:8px">抓药柜</h3>' +
+        '<div id="alchemy-cat-tabs"></div>' +
+        '<div id="alchemy-group-tabs"></div>' +
+        '<div id="alchemy-pick-list"></div>' +
+      '</div>';
+    document.getElementById('alchemy-refine-btn').onclick = alchemyRefine;
+    document.getElementById('alchemy-clear-btn').onclick = function () {
+      alchemyKeys = [];
+      var box = document.getElementById('alchemy-result');
+      if (box) { box.className = ''; box.innerHTML = '炉已倾空。'; }
+      renderAlchemyUI();
+    };
+    root.querySelectorAll('[data-preset]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var keys = (btn.getAttribute('data-preset') || '').split(',');
+        alchemyKeys = [];
+        keys.forEach(function (k) {
+          if (allHerbs.some(function (h) { return h.key === k; })) alchemyKeys.push(k);
+        });
+        renderAlchemyUI();
+        alchemyRefine();
+      });
+    });
+    renderAlchemyUI();
+    setStatus('配伍 · 炼药：抓药柜选药，炼出方义或禁忌');
   }
 
   function renderGroupTabs(pageId) {
@@ -4213,6 +4956,11 @@
     tabs.querySelectorAll('.group-tab').forEach(function (btn) {
       btn.addEventListener('click', function () {
         currentGroup = btn.dataset.group;
+        var listPanel = document.getElementById('list-panel');
+        if (listPanel) {
+          if (currentGroup === '全部') listPanel.classList.add('is-collapsed');
+          else listPanel.classList.remove('is-collapsed');
+        }
         renderGroupTabs(pageId);
         renderHerbList(pageId);
       });
@@ -4224,6 +4972,7 @@
     var keys = currentGroup === '全部' ? orderedGroupKeys(pageId, groups) : [currentGroup];
     var kw = searchKeyword.trim();
     var html = '';
+    var expanded = currentGroup !== '全部';
 
     keys.forEach(function (k) {
       var list = (groups[k] || []).slice();
@@ -4236,41 +4985,66 @@
       if (!list.length) return;
       list.sort(function (a, b) { return a.name_zh.localeCompare(b.name_zh, 'zh'); });
       var color = getGroupColor(pageId, k);
-      html += '<div class="herb-group">';
+      html += '<div class="herb-group" data-group-name="' + escapeAttr(k) + '">';
       html += '<div class="herb-group-title"><span class="herb-group-dot" style="background:' +
         color + '"></span>' + escapeHtml(k) +
         '<span class="herb-group-count">' + list.length + ' 味</span></div>';
-      html += '<div class="herb-grid">';
+      html += '<div class="herb-group-body"><div class="herb-grid">';
       list.forEach(function (h) {
         html += '<a class="herb-link herb-chip" href="#herb/' + encodeURIComponent(h.key) +
           '" data-herb="' + escapeAttr(h.key) + '">' +
           escapeHtml(h.name_zh || h.key) + '</a>';
       });
-      html += '</div></div>';
+      html += '</div></div></div>';
     });
 
-    if (!html) html = '<p style="color:#8C7A6A;font-size: 15px;">暂无匹配药材</p>';
+    if (!html) {
+      html = expanded
+        ? '<p style="color:#8C7A6A;font-size: 15px;">暂无匹配药材</p>'
+        : '<p style="color:#8C7A6A;font-size: 14px;">点击中央图表扇区，展开对应药材名称</p>';
+    }
     document.getElementById('herb-list').innerHTML = html;
   }
 
   function renderCategoryPage(pageId) {
     var meta = PAGE_META[pageId];
     updateNavActive(pageId);
+    var stage = document.getElementById('main-stage');
+    if (stage) {
+      stage.classList.toggle('is-peiwu', pageId === 'peiwu');
+      stage.classList.toggle('is-category', pageId !== 'peiwu');
+    }
 
     showStage('main-stage', function () {
+      if (pageId === 'peiwu') {
+        document.getElementById('chart-title').textContent = meta.title;
+        document.getElementById('chart-desc').innerHTML =
+          '<p class="attr-lead">' + escapeHtml(meta.desc) + '</p>';
+        document.getElementById('chart-conclusion').innerHTML = '';
+        document.getElementById('group-tabs').innerHTML = '';
+        document.getElementById('herb-list').innerHTML = '';
+        var searchBox = document.getElementById('search-box');
+        if (searchBox) searchBox.style.display = 'none';
+        renderAlchemyPage();
+        return;
+      }
+
+      var searchBox2 = document.getElementById('search-box');
+      if (searchBox2) searchBox2.style.display = '';
+      var listPanelShow = document.getElementById('list-panel');
+      if (listPanelShow) listPanelShow.style.display = '';
+      // 清除炼药 UI（若从配伍返回）
+      var alchemy = document.getElementById('alchemy-root');
+      if (alchemy) alchemy.remove();
+      var ring = document.getElementById('ring-chart');
+      if (ring) ring.style.display = '';
+
       document.getElementById('chart-title').textContent = meta.title;
       currentGroup = '全部';
       searchKeyword = '';
       document.getElementById('search-box').value = '';
-      var detailHtml = '<p class="attr-lead">' + escapeHtml(meta.desc) + '</p>';
-      if (meta.detail && meta.detail.length) {
-        detailHtml += '<ul class="attr-detail">';
-        meta.detail.forEach(function (line) {
-          detailHtml += '<li>' + escapeHtml(line) + '</li>';
-        });
-        detailHtml += '</ul>';
-      }
-      document.getElementById('chart-desc').innerHTML = detailHtml;
+      document.getElementById('chart-desc').innerHTML =
+        '<p class="attr-lead">' + escapeHtml(meta.desc) + '</p>';
 
       var groups = buildGroups(pageId);
       var keys = orderedGroupKeys(pageId, groups);
@@ -4291,10 +5065,11 @@
       }
 
       document.getElementById('chart-conclusion').innerHTML = buildCategoryConclusion(pageId, data, groups);
-      if (pageId === 'peiwu') renderPeiwuGraph(pageId);
-      else renderRing(pageId, data);
+      renderRing(pageId, data);
       renderGroupTabs(pageId);
       renderHerbList(pageId);
+      var listPanel = document.getElementById('list-panel');
+      if (listPanel) listPanel.classList.add('is-collapsed');
     });
   }
 
@@ -5684,31 +6459,6 @@
     barChart('chart-gongxiao-kw', gx, '#8FA99A');
     barChart('chart-zhuzhi-kw', zz, '#B89082');
 
-    var symptoms = Object.keys(analysisData.symptom_herbs || {});
-    var box = document.getElementById('symptom-list');
-    box.innerHTML = symptoms.map(function (s, i) {
-      return '<button type="button" class="symptom-chip' + (i === 0 ? ' on' : '') + '" data-sym="' +
-        escapeAttr(s) + '">' + escapeHtml(s) + '</button>';
-    }).join('');
-    function showSym(sym) {
-      box.querySelectorAll('.symptom-chip').forEach(function (b) {
-        b.classList.toggle('on', b.dataset.sym === sym);
-      });
-      var herbs = (analysisData.symptom_herbs && analysisData.symptom_herbs[sym]) || [];
-      document.getElementById('symptom-herbs').innerHTML = herbs.map(function (h) {
-        return herbLink(h.name_zh, h.key);
-      }).join(' ') || '<span style="color:#8C7A6A;font-size: 14px;">暂无</span>';
-      setInsight(
-        'insight-symptom',
-        '选择病症后，列出主治文本命中该词的部分药材，形成「症 → 药」探索。点击药名可进入详情核对四气五味归经。',
-        '当前病症「' + sym + '」示例药材 ' + herbs.length + ' 味（截取展示）。完整辨证仍需四诊合参，本图仅作数据导航。'
-      );
-    }
-    box.querySelectorAll('.symptom-chip').forEach(function (b) {
-      b.addEventListener('click', function () { showSym(b.dataset.sym); });
-    });
-    if (symptoms[0]) showSym(symptoms[0]);
-
     var classical = analysisData.classical_refs || [];
     var block = document.getElementById('classical-block');
     if (!classical.length) {
@@ -5773,7 +6523,7 @@
           var p = pairsRev[i];
           var tip = p.source + ' + ' + p.target + '：' + p.value + ' 次';
           if (p.formulas && p.formulas.length) tip += '<br/>例：' + p.formulas.join('、');
-          tip += '<br/><span style="color:#8C7A6A">点击送入配伍工坊</span>';
+          tip += '<br/><span style="color:#8C7A6A">点击送入配伍炼药</span>';
           return tip;
         }
       }),
@@ -5991,10 +6741,13 @@
   function sendPairToWorkshop(nameA, nameB) {
     var a = findHerbByNameOrKey(nameA);
     var b = findHerbByNameOrKey(nameB);
-    workshopKeys = [];
-    if (a) workshopKeys.push(a.key);
-    if (b && workshopKeys.indexOf(b.key) < 0) workshopKeys.push(b.key);
-    renderAnalysisTab('workshop');
+    alchemyKeys = [];
+    if (a) alchemyKeys.push(a.key);
+    if (b && alchemyKeys.indexOf(b.key) < 0) alchemyKeys.push(b.key);
+    switchPage('peiwu');
+    setTimeout(function () {
+      if (typeof renderAlchemyUI === 'function') renderAlchemyUI('sent');
+    }, 120);
   }
 
   function renderWorkshopSlots() {
@@ -6236,6 +6989,7 @@
   }
 
   function renderAnalysisTab(tab) {
+    if (tab === 'workshop' || tab === 'probe') tab = 'dosage';
     analysisTab = tab;
     document.querySelectorAll('.analysis-tab').forEach(function (b) {
       b.classList.toggle('active', b.dataset.tab === tab);
@@ -6244,9 +6998,7 @@
       p.classList.toggle('active', p.id === 'panel-' + tab);
     });
     requestAnimationFrame(function () {
-      if (tab === 'workshop') initWorkshopPanel();
       if (tab === 'cross') renderCrossTab();
-      if (tab === 'probe') { fillProbeSelects(); runProbe(); }
       if (tab === 'dosage') renderDosageTab();
       if (tab === 'text') renderTextTab();
       if (tab === 'network') renderNetworkTab();
@@ -6262,8 +7014,8 @@
     currentPage = 'analysis';
     updateNavActive('analysis');
     showStage('analysis-stage', function () {
-      renderAnalysisTab(analysisTab || 'workshop');
-      setStatus('析图 · 配伍工坊 / 用量安全 / 从症到药 / 方剂配伍');
+      renderAnalysisTab(analysisTab || 'dosage');
+      setStatus('析图 · 用量安全 / 从症到药 / 方剂配伍 / 交叉关系');
     });
     history.replaceState(null, '', '#analysis');
   }
@@ -6352,6 +7104,14 @@
     if (PAGE_META[currentPage]) renderHerbList(currentPage);
   });
 
+  // 药材分组手风琴展开/折叠
+  document.getElementById('herb-list').addEventListener('click', function (e) {
+    var title = e.target.closest('.herb-group-title');
+    if (!title) return;
+    var group = title.closest('.herb-group');
+    if (group) group.classList.toggle('is-collapsed');
+  });
+
   ['probe-siqi', 'probe-wuwei', 'probe-guijing', 'probe-category'].forEach(function (id) {
     document.getElementById(id).addEventListener('change', runProbe);
   });
@@ -6408,18 +7168,7 @@
   }
 
   function tryLaunchHerbaProtocol() {
-    try {
-      if (sessionStorage.getItem('herbaProtocolTried') === '1') return;
-      sessionStorage.setItem('herbaProtocolTried', '1');
-    } catch (e) { /* ignore */ }
-    // 隐藏 iframe 触发 herba://（需本机已运行「注册本机启动协议.bat」）
-    var ifr = document.createElement('iframe');
-    ifr.style.cssText = 'position:absolute;width:0;height:0;border:0;visibility:hidden';
-    ifr.src = 'herba://start';
-    document.body.appendChild(ifr);
-    setTimeout(function () {
-      try { document.body.removeChild(ifr); } catch (e2) { /* ignore */ }
-    }, 2500);
+    // 已取消自定义协议；保留空函数以免旧调用报错
   }
 
   function pollLocalBackendAndEnter(opts) {
@@ -6447,19 +7196,16 @@
             showLocalBridge(
               true,
               '正在等待本机后端 ' + API + '（' + tries + '/' + maxTries +
-                '）。若尚未注册协议，请先双击项目中的「注册本机启动协议.bat」，或运行「打开前端.bat」。'
+                '）。请双击项目中的「打开.vbs」或「启动.bat」启动服务。'
             );
           }
           setStatus('等待本机后端（' + tries + '/' + maxTries + '）…', true);
           if (tries >= maxTries) {
-            setStatus(
-              '未能连接本机后端。请运行「打开前端.bat」或注册 herba:// 协议后刷新本页。',
-              true
-            );
+            setStatus('未能连接本机后端。请双击「打开.vbs」或「启动.bat」后再打开本地完整版。', true);
             if (bridge) {
               showLocalBridge(
                 true,
-                '仍未检测到本机服务。请双击仓库里的「打开前端.bat」启动数据库，或先运行「注册本机启动协议.bat」后再点「启动本机后端」。'
+                '仍未检测到本机服务。请双击仓库里的「打开.vbs」或「启动.bat」，待浏览器打开 http://127.0.0.1:8000/ 即可。'
               );
             }
             return;
@@ -6479,8 +7225,6 @@
     if (retryBtn && !retryBtn.dataset.bound) {
       retryBtn.dataset.bound = '1';
       retryBtn.addEventListener('click', function () {
-        try { sessionStorage.removeItem('herbaProtocolTried'); } catch (e) { /* ignore */ }
-        tryLaunchHerbaProtocol();
         pollLocalBackendAndEnter({ maxTries: 50, showBridge: true });
       });
     }
@@ -6492,15 +7236,14 @@
       return;
     }
 
-    // GitHub Pages：尝试协议拉起本机后端，并自动跳转至完整版
+    // GitHub Pages / 静态预览：提示用启动脚本，并轮询本机后端
     if (isStaticHost) {
-      setStatus('GitHub 预览页：正在连接本机数据库…', false);
+      setStatus('GitHub 预览页：请用本机「打开.vbs」连接完整版…', false);
       showLocalBridge(
         true,
-        '浏览器不能直接启动电脑程序。将尝试通过 herba:// 协议启动本机后端；若弹出提示请点允许。也可先运行「打开前端.bat」。'
+        '静态页无本地数据库。请双击项目中的「打开.vbs」或「启动.bat」启动后端，再点「打开本地完整版」。'
       );
-      tryLaunchHerbaProtocol();
-      pollLocalBackendAndEnter({ maxTries: 60, showBridge: true });
+      pollLocalBackendAndEnter({ maxTries: 40, showBridge: true });
       return;
     }
 

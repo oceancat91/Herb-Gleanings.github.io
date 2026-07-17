@@ -45,26 +45,19 @@
 
 ### 一键启动（推荐）
 
-双击项目根目录 **`启动.bat`**，或在终端执行：
+**双击 `启动.bat`** — 自动启动后端 + 打开浏览器 **http://127.0.0.1:8000/**
+
+首次使用需安装依赖（仅一次）：
 
 ```bash
 pip install -r backend/requirements.txt
-python run.py
 ```
 
-脚本会启动后端并打开浏览器：**http://127.0.0.1:8000/**
-
-### GitHub Pages 预览与本机后端
+### GitHub Pages 预览
 
 静态页：[https://oceancat91.github.io/Herb-Gleanings.github.io/](https://oceancat91.github.io/Herb-Gleanings.github.io/)
 
-浏览器**不能**从网页直接启动本机程序。若要在打开 GitHub 主页后自动拉起后端并连库：
-
-1. **首次**双击 `注册本机启动协议.bat`（写入当前用户 `herba://` 协议）
-2. 再打开上述 GitHub 主页，允许浏览器打开「本草拾珍」协议
-3. 本机 `run.py --daemon` 启动后，页面会自动跳转到 `http://127.0.0.1:8000/` 完整版
-
-也可继续使用 `打开前端.bat` / `python run.py` 直接启动。卸载协议：`卸载本机启动协议.bat`。
+完整数据与炼药等功能需本机后端。先在本机双击 **`启动.bat`**，再在 Pages 上点「打开本地完整版」即可跳转。
 
 ### 手动启动
 
@@ -89,9 +82,8 @@ API 文档：http://127.0.0.1:8000/docs
 ```
 可视化期末/
 ├── index.html              # 前端单页
-├── run.py                  # 一键启动（后端 + 浏览器）
-├── 启动.bat                # Windows 启动入口
-├── 打开前端.bat            # 确保后端后打开页面
+├── launch.py               # 启动器（等后端就绪后自动打开浏览器）
+├── 启动.bat                # 双击即启动
 ├── README.md
 └── backend/
     ├── app/

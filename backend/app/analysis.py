@@ -12,6 +12,7 @@ from .models import Herb
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 FORMULAS_PATH = DATA_DIR / "formulas_raw.json"
+FORMULAS_EXTRA_PATH = DATA_DIR / "formulas_extra.json"
 
 SIQI_ORDER = ["大寒", "寒", "微寒", "凉", "平", "微温", "温", "热"]
 WUWEI_ORDER = ["酸", "苦", "微苦", "甘", "微甘", "辛", "咸", "淡", "涩"]
@@ -133,13 +134,27 @@ def _classical_zh_name(raw: str | None) -> str | None:
 
 
 def _load_formulas() -> list[dict[str, Any]]:
-    if not FORMULAS_PATH.exists():
-        return []
-    try:
-        data = json.loads(FORMULAS_PATH.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return []
-    return data if isinstance(data, list) else []
+    """合并 formulas_raw + formulas_extra（按 key 去重，raw 优先）。"""
+    merged: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for path in (FORMULAS_PATH, FORMULAS_EXTRA_PATH):
+        if not path.exists():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if not isinstance(data, list):
+            continue
+        for item in data:
+            if not isinstance(item, dict):
+                continue
+            key = item.get("key") or item.get("slug")
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            merged.append(item)
+    return merged
 
 
 def build_formula_pairing(herbs: list[Herb]) -> dict[str, Any]:
