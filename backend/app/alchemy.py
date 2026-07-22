@@ -181,7 +181,7 @@ def _herb_role_profile(herb_key: str) -> dict[str, Any]:
 
 
 def _match_formulas(keys: list[str], limit: int = 16) -> list[dict[str, Any]]:
-    """按覆盖度匹配方剂：full = 选药完全覆盖方组成；partial = 方含全部选药。"""
+    """按覆盖度匹配方剂：full = 炉中药材覆盖方全部组成；partial = 有交集但未齐。"""
     if not keys:
         return []
     key_set = set(keys)
@@ -192,11 +192,13 @@ def _match_formulas(keys: list[str], limit: int = 16) -> list[dict[str, Any]]:
         fset = set(fkeys)
         if not fset:
             continue
-        if not key_set.issubset(fset):
+        inter = key_set & fset
+        if not inter:
             continue
-        covered = len(key_set)
+        # 炉中覆盖方剂全部所需
+        full = fset.issubset(key_set)
+        covered = len(inter)
         total = len(fset)
-        full = key_set == fset
         roles = []
         for c in comps:
             if c["herb_key"] in key_set:
@@ -231,34 +233,143 @@ def _match_formulas(keys: list[str], limit: int = 16) -> list[dict[str, Any]]:
     return out[:limit]
 
 
+def _cooccur_with(herb_key: str, other_key: str) -> bool:
+    """两味药是否曾在本库某方中同时出现。"""
+    if not herb_key or not other_key or herb_key == other_key:
+        return False
+    for f in _load_formulas():
+        keys = {
+            c.get("herb_key")
+            for c in (f.get("composition") or [])
+            if isinstance(c, dict) and c.get("herb_key")
+        }
+        if herb_key in keys and other_key in keys:
+            return True
+    return False
+
+
+def _furnace_nodes(herbs: list[Herb]) -> list[dict[str, Any]]:
+    nodes: list[dict[str, Any]] = []
+    for h in herbs:
+        if not h or not h.key:
+            continue
+        p = _herb_role_profile(h.key)
+        nodes.append(
+            {
+                "key": h.key,
+                "name_zh": h.name_zh,
+                "top_role": p.get("top_role") or "未标",
+                "formula_hits": p.get("formula_hits") or 0,
+            }
+        )
+    return nodes
+
+
+def _furnace_edges(herbs: list[Herb]) -> list[dict[str, Any]]:
+    """炉中仅连接曾在同一药方中共现的药对；无共现则不连线。"""
+    keys = [h.key for h in herbs if h and h.key]
+    edges: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    for i, a in enumerate(keys):
+        for b in keys[i + 1 :]:
+            pair = (a, b) if a <= b else (b, a)
+            if pair in seen:
+                continue
+            if not _cooccur_with(a, b):
+                continue
+            seen.add(pair)
+            edges.append({"source": a, "target": b, "kind": "cooccur"})
+    return edges
+
+
+def _cloud_tips_for_place(herb: Herb, others: list[Herb], related: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """炉内虚浮提示：联想式短句，不弹窗。"""
+    tips: list[dict[str, Any]] = []
+    new_name = herb.name_zh or ""
+    seen: set[str] = set()
+
+    for r in related:
+        pair = r.get("pair") or []
+        other = next((n for n in pair if n and n != new_name), None)
+        if not other:
+            continue
+        kind = r.get("kind") or ""
+        if kind in ("相反", "相恶", "十八反", "十九畏") or r.get("level") in ("danger", "warn"):
+            key = f"taboo|{other}"
+            if key not in seen:
+                seen.add(key)
+                tips.append(
+                    {
+                        "kind": "taboo",
+                        "with_name": other,
+                        "text": f"与「{other}」似乎不适合一起使用……",
+                    }
+                )
+        elif kind in ("相须", "相使"):
+            key = f"boost|{other}"
+            if key not in seen:
+                seen.add(key)
+                tips.append(
+                    {
+                        "kind": "boost",
+                        "with_name": other,
+                        "text": f"与「{other}」似乎在药方中常并肩出现……",
+                    }
+                )
+
+    for o in others:
+        if not o or not o.name_zh or not o.key:
+            continue
+        if f"boost|{o.name_zh}" in seen or f"taboo|{o.name_zh}" in seen:
+            continue
+        if _cooccur_with(herb.key, o.key):
+            key = f"cooccur|{o.name_zh}"
+            if key not in seen:
+                seen.add(key)
+                tips.append(
+                    {
+                        "kind": "cooccur",
+                        "with_name": o.name_zh,
+                        "text": f"与「{o.name_zh}」似乎在药方中同时出现过……",
+                    }
+                )
+    return tips[:5]
+
+
 def place_herb_feedback(herb: Herb, placed: list[Herb]) -> dict[str, Any]:
-    """置入一味药时的即时反馈：角色身份 + 与已置入药的关系提醒（不阻止）。"""
+    """置入一味药：返回角色、关系与炉内云朵提示（不阻止、不弹窗）。"""
     others = [h for h in placed if h.key != herb.key]
     names = [herb.name_zh] + [h.name_zh for h in others if h.name_zh]
     relations = _relation_hits(names)
-    # 只保留涉及新药的关系
     new_name = herb.name_zh
     related = [r for r in relations if new_name in (r.get("pair") or [])]
-    taboo = [r for r in related if r.get("level") in ("danger", "warn") or r.get("kind") in ("相反", "相恶", "十八反", "十九畏")]
     boost = [r for r in related if r.get("kind") in ("相须", "相使")]
     mitigate = [r for r in related if r.get("kind") in ("相畏", "相杀")]
+    taboo = [
+        r
+        for r in related
+        if r.get("level") in ("danger", "warn") or r.get("kind") in ("相反", "相恶", "十八反", "十九畏")
+    ]
 
     profile = _herb_role_profile(herb.key)
-    popup = {
-        "title": f"置入「{herb.name_zh}」",
-        "role_line": profile["hint"],
-        "top_role": profile["top_role"],
-        "formula_hits": profile["formula_hits"],
-        "sample_formulas": profile["sample_formulas"],
-        "reminders": [r.get("copy") or r.get("rule") for r in (boost + mitigate + taboo)[:4]],
-        "blocked": False,
-        "note": "冲突仅提醒，不阻止继续置入；点击炼药后再判定禁忌结果。",
-    }
+    cloud_tips = _cloud_tips_for_place(herb, others, related)
     return {
         "herb": _brief(herb),
         "role_profile": profile,
         "relations": related,
-        "popup": popup,
+        "cloud_tips": cloud_tips,
+        "furnace": _furnace_nodes(placed),
+        "edges": _furnace_edges(placed),
+        "popup": {
+            "title": f"置入「{herb.name_zh}」",
+            "role_line": profile["hint"],
+            "top_role": profile["top_role"],
+            "formula_hits": profile["formula_hits"],
+            "sample_formulas": profile["sample_formulas"],
+            "reminders": [r.get("copy") or r.get("rule") for r in (boost + mitigate + taboo)[:4]],
+            "blocked": False,
+            "note": "",
+        },
     }
 
 

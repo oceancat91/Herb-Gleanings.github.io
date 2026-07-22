@@ -1,0 +1,971 @@
+[
+  {
+    "key": "bu_zhong_yi_qi_tang",
+    "slug": "bu-zhong-yi-qi-tang",
+    "name_zh": "补中益气汤",
+    "name_pinyin": "Bǔ Zhōng Yì Qì Tāng",
+    "name_en": "Tonify the Middle and Augment the Qi Decoction",
+    "category": "补益剂",
+    "subcategory": "补气",
+    "source_text_key": "pi_wei_lun",
+    "source_chapter": null,
+    "treatment_principle": {
+      "zh": "补中益气，升阳举陷",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "huang_qi",
+        "role": "jun",
+        "dosage": "18g",
+        "explanation_zh": "补中益气，升阳固表，为君药"
+      },
+      {
+        "herb_key": "ren_shen",
+        "role": "chen",
+        "dosage": "6g",
+        "explanation_zh": "大补元气，与黄芪相辅"
+      },
+      {
+        "herb_key": "bai_zhu",
+        "role": "chen",
+        "dosage": "9g",
+        "explanation_zh": "健脾益气"
+      },
+      {
+        "herb_key": "dang_gui",
+        "role": "zuo",
+        "dosage": "3g",
+        "explanation_zh": "养血和营"
+      },
+      {
+        "herb_key": "chen_pi",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "理气和胃，使补而不滞"
+      },
+      {
+        "herb_key": "sheng_ma",
+        "role": "zuo",
+        "dosage": "3g",
+        "explanation_zh": "升阳举陷"
+      },
+      {
+        "herb_key": "chai_hu",
+        "role": "zuo",
+        "dosage": "3g",
+        "explanation_zh": "升阳举陷，与升麻相伍助黄芪升举清阳"
+      },
+      {
+        "herb_key": "gan_cao",
+        "role": "shi",
+        "dosage": "9g",
+        "explanation_zh": "调和诸药；用炙甘草"
+      }
+    ],
+    "preparation_zh": "水煎服。",
+    "description_zh": "李东垣脾胃论代表方。在四君子汤基础上增黄芪、升麻、柴胡、当归、陈皮而成。治疗脾气虚弱、清阳下陷诸证。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/bu-zhong-yi-qi-tang"
+    }
+  },
+  {
+    "key": "dang_gui_bu_xue_tang",
+    "slug": "dang-gui-bu-xue-tang",
+    "name_zh": "当归补血汤",
+    "name_pinyin": "Dāng Guī Bǔ Xuè Tāng",
+    "name_en": "Tangkuei Decoction to Tonify the Blood",
+    "category": "补益剂",
+    "subcategory": "补血",
+    "source_text_key": "pi_wei_lun",
+    "source_chapter": null,
+    "treatment_principle": {
+      "zh": "补气生血",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "huang_qi",
+        "role": "jun",
+        "dosage": "30g",
+        "explanation_zh": "重用以大补脾肺之气，旺气以生血"
+      },
+      {
+        "herb_key": "dang_gui",
+        "role": "chen",
+        "dosage": "6g",
+        "explanation_zh": "养血和营，与黄芪相伍气血双补"
+      }
+    ],
+    "preparation_zh": "水煎服。",
+    "description_zh": "李东垣方。本方仅二味药，黄芪与当归之比为五比一。所谓「有形之血不能速生，无形之气所当急固」——通过大补脾肺之气来推动血液生成。气血相生之经典方。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/dang-gui-bu-xue-tang"
+    }
+  },
+  {
+    "key": "pu_ji_xiao_du_yin",
+    "slug": "pu-ji-xiao-du-yin",
+    "name_zh": "普济消毒饮",
+    "name_pinyin": "Pǔ Jì Xiāo Dú Yǐn",
+    "name_en": "Universal Benefit Decoction to Eliminate Toxin",
+    "category": "清热剂",
+    "subcategory": "清热解毒",
+    "source_text_key": "pi_wei_lun",
+    "source_chapter": "李东垣《东垣试效方》(传统归属，亦载于《卫生宝鉴》)",
+    "treatment_principle": {
+      "zh": "清热解毒，疏风散邪",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "huang_qin",
+        "role": "jun",
+        "dosage": "15g",
+        "explanation_zh": "酒炒，清上焦热毒，为君药"
+      },
+      {
+        "herb_key": "huang_lian",
+        "role": "jun",
+        "dosage": "15g",
+        "explanation_zh": "酒炒，清心胃之火，与黄芩相须"
+      },
+      {
+        "herb_key": "niu_bang_zi",
+        "role": "chen",
+        "dosage": "3g",
+        "explanation_zh": "疏散风热，解毒利咽"
+      },
+      {
+        "herb_key": "lian_qiao",
+        "role": "chen",
+        "dosage": "3g",
+        "explanation_zh": "清热解毒，消肿散结"
+      },
+      {
+        "herb_key": "bo_he",
+        "role": "chen",
+        "dosage": "2g",
+        "explanation_zh": "辛凉疏风，清利头目咽喉"
+      },
+      {
+        "herb_key": "jiang_can",
+        "role": "chen",
+        "dosage": "2g",
+        "explanation_zh": "疏散风热，化痰散结"
+      },
+      {
+        "herb_key": "xuan_shen",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "清热凉血解毒，滋阴降火"
+      },
+      {
+        "herb_key": "ban_lan_gen",
+        "role": "zuo",
+        "dosage": "3g",
+        "explanation_zh": "清热解毒，凉血利咽"
+      },
+      {
+        "herb_key": "jie_geng",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "宣肺利咽，载药上行"
+      },
+      {
+        "herb_key": "chen_pi",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "理气疏壅，防苦寒凝滞"
+      },
+      {
+        "herb_key": "chai_hu",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "疏散少阳之邪，引药上行头面"
+      },
+      {
+        "herb_key": "sheng_ma",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "升阳解毒，与柴胡同引药上行，兼散头面风热"
+      },
+      {
+        "herb_key": "gan_cao",
+        "role": "shi",
+        "dosage": "6g",
+        "explanation_zh": "清热解毒，调和诸药"
+      }
+    ],
+    "preparation_zh": "上为细末，汤调，时时服之；或蜜拌为丸噙化。现代多作汤剂水煎服。",
+    "description_zh": "李东垣所创，用治大头瘟（大头天行）——风热疫毒壅于上焦，发于头面之证。症见恶寒发热、头面红肿焮痛、目不能开、咽喉不利、舌红苔黄、脉浮数有力。清热解毒为主，佐以疏散透邪与升散引经，苦降与升散并用，使热毒得清而不致冰伏。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/pu-ji-xiao-du-yin"
+    }
+  },
+  {
+    "key": "sheng_mai_san",
+    "slug": "sheng-mai-san",
+    "name_zh": "生脉散",
+    "name_pinyin": "Shēng Mài Sǎn",
+    "name_en": "Generate the Pulse Powder",
+    "category": "补益剂",
+    "subcategory": "气阴双补",
+    "source_text_key": "pi_wei_lun",
+    "source_chapter": "内外伤辨惑论 (attributed to 李东垣)",
+    "treatment_principle": {
+      "zh": "益气养阴，生津止渴，敛阴止汗",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "ren_shen",
+        "role": "jun",
+        "dosage": "9g",
+        "explanation_zh": "大补元气，补肺气生津，为君药"
+      },
+      {
+        "herb_key": "mai_dong",
+        "role": "chen",
+        "dosage": "9g",
+        "explanation_zh": "养阴润肺，清心生津"
+      },
+      {
+        "herb_key": "wu_wei_zi",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "敛肺止汗，生津止渴，宁心安神"
+      }
+    ],
+    "preparation_zh": "水煎服。亦可作散剂或制成生脉注射液（现代制剂）。",
+    "description_zh": "气阴两伤之代表方，亦是温热病气阴亏损、暑热伤气耗津之要方。本条目源自李东垣《内外伤辨惑论》。全方仅三味，一补一润一敛：人参补气，麦冬养阴，五味子敛肺。气复则津生，津生则脉复，故名「生脉」。现代常用于冠心病、心功能不全、休克等气阴两虚之证；参麦注射液、生脉注射液即源于此方。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/sheng-mai-san"
+    }
+  },
+  {
+    "key": "bao_he_wan",
+    "slug": "bao-he-wan",
+    "name_zh": "保和丸",
+    "name_pinyin": "Bǎo Hé Wán",
+    "name_en": "Preserve Harmony Pill",
+    "category": "消食剂",
+    "subcategory": "消食化滞",
+    "source_text_key": "pi_wei_lun",
+    "source_chapter": "《丹溪心法·卷三·积聚痞块》",
+    "treatment_principle": {
+      "zh": "消食和胃",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "shan_zha",
+        "role": "jun",
+        "dosage": "18g",
+        "explanation_zh": "善消肉食油腻之积，为君药"
+      },
+      {
+        "herb_key": "lai_fu_zi",
+        "role": "chen",
+        "dosage": "9g",
+        "explanation_zh": "下气消食，长于消谷面之积"
+      },
+      {
+        "herb_key": "ban_xia",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "燥湿化痰，和胃降逆"
+      },
+      {
+        "herb_key": "chen_pi",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "理气和胃，化湿醒脾"
+      },
+      {
+        "herb_key": "fu_ling",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "健脾渗湿，和中止泻"
+      },
+      {
+        "herb_key": "lian_qiao",
+        "role": "zuo",
+        "dosage": "3g",
+        "explanation_zh": "食积易郁而化热，连翘清其郁热"
+      }
+    ],
+    "preparation_zh": "上为末，炊饼为丸，如梧桐子大，每服七八十丸，食远白汤下。",
+    "description_zh": "朱丹溪《丹溪心法》名方。治一切食积证：脘腹痞满胀痛、嗳腐吞酸、恶食呕逆、大便泄泻、舌苔厚腻、脉滑。全方以山楂为君消肉积，神曲消酒食陈腐之积，莱菔子消谷面之积——三味分消不同食积。临床仍当按原方七味投药。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/bao-he-wan"
+    }
+  },
+  {
+    "key": "jiu_wei_qiang_huo_tang",
+    "slug": "jiu-wei-qiang-huo-tang",
+    "name_zh": "九味羌活汤",
+    "name_pinyin": "Jiǔ Wèi Qiāng Huó Tāng",
+    "name_en": "Nine-Herb Decoction with Notopterygium",
+    "category": "解表剂",
+    "subcategory": "辛温解表",
+    "source_text_key": "ci_shi_nan_zhi",
+    "source_chapter": null,
+    "treatment_principle": {
+      "zh": "发汗祛湿，兼清里热",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "qiang_huo",
+        "role": "jun",
+        "dosage": "9g",
+        "explanation_zh": "发散风寒，祛湿止痛，为君药"
+      },
+      {
+        "herb_key": "fang_feng",
+        "role": "chen",
+        "dosage": "9g",
+        "explanation_zh": "祛风胜湿，散寒止痛"
+      },
+      {
+        "herb_key": "cang_zhu",
+        "role": "chen",
+        "dosage": "9g",
+        "explanation_zh": "发汗祛湿，助羌活散寒除湿"
+      },
+      {
+        "herb_key": "xi_xin",
+        "role": "zuo",
+        "dosage": "3g",
+        "explanation_zh": "祛风散寒，宣通鼻窍"
+      },
+      {
+        "herb_key": "bai_zhi",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "祛风散寒，燥湿止痛"
+      },
+      {
+        "herb_key": "chuan_xiong",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "活血祛风，行气止痛"
+      },
+      {
+        "herb_key": "sheng_di_huang",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "清热凉血，防诸辛温药过于温燥"
+      },
+      {
+        "herb_key": "huang_qin",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "清泄里热"
+      },
+      {
+        "herb_key": "gan_cao",
+        "role": "shi",
+        "dosage": "3g",
+        "explanation_zh": "调和诸药"
+      }
+    ],
+    "preparation_zh": "水煎服。",
+    "description_zh": "九味羌活汤为外感风寒湿邪、内有蕴热之证的常用方。方以分经论治思想组方，以羌活为君，配伍防风、苍术等辛温解表药，佐以生地、黄芩清里热，体现了表里同治的特点。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/jiu-wei-qiang-huo-tang"
+    }
+  },
+  {
+    "key": "qing_wei_san",
+    "slug": "qing-wei-san",
+    "name_zh": "清胃散",
+    "name_pinyin": "Qīng Wèi Sǎn",
+    "name_en": "Clear the Stomach Powder",
+    "category": "清热剂",
+    "subcategory": "清脏腑热",
+    "source_text_key": "lan_shi_mi_cang",
+    "source_chapter": null,
+    "treatment_principle": {
+      "zh": "清胃凉血",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "huang_lian",
+        "role": "jun",
+        "dosage": "6g",
+        "explanation_zh": "清泻胃火，为君药"
+      },
+      {
+        "herb_key": "sheng_ma",
+        "role": "chen",
+        "dosage": "6g",
+        "explanation_zh": "清热解毒，升散郁火"
+      },
+      {
+        "herb_key": "sheng_di_huang",
+        "role": "zuo",
+        "dosage": "12g",
+        "explanation_zh": "清热凉血，滋阴养液"
+      },
+      {
+        "herb_key": "mu_dan_pi",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "清热凉血，散血中伏火"
+      },
+      {
+        "herb_key": "dang_gui",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "养血活血，消肿止痛"
+      }
+    ],
+    "preparation_zh": "水煎服。",
+    "description_zh": "清胃散为治疗胃火牙痛的名方，出自李东垣《兰室秘藏》。方以黄连苦寒直折胃火为君，配伍升麻以升散郁火，辅以生地、丹皮凉血清热，当归活血止痛。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/qing-wei-san"
+    }
+  },
+  {
+    "key": "shao_yao_tang",
+    "slug": "shao-yao-tang",
+    "name_zh": "芍药汤",
+    "name_pinyin": "Sháo Yào Tāng",
+    "name_en": "Peony Decoction",
+    "category": "清热剂",
+    "subcategory": "清热凉血",
+    "source_text_key": "su_wen_bing_ji_qi_yi_bao_ming_ji",
+    "source_chapter": null,
+    "treatment_principle": {
+      "zh": "清热燥湿，调气和血",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "bai_shao",
+        "role": "jun",
+        "dosage": "15g",
+        "explanation_zh": "养血和营，缓急止痛，为君药"
+      },
+      {
+        "herb_key": "huang_lian",
+        "role": "chen",
+        "dosage": "6g",
+        "explanation_zh": "清热燥湿"
+      },
+      {
+        "herb_key": "huang_qin",
+        "role": "chen",
+        "dosage": "6g",
+        "explanation_zh": "清热燥湿"
+      },
+      {
+        "herb_key": "da_huang",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "泻热除积，活血行滞"
+      },
+      {
+        "herb_key": "dang_gui",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "养血活血"
+      },
+      {
+        "herb_key": "rou_gui",
+        "role": "zuo",
+        "dosage": "2g",
+        "explanation_zh": "温通血脉，防苦寒伤中"
+      },
+      {
+        "herb_key": "mu_xiang",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "行气导滞"
+      },
+      {
+        "herb_key": "bing_lang",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "行气导滞"
+      },
+      {
+        "herb_key": "gan_cao",
+        "role": "shi",
+        "dosage": "3g",
+        "explanation_zh": "调和诸药，缓急止痛"
+      }
+    ],
+    "preparation_zh": "水煎服。",
+    "description_zh": "芍药汤治湿热痢疾，腹痛便脓血。重用芍药和营止痛为君，配伍黄连、黄芩清热燥湿，大黄通因通用以导滞，木香、槟榔行气止痛，更以少量肉桂温通血脉以防寒凝，体现\"调气则后重自除，行血则便脓自愈\"的治法。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/shao-yao-tang"
+    }
+  },
+  {
+    "key": "er_miao_san",
+    "slug": "er-miao-san",
+    "name_zh": "二妙散",
+    "name_pinyin": "Èr Miào Sǎn",
+    "name_en": "Two Marvels Powder",
+    "category": "祛湿剂",
+    "subcategory": "清热祛湿",
+    "source_text_key": "dan_xi_xin_fa",
+    "source_chapter": null,
+    "treatment_principle": {
+      "zh": "清热燥湿",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "huang_bai",
+        "role": "jun",
+        "dosage": "9g",
+        "explanation_zh": "清热燥湿，泻下焦之火，为君药"
+      },
+      {
+        "herb_key": "cang_zhu",
+        "role": "chen",
+        "dosage": "9g",
+        "explanation_zh": "健脾燥湿"
+      }
+    ],
+    "preparation_zh": "研末，姜汁调服，或水煎服。",
+    "description_zh": "二妙散出自朱丹溪《丹溪心法》，为治疗下焦湿热之基础方。方仅黄柏、苍术二味，以黄柏清热燥湿为主，苍术健脾燥湿为辅，相须为用，妙在精简，故名\"二妙\"。为三妙散、四妙散之祖方。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/er-miao-san"
+    }
+  },
+  {
+    "key": "da_bu_yin_wan",
+    "slug": "da-bu-yin-wan",
+    "name_zh": "大补阴丸",
+    "name_pinyin": "Dà Bǔ Yīn Wán",
+    "name_en": "Great Yin Supplementation Pill",
+    "category": "补益剂",
+    "subcategory": "补阴",
+    "source_text_key": "dan_xi_xin_fa",
+    "source_chapter": "卷一",
+    "treatment_principle": {
+      "zh": "滋阴降火",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "shu_di_huang",
+        "role": "jun",
+        "dosage": "18g",
+        "explanation_zh": "滋阴填精，补肾水之不足"
+      },
+      {
+        "herb_key": "gui_ban_jiao",
+        "role": "jun",
+        "dosage": "18g",
+        "explanation_zh": "滋阴潜阳，壮水以制火"
+      },
+      {
+        "herb_key": "huang_bai",
+        "role": "chen",
+        "dosage": "12g",
+        "explanation_zh": "泻相火，清下焦湿热"
+      },
+      {
+        "herb_key": "zhi_mu",
+        "role": "chen",
+        "dosage": "12g",
+        "explanation_zh": "滋阴清热，助黄柏泻火"
+      }
+    ],
+    "preparation_zh": "上药研末，猪脊髓蒸熟，炼蜜为丸，每服9g，每日2次，淡盐汤送服。",
+    "description_zh": "治阴虚火旺之代表方。用大量滋阴之品壮水以制阳光，佐以苦寒泻火之品直折其势。以猪脊髓入丸，取其补精益髓之意。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/da-bu-yin-wan"
+    }
+  },
+  {
+    "key": "yue_ju_wan",
+    "slug": "yue-ju-wan",
+    "name_zh": "越鞠丸",
+    "name_pinyin": "Yuè Jū Wán",
+    "name_en": "Constraint-Resolving Pill",
+    "category": "理气剂",
+    "subcategory": "行气",
+    "source_text_key": "dan_xi_xin_fa",
+    "source_chapter": "卷三·六郁",
+    "treatment_principle": {
+      "zh": "行气解郁",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "xiang_fu",
+        "role": "jun",
+        "dosage": "10g",
+        "explanation_zh": "行气解郁，治气郁，为方中主药"
+      },
+      {
+        "herb_key": "chuan_xiong",
+        "role": "chen",
+        "dosage": "10g",
+        "explanation_zh": "活血行气，治血郁"
+      },
+      {
+        "herb_key": "cang_zhu",
+        "role": "chen",
+        "dosage": "10g",
+        "explanation_zh": "燥湿运脾，治湿郁"
+      },
+      {
+        "herb_key": "zhi_zi",
+        "role": "zuo",
+        "dosage": "10g",
+        "explanation_zh": "清热泻火，治火郁"
+      },
+      {
+        "herb_key": "lai_fu_zi",
+        "role": "zuo",
+        "dosage": "10g",
+        "explanation_zh": "消食化积，治食郁"
+      }
+    ],
+    "preparation_zh": "上药研末，水泛为丸，每服6-9g，每日2次，温水送服。",
+    "description_zh": "治六郁之代表方。丹溪认为气、血、湿、火、痰、食六郁相因为病，以行气解郁为核心，气行则诸郁自解。五味药各治一郁，简洁而周全。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/yue-ju-wan"
+    }
+  },
+  {
+    "key": "jin_ling_zi_san",
+    "slug": "jin-ling-zi-san",
+    "name_zh": "金铃子散",
+    "name_pinyin": "Jīn Líng Zǐ Sǎn",
+    "name_en": "Melia Powder",
+    "category": "理气剂",
+    "subcategory": "行气",
+    "source_text_key": "su_wen_bing_ji_qi_yi_bao_ming_ji",
+    "source_chapter": "卷中",
+    "treatment_principle": {
+      "zh": "疏肝泄热，活血止痛",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "chuan_lian_zi",
+        "role": "jun",
+        "dosage": "10g",
+        "explanation_zh": "疏肝理气，泄热止痛"
+      },
+      {
+        "herb_key": "yan_hu_suo",
+        "role": "chen",
+        "dosage": "10g",
+        "explanation_zh": "活血行气止痛，为止痛要药"
+      }
+    ],
+    "preparation_zh": "上药研末，每服9g，酒调服。也可水煎服。",
+    "description_zh": "治肝郁化热、气滞血瘀所致胸胁脘腹疼痛之名方。仅川楝子、延胡索二味，一行气泄热，一活血止痛，药简效宏，为理气止痛之经典配伍。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/jin-ling-zi-san"
+    }
+  },
+  {
+    "key": "hao_qin_qing_dan_tang",
+    "slug": "hao-qin-qing-dan-tang",
+    "name_zh": "蒿芩清胆汤",
+    "name_pinyin": "Hāo Qín Qīng Dǎn Tāng",
+    "name_en": "Sweet Wormwood and Scutellaria Decoction to Clear the Gallbladder",
+    "category": "和解剂",
+    "subcategory": "和解少阳",
+    "source_text_key": "chong_ding_tong_su_shang_han_lun",
+    "source_chapter": null,
+    "treatment_principle": {
+      "zh": "清胆利湿，和胃化痰",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "qing_hao",
+        "role": "jun",
+        "dosage": "6g",
+        "explanation_zh": "清透少阳邪热，为君药"
+      },
+      {
+        "herb_key": "huang_qin",
+        "role": "jun",
+        "dosage": "9g",
+        "explanation_zh": "清泄胆腑之热"
+      },
+      {
+        "herb_key": "ban_xia",
+        "role": "chen",
+        "dosage": "5g",
+        "explanation_zh": "和胃降逆，化痰开结"
+      },
+      {
+        "herb_key": "chen_pi",
+        "role": "chen",
+        "dosage": "5g",
+        "explanation_zh": "理气化痰"
+      },
+      {
+        "herb_key": "zhu_ru",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "清热化痰，除烦止呕"
+      },
+      {
+        "herb_key": "zhi_shi",
+        "role": "zuo",
+        "dosage": "5g",
+        "explanation_zh": "行气消痞"
+      },
+      {
+        "herb_key": "fu_ling",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "健脾渗湿"
+      },
+      {
+        "herb_key": "hua_shi",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "清热利湿"
+      }
+    ],
+    "preparation_zh": "水煎服。",
+    "description_zh": "蒿芩清胆汤出自俞根初《重订通俗伤寒论》，治少阳湿热痰浊证。方以青蒿、黄芩清透少阳湿热为君，配伍半夏、陈皮和胃化痰，竹茹清热止呕，枳实行气消痞，茯苓、滑石渗湿利水，为温病少阳证的常用方。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/hao-qin-qing-dan-tang"
+    }
+  },
+  {
+    "key": "zhen_gan_xi_feng_tang",
+    "slug": "zhen-gan-xi-feng-tang",
+    "name_zh": "镇肝熄风汤",
+    "name_pinyin": "Zhèn Gān Xī Fēng Tāng",
+    "name_en": "Liver-Sedating Wind-Extinguishing Decoction",
+    "category": "治风剂",
+    "subcategory": "平熄内风",
+    "source_text_key": "yi_xue_zhong_zhong_can_xi_lu",
+    "source_chapter": "治内外中风方",
+    "treatment_principle": {
+      "zh": "镇肝熄风，滋阴潜阳",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "niu_xi",
+        "role": "jun",
+        "dosage": "30g",
+        "explanation_zh": "引血下行，补肝肾，为方中主药"
+      },
+      {
+        "herb_key": "dai_zhe_shi",
+        "role": "chen",
+        "dosage": "30g",
+        "explanation_zh": "质重镇逆，降气平肝"
+      },
+      {
+        "herb_key": "long_gu",
+        "role": "chen",
+        "dosage": "15g",
+        "explanation_zh": "平肝潜阳，镇惊安神"
+      },
+      {
+        "herb_key": "mu_li",
+        "role": "chen",
+        "dosage": "15g",
+        "explanation_zh": "平肝潜阳，与龙骨相须为用"
+      },
+      {
+        "herb_key": "gui_ban_jiao",
+        "role": "zuo",
+        "dosage": "15g",
+        "explanation_zh": "滋阴潜阳，育阴以涵阳"
+      },
+      {
+        "herb_key": "bai_shao",
+        "role": "zuo",
+        "dosage": "15g",
+        "explanation_zh": "养血柔肝，敛阴平肝"
+      },
+      {
+        "herb_key": "xuan_shen",
+        "role": "zuo",
+        "dosage": "15g",
+        "explanation_zh": "滋阴降火，清浮越之热"
+      },
+      {
+        "herb_key": "tian_dong",
+        "role": "zuo",
+        "dosage": "15g",
+        "explanation_zh": "滋阴清热"
+      },
+      {
+        "herb_key": "yin_chen",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "清肝热，疏肝郁"
+      },
+      {
+        "herb_key": "chuan_lian_zi",
+        "role": "zuo",
+        "dosage": "6g",
+        "explanation_zh": "清泄肝热，疏肝理气"
+      },
+      {
+        "herb_key": "mai_ya",
+        "role": "shi",
+        "dosage": "6g",
+        "explanation_zh": "疏肝理气，防金石药碍胃"
+      },
+      {
+        "herb_key": "gan_cao",
+        "role": "shi",
+        "dosage": "5g",
+        "explanation_zh": "调和诸药"
+      }
+    ],
+    "preparation_zh": "水煎服。",
+    "description_zh": "类中风之代表方，治肝肾阴虚、肝阳上亢、气血逆乱。以重镇潜阳为主，配伍滋阴养血、清泄疏肝之品，标本兼治。为张锡纯治内中风之名方。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/zhen-gan-xi-feng-tang"
+    }
+  },
+  {
+    "key": "tian_ma_gou_teng_yin",
+    "slug": "tian-ma-gou-teng-yin",
+    "name_zh": "天麻钩藤饮",
+    "name_pinyin": "Tiān Má Gōu Téng Yǐn",
+    "name_en": "Gastrodia and Uncaria Beverage",
+    "category": "治风剂",
+    "subcategory": "平熄内风",
+    "source_text_key": "za_bing_zheng_zhi_xin_yi",
+    "source_chapter": "高血压",
+    "treatment_principle": {
+      "zh": "平肝熄风，清热活血，补益肝肾",
+      "en": ""
+    },
+    "composition": [
+      {
+        "herb_key": "tian_ma",
+        "role": "jun",
+        "dosage": "9g",
+        "explanation_zh": "平肝熄风，善治头痛眩晕"
+      },
+      {
+        "herb_key": "gou_teng",
+        "role": "jun",
+        "dosage": "12g",
+        "explanation_zh": "清热平肝，熄风定惊"
+      },
+      {
+        "herb_key": "shi_jue_ming",
+        "role": "chen",
+        "dosage": "18g",
+        "explanation_zh": "平肝潜阳，清肝明目"
+      },
+      {
+        "herb_key": "zhi_zi",
+        "role": "chen",
+        "dosage": "9g",
+        "explanation_zh": "清泻肝火"
+      },
+      {
+        "herb_key": "huang_qin",
+        "role": "chen",
+        "dosage": "9g",
+        "explanation_zh": "清热泻火，助栀子清肝"
+      },
+      {
+        "herb_key": "niu_xi",
+        "role": "zuo",
+        "dosage": "12g",
+        "explanation_zh": "引血下行，补益肝肾"
+      },
+      {
+        "herb_key": "du_zhong",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "补益肝肾"
+      },
+      {
+        "herb_key": "sang_ji_sheng",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "补肝肾，强筋骨"
+      },
+      {
+        "herb_key": "yi_mu_cao",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "活血利水"
+      },
+      {
+        "herb_key": "ye_jiao_teng",
+        "role": "zuo",
+        "dosage": "9g",
+        "explanation_zh": "养心安神"
+      },
+      {
+        "herb_key": "fu_ling",
+        "role": "shi",
+        "dosage": "9g",
+        "explanation_zh": "宁心安神，健脾渗湿"
+      }
+    ],
+    "preparation_zh": "水煎服。钩藤后下。",
+    "description_zh": "治肝阳上亢、肝风上扰之头痛眩晕代表方。天麻、钩藤平肝熄风为君，配伍清热、活血、补肝肾、安神诸法，层次分明，治法周全。",
+    "verification": {
+      "status": "bencaodian-opendata",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Bencaodian Editorial",
+      "source_url": "https://bencaodian.org/zh/formulas/tian-ma-gou-teng-yin"
+    }
+  }
+]

@@ -7,6 +7,7 @@ from typing import Any
 
 from .analysis import ROLE_ZH, _load_formulas, _split_multi
 from .models import Herb
+from .pinyin_fix import display_pinyin
 
 # 十八反（课程通识常用表述，按药名集合匹配）
 _SHIBA_FAN: list[tuple[set[str], set[str], str]] = [
@@ -63,7 +64,7 @@ def _brief(h: Herb) -> dict[str, Any]:
         "id": h.id,
         "key": h.key,
         "name_zh": h.name_zh,
-        "name_pinyin": h.name_pinyin,
+        "name_pinyin": display_pinyin(h.name_zh, h.name_pinyin),
         "category": h.category,
         "siqi": h.siqi,
         "wuwei": h.wuwei,

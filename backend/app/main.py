@@ -15,6 +15,7 @@ from .analysis import build_analysis
 from .config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
 from .database import Base, engine, get_db
 from .models import Herb
+from .pinyin_fix import display_pinyin
 from .schemas import (
     CategoryItem,
     HerbBrief,
@@ -39,7 +40,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -78,8 +79,15 @@ def _loads(text: str | None):
         return text
 
 
+def to_brief(herb: Herb) -> HerbBrief:
+    data = HerbBrief.model_validate(herb)
+    data.name_pinyin = display_pinyin(herb.name_zh, herb.name_pinyin)
+    return data
+
+
 def to_detail(herb: Herb) -> HerbDetail:
     data = HerbDetail.model_validate(herb)
+    data.name_pinyin = display_pinyin(herb.name_zh, herb.name_pinyin)
     data.gongxiao_detail = _loads(herb.gongxiao_detail)
     data.zhuzhi_detail = _loads(herb.zhuzhi_detail)
     data.paozhi = _loads(herb.paozhi)
@@ -98,7 +106,11 @@ def startup():
 def index():
     """托管前端页面；API 说明见 /api"""
     if FRONTEND_INDEX.is_file():
-        return FileResponse(FRONTEND_INDEX, media_type="text/html; charset=utf-8")
+        return FileResponse(
+            FRONTEND_INDEX,
+            media_type="text/html; charset=utf-8",
+            headers={"Cache-Control": "no-store"},
+        )
     return {
         "name": "本草拾珍 API",
         "docs": "/docs",
@@ -116,6 +128,8 @@ def api_root():
             "/api/herbs/{id_or_key}",
             "/api/herbs/{id_or_key}/story",
             "/api/formulas/{id_or_key}",
+            "/api/eras",
+            "/api/eras/{era_id}",
             "/api/stats",
             "/api/analysis",
             "/api/assistant/consult",
@@ -188,7 +202,7 @@ def geo_province(name: str, db: Session = Depends(get_db)):
             continue
         herb = db.scalar(select(Herb).where(Herb.name_zh == hn))
         if herb:
-            items.append(HerbBrief.model_validate(herb))
+            items.append(to_brief(herb))
             seen.add(hn)
 
     return {
@@ -210,6 +224,25 @@ def geo_china():
     return FileResponse(path, media_type="application/json; charset=utf-8")
 
 
+@app.get("/api/geo/eras")
+def geo_eras_index():
+    """历代疆域地图索引。"""
+    path = Path(__file__).resolve().parent.parent / "data" / "era_maps" / "index.json"
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="缺少历代疆域索引，请运行 build_era_maps.py")
+    return FileResponse(path, media_type="application/json; charset=utf-8")
+
+
+@app.get("/api/geo/era/{era_id}")
+def geo_era(era_id: str):
+    """单朝疆域 + 示意行政区划 GeoJSON。"""
+    safe = "".join(ch for ch in era_id if ch.isalnum() or ch in ("_", "-"))
+    path = Path(__file__).resolve().parent.parent / "data" / "era_maps" / f"{safe}.json"
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail=f"缺少疆域数据：{safe}")
+    return FileResponse(path, media_type="application/json; charset=utf-8")
+
+
 @app.get("/china-geo-embed.js")
 def china_geo_embed():
     """前端内嵌地图脚本（API 未更新或 CDN 不可用时的兜底）。"""
@@ -228,7 +261,7 @@ def list_herbs(
     shengjiang: str | None = Query(None, description="升降沉浮：升/降/沉/浮"),
     category: str | None = Query(None, description="功效分类"),
     page: int = Query(1, ge=1),
-    page_size: int = Query(20, ge=1, le=1000),
+    page_size: int = Query(20, ge=1, le=5000),
     db: Session = Depends(get_db),
 ):
     stmt = select(Herb)
@@ -258,11 +291,12 @@ def list_herbs(
     items = db.scalars(
         stmt.order_by(Herb.name_zh).offset((page - 1) * page_size).limit(page_size)
     ).all()
+    briefs = [to_brief(h) for h in items]
     return HerbListResponse(
         total=total,
         page=page,
         page_size=page_size,
-        items=[HerbBrief.model_validate(h) for h in items],
+        items=briefs,
     )
 
 
@@ -447,6 +481,42 @@ def get_formula(id_or_key: str, db: Session = Depends(get_db)):
     }
 
 
+@app.get("/api/eras")
+def list_eras(db: Session = Depends(get_db)):
+    """各朝典籍与方剂索引（摘要，方剂可截断）。"""
+    from .era_library import build_era_index
+
+    name_map = {h.key: h.name_zh for h in db.scalars(select(Herb)).all()}
+    eras = build_era_index(name_map)
+    brief = []
+    for e in eras:
+        formulas = e.get("formulas") or []
+        brief.append(
+            {
+                "id": e.get("id"),
+                "dynasty": e.get("dynasty"),
+                "classic_count": e.get("classic_count") or 0,
+                "formula_count": e.get("formula_count") or 0,
+                "classics": e.get("classics") or [],
+                "formulas": formulas[:40],
+                "formula_total": len(formulas),
+            }
+        )
+    return {"eras": brief, "total_formulas": sum(x["formula_total"] for x in brief)}
+
+
+@app.get("/api/eras/{era_id}")
+def get_era(era_id: str, db: Session = Depends(get_db)):
+    """单朝完整典籍 + 方剂列表。"""
+    from .era_library import get_era_by_id
+
+    name_map = {h.key: h.name_zh for h in db.scalars(select(Herb)).all()}
+    era = get_era_by_id(era_id, name_map)
+    if era is None:
+        raise HTTPException(status_code=404, detail="未找到该朝代")
+    return era
+
+
 @app.get("/api/herbs/{id_or_key}/story")
 def get_herb_story(id_or_key: str, db: Session = Depends(get_db)):
     """首页「穿越药」历史名片：典籍线索 + 入方角色。"""
@@ -493,7 +563,7 @@ def get_herb_story(id_or_key: str, db: Session = Depends(get_db)):
     return {
         "key": herb.key,
         "name_zh": herb.name_zh,
-        "name_pinyin": herb.name_pinyin,
+        "name_pinyin": display_pinyin(herb.name_zh, herb.name_pinyin),
         "category": herb.category,
         "siqi": herb.siqi,
         "wuwei": herb.wuwei,
@@ -574,7 +644,7 @@ def filter_siqi(value: str, db: Session = Depends(get_db)):
     items = db.scalars(
         select(Herb).where(Herb.siqi == value).order_by(Herb.name_zh)
     ).all()
-    return [HerbBrief.model_validate(h) for h in items]
+    return [to_brief(h) for h in items]
 
 
 @app.get("/api/filter/wuwei/{value}", response_model=list[HerbBrief])
@@ -582,7 +652,7 @@ def filter_wuwei(value: str, db: Session = Depends(get_db)):
     items = db.scalars(
         select(Herb).where(Herb.wuwei.like(f"%{value}%")).order_by(Herb.name_zh)
     ).all()
-    return [HerbBrief.model_validate(h) for h in items]
+    return [to_brief(h) for h in items]
 
 
 @app.get("/api/filter/guijing/{value}", response_model=list[HerbBrief])
@@ -590,7 +660,7 @@ def filter_guijing(value: str, db: Session = Depends(get_db)):
     items = db.scalars(
         select(Herb).where(Herb.guijing.like(f"%{value}%")).order_by(Herb.name_zh)
     ).all()
-    return [HerbBrief.model_validate(h) for h in items]
+    return [to_brief(h) for h in items]
 
 
 # ---------------- AI 辨症助手（DeepSeek 代理） ----------------

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "donghan",
+    "dynasty": "东汉",
+    "year": 200,
+    "source": "historical-basemaps · CE 200 汉疆域",
+    "features": 25
+  },
+  {
+    "id": "nanchao",
+    "dynasty": "南朝",
+    "year": 500,
+    "source": "historical-basemaps · CE 500 晋/南朝政权",
+    "features": 17
+  },
+  {
+    "id": "tang",
+    "dynasty": "唐",
+    "year": 800,
+    "source": "historical-basemaps · CE 800 唐与吐蕃",
+    "features": 23
+  },
+  {
+    "id": "song",
+    "dynasty": "宋",
+    "year": 1000,
+    "source": "historical-basemaps · CE 1000 宋辽并立",
+    "features": 23
+  },
+  {
+    "id": "jinyuan",
+    "dynasty": "金元",
+    "year": 1200,
+    "source": "复用宋辽疆域底图 · 金元对峙期",
+    "features": 0,
+    "aliasOf": "song"
+  },
+  {
+    "id": "ming",
+    "dynasty": "明",
+    "year": 1500,
+    "source": "historical-basemaps · CE 1500 明疆域",
+    "features": 28
+  },
+  {
+    "id": "qing",
+    "dynasty": "清",
+    "year": 1800,
+    "source": "historical-basemaps · CE 1800 清疆域",
+    "features": 33
+  },
+  {
+    "id": "minguo",
+    "dynasty": "民国",
+    "year": 1920,
+    "source": "复用清疆域底图 · 民国初期",
+    "features": 0,
+    "aliasOf": "qing"
+  },
+  {
+    "id": "dangdai",
+    "dynasty": "当代",
+    "year": 1980,
+    "source": "复用清疆域底图 · 当代中国",
+    "features": 0,
+    "aliasOf": "qing"
+  }
+]

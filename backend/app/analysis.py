@@ -107,6 +107,60 @@ CLASSICAL_TITLE_ZH: dict[str, str] = {
     "si_bu_yi_dian": "《四部医典》",
     "xian_dai_shi_yong_zhong_yao": "《现代实用中药》",
     "course_tongshi": "课程通识摘要",
+    "bei_ji_qian_jin_yao_fang": "《备急千金要方》",
+    "qian_jin_yi_fang": "《千金翼方》",
+    "wai_tai_bi_yao": "《外台秘要》",
+    "wai_tai_mi_yao": "《外台秘要》",
+    "zhou_hou_bei_ji_fang": "《肘后备急方》",
+    "xiao_er_yao_zheng_zhi_jue": "《小儿药证直诀》",
+    "pi_wei_lun": "《脾胃论》",
+    "dan_xi_xin_fa": "《丹溪心法》",
+    "jing_yue_quan_shu": "《景岳全书》",
+    "yi_lin_gai_cuo": "《医林改错》",
+    "yi_zong_jin_jian": "《医宗金鉴》",
+    "fu_qing_zhu_nv_ke": "《傅青主女科》",
+    "nei_wai_shang_bian_huo_lun": "《内外伤辨惑论》",
+    "lan_shi_mi_cang": "《兰室秘藏》",
+    "san_yin_ji_yi_bing_zheng_fang_lun": "《三因极一病证方论》",
+    "ji_sheng_fang": "《济生方》",
+    "sheng_ji_zong_lu": "《圣济总录》",
+    "pu_ji_ben_shi_fang": "《普济本事方》",
+    "yi_xue_xin_wu": "《医学心悟》",
+    "yi_xue_zhong_zhong_can_xi_lu": "《医学衷中参西录》",
+    "wen_re_jing_wei": "《温热经纬》",
+    "wai_ke_zheng_zong": "《外科正宗》",
+    "yi_xue_fa_ming": "《医学发明》",
+    "yi_xue_zheng_chuan": "《医学正传》",
+    "shou_shi_bao_yuan": "《寿世保元》",
+    "zheng_zhi_zhun_sheng": "《证治准绳》",
+    "ru_men_shi_qin": "《儒门事亲》",
+    "su_wen_bing_ji_qi_yi_bao_ming_ji": "《素问病机气宜保命集》",
+    "dong_yuan_shi_xiao_fang": "《东垣试效方》",
+    "fu_ren_da_quan_liang_fang": "《妇人大全良方》",
+    "fu_ren_liang_fang": "《妇人良方》",
+    "yang_shi_jia_cang_fang": "《杨氏家藏方》",
+    "wei_shi_jia_cang_fang": "《魏氏家藏方》",
+    "han_shi_yi_tong": "《韩氏医通》",
+    "she_sheng_mi_pou": "《摄生秘剖》",
+    "shi_fang_ge_kuo": "《时方歌括》",
+    "yi_fang_kao": "《医方考》",
+    "gu_jin_ming_yi_fang_lun": "《古今名医方论》",
+    "yi_ji": "《医级》",
+    "yi_zong_ji_ren_bian": "《医宗己任编》",
+    "nei_ke_zhai_yao": "《内科摘要》",
+    "ci_shi_nan_zhi": "《此事难知》",
+    "shang_han_liu_shu": "《伤寒六书》",
+    "tong_su_shang_han_lun": "《通俗伤寒论》",
+    "chong_ding_tong_su_shang_han_lun": "《重订通俗伤寒论》",
+    "za_bing_zheng_zhi_xin_yi": "《杂病证治新义》",
+    "zheng_yin_mai_zhi": "《症因脉治》",
+    "xu_ming_yi_lei_an": "《续名医类案》",
+    "wai_ke_zheng_zhi_quan_sheng_ji": "《外科证治全生集》",
+    "she_sheng_zhong_miao_fang": "《摄生众妙方》",
+    "jiao_zhu_fu_ren_liang_fang": "《校注妇人良方》",
+    "xian_dai_jing_yan_fang": "现代经验方",
+    "xin_zhongguo_yan_fang": "新中国临床验方",
+    "zhong_hua_ren_min_gong_he_guo_yao_dian": "《中华人民共和国药典》",
 }
 
 
@@ -321,6 +375,7 @@ def build_formula_pairing(herbs: list[Herb]) -> dict[str, Any]:
         "top_pairs": top_pairs,
         "hubs": hubs,
         "roles": [{"name": k, "value": role_count[k]} for k in ["君", "臣", "佐", "使"] if role_count[k]],
+        "herb_roles": {k: _primary_role(k) for k in herb_roles},
         "formula_categories": [{"name": k, "value": v} for k, v in formula_cat.most_common(12)],
         "role_colors": {
             "君": "#B89082",
@@ -554,14 +609,26 @@ def build_analysis(herbs: list[Herb]) -> dict[str, Any]:
     dosage_cat_stats = []
     for cat, arr in sorted(dosage_by_cat.items(), key=lambda x: -len(x[1]))[:12]:
         arr = sorted(arr)
+        n = len(arr)
+
+        def _pct(p: float) -> float:
+            if n == 1:
+                return float(arr[0])
+            # 线性插值百分位，避免大量同分时 P25=P75
+            pos = (n - 1) * p
+            lo = int(pos)
+            hi = min(lo + 1, n - 1)
+            w = pos - lo
+            return float(arr[lo] * (1 - w) + arr[hi] * w)
+
         dosage_cat_stats.append({
             "category": cat,
-            "count": len(arr),
-            "avg": round(sum(arr) / len(arr), 2),
+            "count": n,
+            "avg": round(sum(arr) / n, 2),
             "min": round(arr[0], 2),
             "max": round(arr[-1], 2),
-            "p25": round(arr[len(arr) // 4], 2),
-            "p75": round(arr[(3 * len(arr)) // 4], 2),
+            "p25": round(_pct(0.25), 2),
+            "p75": round(_pct(0.75), 2),
         })
 
     # complete subset: has siqi + wuwei + guijing + category + dosage

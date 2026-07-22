@@ -476,11 +476,16 @@ def make_entry(name: str, category: str) -> dict:
     key = "bulk_" + slug_key(name)
     # 剂量若为「外用」类已规范为数字
     dmin, dmax = dosage
+    try:
+        from pypinyin import lazy_pinyin
+        name_pinyin = " ".join(p.capitalize() for p in lazy_pinyin(name) if p)
+    except Exception:
+        name_pinyin = key.replace("bulk_", "").replace("_", " ")
     return {
         "key": key,
         "slug": key.replace("_", "-"),
         "name_zh": name,
-        "name_pinyin": key.replace("bulk_", "").replace("_", " "),
+        "name_pinyin": name_pinyin,
         "name_en": None,
         "name_latin": None,
         "category": category,

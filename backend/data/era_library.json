@@ -1,0 +1,388 @@
+{
+  "eras": [
+    {
+      "id": "donghan",
+      "dynasty": "东汉",
+      "classics": [
+        {
+          "key": "shang_han_za_bing_lun",
+          "title": "《伤寒杂病论》",
+          "year": "约200",
+          "kind": "方书",
+          "blurb": "张仲景著，后世析为《伤寒论》《金匮要略》，创立六经辨证与方证相应。"
+        },
+        {
+          "key": "shang_han_lun",
+          "title": "《伤寒论》",
+          "year": "约200",
+          "kind": "方书",
+          "blurb": "外感热病辨证论治经典，麻黄、桂枝、白虎、承气等方为后世解表清热泻下之祖。"
+        },
+        {
+          "key": "jin_gui_yao_lue",
+          "title": "《金匮要略》",
+          "year": "约200",
+          "kind": "方书",
+          "blurb": "杂病方证渊薮，涵盖脏腑、痰饮、妇人等，开后世内科方书之先河。"
+        }
+      ],
+      "source_text_keys": [
+        "shang_han_lun",
+        "jin_gui_yao_lue",
+        "shang_han_liu_shu",
+        "tong_su_shang_han_lun"
+      ]
+    },
+    {
+      "id": "nanchao",
+      "dynasty": "南朝",
+      "classics": [
+        {
+          "key": "ben_cao_jing_ji_zhu",
+          "title": "《本草经集注》",
+          "year": "约500",
+          "kind": "本草",
+          "blurb": "陶弘景整理《本经》并广采《名医别录》，药数增至七百三十种，首创自然属性分类。"
+        },
+        {
+          "key": "ming_yi_bie_lu",
+          "title": "《名医别录》",
+          "year": "魏晋—南朝",
+          "kind": "本草",
+          "blurb": "汇集汉魏名医用药经验，为《集注》朱墨分写之重要来源。"
+        },
+        {
+          "key": "zhou_hou_bei_ji_fang",
+          "title": "《肘后备急方》",
+          "year": "东晋—南朝传抄",
+          "kind": "方书",
+          "blurb": "葛洪撰，强调简易备急，收载民间验方与早期急症救治思路。"
+        }
+      ],
+      "source_text_keys": [
+        "zhou_hou_bei_ji_fang",
+        "gu_jin_ming_yi_fang_lun"
+      ]
+    },
+    {
+      "id": "tang",
+      "dynasty": "唐",
+      "classics": [
+        {
+          "key": "xin_xiu_ben_cao",
+          "title": "《新修本草》",
+          "year": "659",
+          "kind": "本草",
+          "blurb": "唐高宗敕修，世界上较早由国家颁行的药典，约载药八百五十种。"
+        },
+        {
+          "key": "bei_ji_qian_jin_yao_fang",
+          "title": "《备急千金要方》",
+          "year": "652",
+          "kind": "方书",
+          "blurb": "孙思邈集唐以前方药大成，强调备急与医德，被尊为药王。"
+        },
+        {
+          "key": "qian_jin_yi_fang",
+          "title": "《千金翼方》",
+          "year": "约682",
+          "kind": "方书",
+          "blurb": "孙思邈晚年补《千金》之未备，收载本草、伤寒与养生方。"
+        },
+        {
+          "key": "wai_tai_bi_yao",
+          "title": "《外台秘要》",
+          "year": "752",
+          "kind": "方书",
+          "blurb": "王焘汇集唐以前医方，保存大量亡佚文献与急慢诸证方。"
+        }
+      ],
+      "source_text_keys": [
+        "bei_ji_qian_jin_yao_fang",
+        "qian_jin_yi_fang",
+        "wai_tai_bi_yao",
+        "wai_tai_mi_yao"
+      ]
+    },
+    {
+      "id": "song",
+      "dynasty": "宋",
+      "classics": [
+        {
+          "key": "zheng_lei_ben_cao",
+          "title": "《证类本草》",
+          "year": "1108",
+          "kind": "本草",
+          "blurb": "唐慎微撰，集北宋以前本草之大成，附方三千余首。"
+        },
+        {
+          "key": "tai_ping_hui_min_he_ji_ju_fang",
+          "title": "《太平惠民和剂局方》",
+          "year": "北宋—南宋增补",
+          "kind": "方书",
+          "blurb": "官局成方规范，四君子、逍遥、平胃等流传极广。"
+        },
+        {
+          "key": "xiao_er_yao_zheng_zhi_jue",
+          "title": "《小儿药证直诀》",
+          "year": "约1119",
+          "kind": "方书",
+          "blurb": "钱乙著，奠定儿科辨证与六味地黄、导赤散等方。"
+        },
+        {
+          "key": "san_yin_ji_yi_bing_zheng_fang_lun",
+          "title": "《三因极一病证方论》",
+          "year": "1174",
+          "kind": "方书",
+          "blurb": "陈言以三因立论，统摄内外妇儿诸证方药。"
+        },
+        {
+          "key": "sheng_ji_zong_lu",
+          "title": "《圣济总录》",
+          "year": "1117",
+          "kind": "方书",
+          "blurb": "徽宗敕修大型方书，收载万余方，反映北宋医学规模。"
+        }
+      ],
+      "source_text_keys": [
+        "tai_ping_hui_min_he_ji_ju_fang",
+        "xiao_er_yao_zheng_zhi_jue",
+        "san_yin_ji_yi_bing_zheng_fang_lun",
+        "ji_sheng_fang",
+        "sheng_ji_zong_lu",
+        "pu_ji_ben_shi_fang",
+        "yang_shi_jia_cang_fang",
+        "wei_shi_jia_cang_fang",
+        "fu_ren_da_quan_liang_fang",
+        "fu_ren_liang_fang",
+        "jiao_zhu_fu_ren_liang_fang",
+        "she_sheng_zhong_miao_fang",
+        "ben_cao_yan_yi"
+      ]
+    },
+    {
+      "id": "jinyuan",
+      "dynasty": "金元",
+      "classics": [
+        {
+          "key": "pi_wei_lun",
+          "title": "《脾胃论》",
+          "year": "1249",
+          "kind": "方书",
+          "blurb": "李东垣补土派代表作，补中益气等方影响深远。"
+        },
+        {
+          "key": "dan_xi_xin_fa",
+          "title": "《丹溪心法》",
+          "year": "1347",
+          "kind": "方书",
+          "blurb": "朱丹溪滋阴学说，左金、越鞠、大补阴等方为后世常用。"
+        },
+        {
+          "key": "ru_men_shi_qin",
+          "title": "《儒门事亲》",
+          "year": "约1228",
+          "kind": "方书",
+          "blurb": "张从正攻下派，强调汗吐下三法，木香槟榔等方见其思路。"
+        },
+        {
+          "key": "yi_xue_qi_yuan",
+          "title": "《医学启源》",
+          "year": "约1186",
+          "kind": "方书",
+          "blurb": "张元素易水学派开端，脏腑辨证与药性理论影响金元诸家。"
+        },
+        {
+          "key": "ci_shi_nan_zhi",
+          "title": "《此事难知》",
+          "year": "约1308",
+          "kind": "方书",
+          "blurb": "王好古易水学派，九味羌活等方见其用药思路。"
+        },
+        {
+          "key": "lan_shi_mi_cang",
+          "title": "《兰室秘藏》",
+          "year": "约1276",
+          "kind": "方书",
+          "blurb": "李东垣晚年方论，清胃散等方出于此。"
+        }
+      ],
+      "source_text_keys": [
+        "pi_wei_lun",
+        "dan_xi_xin_fa",
+        "lan_shi_mi_cang",
+        "nei_wai_shang_bian_huo_lun",
+        "su_wen_bing_ji_qi_yi_bao_ming_ji",
+        "ru_men_shi_qin",
+        "dong_yuan_shi_xiao_fang",
+        "yi_xue_qi_yuan",
+        "ci_shi_nan_zhi"
+      ]
+    },
+    {
+      "id": "ming",
+      "dynasty": "明",
+      "classics": [
+        {
+          "key": "ben_cao_gang_mu",
+          "title": "《本草纲目》",
+          "year": "1596",
+          "kind": "本草",
+          "blurb": "李时珍集大成，载药一千八百九十二种，附图千余，附方万首。"
+        },
+        {
+          "key": "jing_yue_quan_shu",
+          "title": "《景岳全书》",
+          "year": "1624",
+          "kind": "方书",
+          "blurb": "张景岳温补学说，玉女煎、右归、左归等方影响明清临床。"
+        },
+        {
+          "key": "wai_ke_zheng_zong",
+          "title": "《外科正宗》",
+          "year": "1617",
+          "kind": "方书",
+          "blurb": "陈实功外科名著，消风散等方兼顾内外。"
+        },
+        {
+          "key": "zheng_zhi_zhun_sheng",
+          "title": "《证治准绳》",
+          "year": "1602",
+          "kind": "方书",
+          "blurb": "王肯堂汇集辨证论治与方药，健脾丸等通行后世。"
+        }
+      ],
+      "source_text_keys": [
+        "jing_yue_quan_shu",
+        "yi_fang_kao",
+        "wai_ke_zheng_zong",
+        "yi_xue_fa_ming",
+        "yi_xue_zheng_chuan",
+        "shou_shi_bao_yuan",
+        "zheng_zhi_zhun_sheng",
+        "han_shi_yi_tong",
+        "she_sheng_mi_pou",
+        "shi_fang_ge_kuo",
+        "nei_ke_zhai_yao",
+        "zheng_yin_mai_zhi",
+        "xu_ming_yi_lei_an",
+        "wai_ke_zheng_zhi_quan_sheng_ji"
+      ]
+    },
+    {
+      "id": "qing",
+      "dynasty": "清",
+      "classics": [
+        {
+          "key": "ben_cao_gang_mu_shi_yi",
+          "title": "《本草纲目拾遗》",
+          "year": "1765",
+          "kind": "本草",
+          "blurb": "赵学敏补《纲目》未备，收药九百余种，兼及民间草药。"
+        },
+        {
+          "key": "wen_bing_tiao_bian",
+          "title": "《温病条辨》",
+          "year": "1798",
+          "kind": "方书",
+          "blurb": "吴鞠通三焦辨证，银翘、桑菊、安宫等为温病常用方。"
+        },
+        {
+          "key": "yi_lin_gai_cuo",
+          "title": "《医林改错》",
+          "year": "1830",
+          "kind": "方书",
+          "blurb": "王清任活血化瘀名著，血府逐瘀、补阳还五等方影响深远。"
+        },
+        {
+          "key": "yi_fang_ji_jie",
+          "title": "《医方集解》",
+          "year": "1682",
+          "kind": "方书",
+          "blurb": "汪昂分类解说古今名方，龙胆泻肝、归脾等方通行教材。"
+        },
+        {
+          "key": "fu_qing_zhu_nv_ke",
+          "title": "《傅青主女科》",
+          "year": "清",
+          "kind": "方书",
+          "blurb": "傅山妇科方论，完带、易黄等方临床常用。"
+        }
+      ],
+      "source_text_keys": [
+        "wen_bing_tiao_bian",
+        "yi_lin_gai_cuo",
+        "yi_zong_jin_jian",
+        "yi_xue_xin_wu",
+        "fu_qing_zhu_nv_ke",
+        "wen_re_jing_wei",
+        "yi_ji",
+        "yi_zong_ji_ren_bian",
+        "yi_fang_ji_jie"
+      ]
+    },
+    {
+      "id": "minguo",
+      "dynasty": "民国",
+      "classics": [
+        {
+          "key": "yi_xue_zhong_zhong_can_xi_lu",
+          "title": "《医学衷中参西录》",
+          "year": "1909—1924",
+          "kind": "方书",
+          "blurb": "张锡纯中西汇通代表作，镇肝熄风、固冲等方影响近代临床。"
+        },
+        {
+          "key": "chong_ding_tong_su_shang_han_lun",
+          "title": "《重订通俗伤寒论》",
+          "year": "1916",
+          "kind": "方书",
+          "blurb": "清末民初伤寒通俗读本，蒿芩清胆汤等方通行。"
+        }
+      ],
+      "source_text_keys": [
+        "yi_xue_zhong_zhong_can_xi_lu",
+        "chong_ding_tong_su_shang_han_lun"
+      ]
+    },
+    {
+      "id": "dangdai",
+      "dynasty": "当代",
+      "classics": [
+        {
+          "key": "zhong_hua_ren_min_gong_he_guo_yao_dian",
+          "title": "《中华人民共和国药典》",
+          "year": "1953 起",
+          "kind": "药典",
+          "blurb": "国家药品标准，规范中药材与成方制剂，推动中药现代化与质量控制。"
+        },
+        {
+          "key": "za_bing_zheng_zhi_xin_yi",
+          "title": "《杂病证治新义》",
+          "year": "1956",
+          "kind": "方书",
+          "blurb": "近代验方汇编，天麻钩藤饮等进入新中国临床与教材体系。"
+        },
+        {
+          "key": "xian_dai_jing_yan_fang",
+          "title": "现代经验方",
+          "year": "1950 年代以降",
+          "kind": "方书",
+          "blurb": "中西医结合与专科临床中形成的验方，如二仙汤、冠心Ⅱ号等。"
+        },
+        {
+          "key": "xin_zhongguo_yan_fang",
+          "title": "新中国临床验方",
+          "year": "当代",
+          "kind": "方书",
+          "blurb": "面向心血管、妇科急症等新需求的组方探索，强调成药化与可重复应用。"
+        }
+      ],
+      "source_text_keys": [
+        "za_bing_zheng_zhi_xin_yi",
+        "xian_dai_jing_yan_fang",
+        "xin_zhongguo_yan_fang"
+      ]
+    }
+  ]
+}

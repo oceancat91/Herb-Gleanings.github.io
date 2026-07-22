@@ -5,10 +5,12 @@ backend/.env
 
 # Python
 __pycache__/
+**/__pycache__/
 *.pyc
 *.pyo
 
 # 数据库运行文件
+backend/data/china_full.json
 backend/data/*.db-journal
 backend/data/*.db-wal
 backend/data/*.db-shm
@@ -20,5 +22,21 @@ backend/data/*.db-shm
 # 视频/大文件
 *.mp4
 
-# 数据库运行文件
+# 本地联调 / 临时残留
+_inttest.py
+_t.js
+_jscheck.js
+_brace*.py
+_patch*.py
+_pycheck.py
+_u.py
+_verify*.py
+_count_broken.py
+_chk*.js
+_s[0-9]*.js
+
+# 空壳/误生成库
+backend/data/herba.db
+
+# 数据库运行文件（体积大，本地用脚本导入）
 backend/data/herbs.db
