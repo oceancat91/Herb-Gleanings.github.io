@@ -790,10 +790,10 @@
     display: none;
     flex-shrink: 0;
     margin-bottom: 10px;
-    padding: 10px 12px 12px;
+    padding: 10px 12px 11px;
     border: 1px solid rgba(60, 48, 36, 0.1);
     background: rgba(255, 252, 245, 0.55);
-    max-height: 28%;
+    max-height: 34%;
     overflow-y: auto;
     scrollbar-width: thin;
   }
@@ -802,33 +802,27 @@
     font-size: 11px;
     letter-spacing: 0.14em;
     color: #A85A3C;
-    margin-bottom: 4px;
-  }
-  #alchemy-trial-info .ati-title {
-    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
-    font-size: 17px;
-    letter-spacing: 0.12em;
-    color: var(--ink-dark);
-    margin-bottom: 4px;
-  }
-  #alchemy-trial-info .ati-meta {
-    font-size: 12px;
-    color: #8C7A6A;
-    letter-spacing: 0.04em;
     margin-bottom: 8px;
   }
-  #alchemy-trial-info .ati-sec {
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--ink-medium);
-    margin-top: 6px;
+  #alchemy-trial-info .ati-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
-  #alchemy-trial-info .ati-sec h6 {
+  #alchemy-trial-info .ati-line {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-medium);
+    letter-spacing: 0.03em;
+  }
+  #alchemy-trial-info .ati-line .ati-lab {
+    display: inline-block;
+    min-width: 2.6em;
+    margin-right: 8px;
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     color: #A85A3C;
-    margin: 0 0 2px;
-    font-weight: 500;
+    vertical-align: baseline;
   }
   #alchemy-trial-info .ati-hint {
     margin-top: 8px;
@@ -837,7 +831,7 @@
     letter-spacing: 0.06em;
   }
   #alchemy-trial-info.is-taboo .ati-kicker,
-  #alchemy-trial-info.is-taboo .ati-title { color: #7A4030; }
+  #alchemy-trial-info.is-taboo .ati-lab { color: #7A4030; }
   #alchemy-stage {
     position: relative;
     flex: 1 1 auto;
@@ -960,9 +954,11 @@
     padding-top: 14px;
     border-top: 1px solid transparent;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 8px 20px;
     max-width: 100%;
     width: 100%;
     position: relative;
@@ -989,16 +985,28 @@
     opacity: 0;
     filter: blur(3px);
     transform: translateY(10px);
+    white-space: nowrap;
   }
   #alchemy-formula-seal.is-ready .afs-entry {
     animation: afs-ink-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
   #alchemy-formula-seal .afs-entry .afs-entry-label {
     display: inline-block;
-    margin-right: 8px;
+    margin-right: 6px;
     font-size: 11px;
     letter-spacing: 0.16em;
     color: var(--accent);
+  }
+  #alchemy-formula-seal .afs-entry.is-easter {
+    flex: 1 1 100%;
+    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+    font-size: clamp(13px, 1.55vw, 17px);
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+    color: var(--ink-dark);
+    margin-top: 6px;
+    text-align: center;
+    white-space: nowrap;
   }
   @keyframes afs-veil-in {
     from { opacity: 0; }
@@ -1031,16 +1039,81 @@
   #alchemy-formula-seal.is-taboo .afs-kicker,
   #alchemy-formula-seal.is-taboo .afs-name { color: #7A4030; }
   #alchemy-formula-seal.is-taboo .afs-entry .afs-entry-label { color: #7A4030; }
-  #alchemy-stage.is-merging #alchemy-net {
-    transition: opacity 0.85s ease, filter 0.85s ease, transform 0.85s ease;
+  #alchemy-formula-seal.is-fail .afs-kicker { color: #8C7A6A; }
+  #alchemy-formula-seal.is-fail .afs-name { color: #5C4A3A; }
+  #alchemy-formula-seal.is-fail .afs-entry .afs-entry-label { color: #8C7A6A; }
+  #alchemy-formula-seal.is-fail .afs-orb::before,
+  #alchemy-formula-seal.is-fail .afs-orb::after,
+  #alchemy-formula-seal.is-fail .afs-entries::before {
+    background: rgba(60, 48, 36, 0.12);
+  }
+  #alchemy-stage.is-merging #alchemy-net,
+  #alchemy-stage.is-refining #alchemy-net {
+    z-index: 4;
+    transition: opacity 0.55s ease, filter 0.7s ease;
     opacity: 1;
     filter: none;
-    transform: scale(1);
+  }
+  #alchemy-refine-fx {
+    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(
+      circle at 50% 52%,
+      rgba(196, 165, 116, 0.14) 0%,
+      rgba(248, 243, 234, 0.06) 42%,
+      transparent 70%
+    );
+  }
+  #alchemy-stage.is-refining #alchemy-refine-fx {
+    display: flex;
+  }
+  #alchemy-refine-fx .arf-ring {
+    position: absolute;
+    width: min(42%, 160px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(122, 64, 48, 0.28);
+    box-shadow: inset 0 0 24px rgba(196, 165, 116, 0.18);
+    animation: arf-breathe 1.4s ease-in-out infinite;
+  }
+  #alchemy-refine-fx .arf-ring.arf-outer {
+    width: min(58%, 220px);
+    border-color: rgba(60, 48, 36, 0.12);
+    animation-duration: 2.1s;
+    animation-direction: reverse;
+  }
+  #alchemy-refine-fx .arf-label {
+    position: relative;
+    z-index: 1;
+    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+    font-size: clamp(14px, 1.8vw, 18px);
+    letter-spacing: 0.36em;
+    color: rgba(122, 64, 48, 0.55);
+    padding-left: 0.36em;
+    opacity: 0.75;
+    animation: arf-label-pulse 1.6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes arf-breathe {
+    0%, 100% { transform: scale(0.94); opacity: 0.55; }
+    50% { transform: scale(1.04); opacity: 0.95; }
+  }
+  @keyframes arf-label-pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
   }
   #alchemy-stage.is-revealed #alchemy-net {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.45s ease;
+  }
+  #alchemy-stage.is-revealed #alchemy-refine-fx {
+    display: none;
   }
   @media (prefers-reduced-motion: reduce) {
     #alchemy-formula-seal.is-ready,
@@ -1055,8 +1128,15 @@
       filter: none !important;
       transform: none !important;
     }
-    #alchemy-stage.is-merging #alchemy-net {
+    #alchemy-stage.is-merging #alchemy-net,
+    #alchemy-stage.is-refining #alchemy-net {
       transition: none;
+    }
+    #alchemy-refine-fx .arf-ring,
+    #alchemy-refine-fx .arf-label {
+      animation: none !important;
+      opacity: 0.9 !important;
+      transform: none !important;
     }
   }
   #alchemy-clouds {
@@ -1140,6 +1220,15 @@
     border-color: rgba(60,48,36,0.18);
     background: transparent;
     color: var(--ink-medium);
+  }
+  #alchemy-actions > button.hint {
+    border-color: rgba(122, 64, 48, 0.28);
+    background: transparent;
+    color: #7A4030;
+  }
+  #alchemy-actions > button.hint:hover {
+    border-color: rgba(122, 64, 48, 0.45);
+    background: rgba(122, 64, 48, 0.06);
   }
   #alchemy-trials {
     position: relative;
@@ -1557,7 +1646,8 @@
     padding: 0;
     left: 2.6vw;
     right: 2.6vw;
-    top: 11vh;
+    /* 避开左上角本草标识 */
+    top: max(14.5vh, calc(2.4vh + 112px));
     bottom: 2.8vh;
   }
   #home-stage::-webkit-scrollbar { width: 4px; }
@@ -1596,6 +1686,27 @@
     box-shadow: none;
     background: transparent;
   }
+  #home-era-chart-title {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6;
+    margin: 0;
+    padding: 0;
+    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+    font-size: clamp(16px, 1.6vw, 20px);
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    color: var(--ink-dark);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0.92;
+    transition: opacity 0.55s ease;
+  }
+  #home-era-viz-wrap.is-ecology #home-era-chart-title {
+    opacity: 0;
+  }
   #home-era-formula-stage {
     position: relative;
     width: 100%;
@@ -1622,6 +1733,7 @@
     width: 100%;
     height: 100%;
     min-height: 280px;
+    transition: opacity 1.05s cubic-bezier(0.4, 0, 0.2, 1);
   }
   #era-formula-ring-center {
     position: absolute;
@@ -1630,11 +1742,20 @@
     transform: translate(-50%, -50%);
     text-align: center;
     pointer-events: none;
-    z-index: 2;
+    z-index: 5;
     max-width: 42%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition:
+      left 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+      top 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+      max-width 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #era-formula-ring-center .ring-center-num,
+  #era-formula-ring-center .ring-center-unit {
+    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   }
   #era-formula-ring-center .ring-center-dynasty {
     font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive;
@@ -1643,13 +1764,22 @@
     line-height: 1.1;
     color: #2C2416;
     margin-bottom: 4px;
-    transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s ease;
+    transition:
+      opacity 0.35s ease,
+      color 0.2s ease,
+      letter-spacing 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+      margin 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: auto;
     cursor: pointer;
     border: none;
     background: transparent;
     padding: 0;
     display: block;
+    transform: scale(1);
+    transform-origin: center center;
+    will-change: transform;
+    animation: era-dynasty-breathe 2.6s ease-in-out infinite;
   }
   #era-formula-ring-center .ring-center-dynasty:hover {
     color: #7A4030;
@@ -1658,25 +1788,200 @@
     outline: 1px solid rgba(122, 64, 48, 0.45);
     outline-offset: 4px;
   }
+  #era-formula-ring-center .ring-center-dynasty.is-swapping,
+  #era-formula-ring-center .ring-center-dynasty.is-ecology-title {
+    animation: none;
+  }
+  @keyframes era-dynasty-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #era-formula-ring-center .ring-center-dynasty {
+      animation: none;
+    }
+    #era-formula-ring-center,
+    #chart-era-formula-ring,
+    #home-era-ecology,
+    #era-formula-ring-center .ring-center-num,
+    #era-formula-ring-center .ring-center-unit,
+    #era-formula-ring-center .ring-center-dynasty {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* 入本朝：环图淡出，朝代名左移放大，右侧展开时代生态 */
+  #home-era-ecology {
+    position: absolute;
+    top: 2%;
+    left: 20%;
+    right: 1.5%;
+    bottom: 2%;
+    width: auto;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(36px);
+    pointer-events: none;
+    overflow: hidden;
+    padding: 6px 8px 8px 20px;
+    background:
+      linear-gradient(105deg, rgba(248, 243, 234, 0) 0%, rgba(248, 243, 234, 0.42) 12%, rgba(245, 240, 232, 0.94) 100%);
+    transition:
+      opacity 0.95s cubic-bezier(0.4, 0, 0.2, 1) 0.08s,
+      transform 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.02s,
+      left 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #home-era-ecology-bar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 2px 8px;
+    border-bottom: 1px solid rgba(60, 48, 36, 0.1);
+  }
+  #home-era-ecology-bar .eco-kicker {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    color: #8C7A6A;
+    padding-left: 0.28em;
+  }
+  #home-era-ecology-close {
+    border: none;
+    background: transparent;
+    color: #8C7A6A;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    cursor: pointer;
+    padding: 2px 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  #home-era-ecology-close:hover {
+    color: #2A2218;
+    border-bottom-color: rgba(42, 34, 24, 0.35);
+  }
+  #home-era-ecology-story {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    padding: 4px 2px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: min-content;
+    column-gap: 22px;
+    align-content: start;
+  }
+  #home-era-ecology-story .era-bg-meta,
+  #home-era-ecology-story .era-bg-lead,
+  #home-era-ecology-story .era-bg-foot {
+    grid-column: 1 / -1;
+  }
+  #home-era-ecology-story .era-bg-meta {
+    padding: 4px 0 8px;
+    font-size: 11px;
+    gap: 6px 12px;
+  }
+  #home-era-ecology-story .era-bg-lead {
+    font-size: 13.5px;
+    line-height: 1.65;
+    padding-bottom: 10px;
+    margin: 0;
+  }
+  #home-era-ecology-story .era-bg-section {
+    padding: 8px 0 2px;
+  }
+  #home-era-ecology-story .era-bg-section + .era-bg-section {
+    border-top: none;
+  }
+  #home-era-ecology-story .era-bg-h {
+    font-size: 13px;
+    margin: 0 0 4px;
+    letter-spacing: 0.14em;
+  }
+  #home-era-ecology-story .era-bg-p {
+    font-size: 12.5px;
+    line-height: 1.62;
+  }
+  #home-era-ecology-story .era-bg-chips {
+    margin-top: 6px;
+    gap: 6px;
+  }
+  #home-era-ecology-story .era-bg-chip {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+  #home-era-ecology-story .era-bg-chip strong {
+    font-size: 12px;
+  }
+  #home-era-ecology-story .era-bg-herbs {
+    margin-top: 6px;
+    gap: 4px 8px;
+  }
+  #home-era-ecology-story .era-bg-herb {
+    font-size: 12px;
+  }
+  #home-era-ecology-story .era-bg-foot {
+    margin-top: 4px;
+    padding-top: 8px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  #home-era-viz-wrap.is-ecology #chart-era-formula-ring {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #home-era-viz-wrap.is-ecology #era-formula-ring-center {
+    left: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    max-width: 18%;
+    align-items: flex-start;
+    text-align: left;
+  }
+  #home-era-viz-wrap.is-ecology #era-formula-ring-center .ring-center-dynasty {
+    letter-spacing: 0.2em;
+    margin-bottom: 0;
+    animation: none;
+    transform: scale(2.9);
+    transform-origin: left center;
+    color: #2C2416;
+  }
+  #home-era-viz-wrap.is-ecology #era-formula-ring-center .ring-center-num,
+  #home-era-viz-wrap.is-ecology #era-formula-ring-center .ring-center-unit {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+  }
+  #home-era-viz-wrap.is-ecology #home-era-ecology {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    left: 18%;
+  }
+  #home-era-viz-wrap.is-ecology #home-era-formula-list {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  #home-era-viz-wrap.is-ecology #home-era-formula-ring-move {
+    transform: none !important;
+  }
   #era-formula-ring-center .ring-center-num {
     font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
     font-size: clamp(22px, 2.6vw, 32px);
     line-height: 1.15;
     color: #2C2416;
-    transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s ease;
-    pointer-events: auto;
-    cursor: pointer;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
     border: none;
     background: transparent;
     padding: 0;
     display: block;
-  }
-  #era-formula-ring-center .ring-center-num:hover {
-    color: #7A4030;
-  }
-  #era-formula-ring-center .ring-center-num:focus-visible {
-    outline: 1px solid rgba(122, 64, 48, 0.45);
-    outline-offset: 4px;
   }
   #era-formula-ring-center .ring-center-unit {
     font-size: 12px;
@@ -2020,11 +2325,11 @@
     min-height: 0;
     padding: 0;
     font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
-    font-size: 11px;
+    font-size: 13px;
     color: var(--ink-light);
     letter-spacing: 0.06em;
     user-select: none;
-    min-width: 2.2em;
+    min-width: 2.5em;
   }
   #home-era-ticks span {
     position: relative;
@@ -2126,12 +2431,12 @@
     background: rgba(60,48,36,0.18);
     border-radius: 2px;
   }
-  #era-popup-story {
+  #era-popup-story, #home-era-ecology-story {
     display: flex;
     flex-direction: column;
     gap: 0;
   }
-  #era-popup-story .era-bg-meta {
+#era-popup-story .era-bg-meta , #home-era-ecology-story .era-bg-meta {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -2141,15 +2446,15 @@
     color: #8C7A6A;
     letter-spacing: 0.08em;
   }
-  #era-popup-story .era-bg-meta .era-bg-years {
+#era-popup-story .era-bg-meta .era-bg-years , #home-era-ecology-story .era-bg-meta .era-bg-years {
     font-family: 'Noto Serif SC', serif;
     color: #5C4A3A;
     letter-spacing: 0.12em;
   }
-  #era-popup-story .era-bg-meta .era-bg-tag {
+#era-popup-story .era-bg-meta .era-bg-tag , #home-era-ecology-story .era-bg-meta .era-bg-tag {
     color: #7A4030;
   }
-  #era-popup-story .era-bg-lead {
+#era-popup-story .era-bg-lead , #home-era-ecology-story .era-bg-lead {
     font-family: 'Noto Serif SC', serif;
     font-size: 15px;
     line-height: 1.95;
@@ -2158,13 +2463,13 @@
     padding-bottom: 18px;
     border-bottom: 1px solid rgba(60, 48, 36, 0.08);
   }
-  #era-popup-story .era-bg-section {
+#era-popup-story .era-bg-section , #home-era-ecology-story .era-bg-section {
     padding: 16px 0 4px;
   }
-  #era-popup-story .era-bg-section + .era-bg-section {
+#era-popup-story .era-bg-section + .era-bg-section , #home-era-ecology-story .era-bg-section + .era-bg-section {
     border-top: 1px solid rgba(60, 48, 36, 0.07);
   }
-  #era-popup-story .era-bg-h {
+#era-popup-story .era-bg-h , #home-era-ecology-story .era-bg-h {
     font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
     font-size: 15px;
     font-weight: 600;
@@ -2172,7 +2477,7 @@
     letter-spacing: 0.16em;
     margin: 0 0 8px;
   }
-  #era-popup-story .era-bg-p {
+#era-popup-story .era-bg-p , #home-era-ecology-story .era-bg-p {
     margin: 0;
     font-family: 'Noto Serif SC', serif;
     font-size: 13.5px;
@@ -2180,14 +2485,14 @@
     color: var(--ink-medium);
     letter-spacing: 0.03em;
   }
-  #era-popup-story .era-bg-p + .era-bg-p { margin-top: 8px; }
-  #era-popup-story .era-bg-chips {
+#era-popup-story .era-bg-p + .era-bg-p , #home-era-ecology-story .era-bg-p + .era-bg-p { margin-top: 8px; }
+#era-popup-story .era-bg-chips , #home-era-ecology-story .era-bg-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 10px;
   }
-  #era-popup-story .era-bg-chip {
+#era-popup-story .era-bg-chip , #home-era-ecology-story .era-bg-chip {
     display: inline-flex;
     flex-direction: column;
     gap: 2px;
@@ -2200,25 +2505,25 @@
     color: #5C4A3A;
     letter-spacing: 0.04em;
   }
-  #era-popup-story .era-bg-chip strong {
+#era-popup-story .era-bg-chip strong , #home-era-ecology-story .era-bg-chip strong {
     font-family: 'Noto Serif SC', serif;
     font-weight: 600;
     font-size: 13px;
     color: var(--ink-dark);
     letter-spacing: 0.06em;
   }
-  #era-popup-story .era-bg-chip span {
+#era-popup-story .era-bg-chip span , #home-era-ecology-story .era-bg-chip span {
     color: #8C7A6A;
     font-size: 11px;
     line-height: 1.5;
   }
-  #era-popup-story .era-bg-herbs {
+#era-popup-story .era-bg-herbs , #home-era-ecology-story .era-bg-herbs {
     display: flex;
     flex-wrap: wrap;
     gap: 6px 8px;
     margin-top: 10px;
   }
-  #era-popup-story .era-bg-herb {
+#era-popup-story .era-bg-herb , #home-era-ecology-story .era-bg-herb {
     font-family: 'Noto Serif SC', serif;
     font-size: 13px;
     color: #7A4030;
@@ -2226,7 +2531,7 @@
     padding: 3px 2px;
     border-bottom: 1px solid rgba(122, 64, 48, 0.28);
   }
-  #era-popup-story .era-bg-foot {
+#era-popup-story .era-bg-foot , #home-era-ecology-story .era-bg-foot {
     margin-top: 8px;
     padding-top: 16px;
     border-top: 1px solid rgba(60, 48, 36, 0.1);
@@ -3857,7 +4162,8 @@
     }
     #home-stage {
       left: 1.2vw; right: 1.2vw;
-      top: 9vh; bottom: 2vh;
+      top: max(12vh, calc(2vh + 90px));
+      bottom: 2vh;
       overflow-y: auto;
     }
     #home-era-layout {
@@ -3870,7 +4176,7 @@
       min-height: 60vh;
     }
     #home-era-slider-wrap { padding: 2px 0 4px; gap: 6px; }
-    #home-era-ticks { font-size: 11px; }
+    #home-era-ticks { font-size: 12px; }
     #home-era-viz-wrap { min-height: 52vh; }
     #home-era-formula-list { width: 44%; max-width: none; }
     .era-viz-pane.era-viz-top { min-height: 180px; }
@@ -3884,9 +4190,29 @@
     }
     #home-era-formula-stage { min-height: 280px; }
     #home-era-formula-list { width: 46%; max-width: none; }
-    #era-popup {
-      width: 96vw;
-      max-height: 90vh;
+    #home-era-viz-wrap.is-ecology #era-formula-ring-center {
+      left: 50%;
+      top: 5%;
+      transform: translate(-50%, 0);
+      max-width: 90%;
+      align-items: center;
+      text-align: center;
+    }
+    #home-era-viz-wrap.is-ecology #era-formula-ring-center .ring-center-dynasty {
+      transform: scale(1.55);
+      transform-origin: center center;
+    }
+    #home-era-ecology {
+      top: 14%;
+      left: 0 !important;
+      right: 0;
+      width: auto;
+      padding: 6px 8px 8px;
+      background: linear-gradient(180deg, rgba(248, 243, 234, 0) 0%, rgba(245, 240, 232, 0.88) 10%, rgba(245, 240, 232, 0.96) 100%);
+    }
+    #home-era-ecology-story {
+      grid-template-columns: 1fr;
+      overflow: hidden;
     }
     #province-body { flex-direction: column; overflow: hidden; }
     #province-side { flex: none; min-width: 0; max-height: 28vh; }
@@ -3942,17 +4268,25 @@
         </div>
       </div>
       <div id="home-era-viz-wrap">
+        <h2 id="home-era-chart-title">历代药方类型分布</h2>
         <div id="home-era-formula-stage">
           <div id="home-era-formula-ring-wrap">
             <div id="home-era-formula-ring-move">
               <div id="chart-era-formula-ring"></div>
               <div id="era-formula-ring-center">
                 <button type="button" class="ring-center-dynasty" aria-label="入本朝，查看时代生态" title="点击查看本朝时代生态"></button>
-                <button type="button" class="ring-center-num" aria-label="打开典籍与方药" title="点击查看典籍 · 方药" aria-expanded="false">0</button>
+                <div class="ring-center-num" aria-hidden="true">0</div>
                 <div class="ring-center-unit">累计</div>
               </div>
             </div>
           </div>
+          <aside id="home-era-ecology" aria-hidden="true" aria-label="本朝时代生态">
+            <div id="home-era-ecology-bar">
+              <span class="eco-kicker">时代生态</span>
+              <button type="button" id="home-era-ecology-close" aria-label="返回环图">收起</button>
+            </div>
+            <div id="home-era-ecology-story"></div>
+          </aside>
           <div id="home-era-formula-list" aria-live="polite"></div>
         </div>
       </div>
@@ -3978,17 +4312,6 @@
   </aside>
 
   <div id="formula-peek"></div>
-
-  <div id="era-popup-backdrop" aria-hidden="true"></div>
-  <div id="era-popup" aria-hidden="true" role="dialog" aria-modal="true" aria-label="本朝时代生态">
-    <div id="era-popup-bar">
-      <span id="era-popup-title"></span>
-      <button type="button" id="era-popup-close" aria-label="关闭">&times;</button>
-    </div>
-    <div id="era-popup-body">
-      <div id="era-popup-story"></div>
-    </div>
-  </div>
 
 </section>
 
@@ -4065,7 +4388,6 @@
 <section id="analysis-stage">
   <div class="analysis-head">
     <h2>析图 · 多维分析</h2>
-    <p>按主题切换标签看图；悬停标题可看文字结论。学习示意，非诊疗建议。</p>
   </div>
   <div id="analysis-tabs">
     <button class="analysis-tab active" data-tab="dosage">用量 · 安全</button>
@@ -4077,7 +4399,6 @@
   <div id="analysis-body">
     <div class="analysis-panel active" id="panel-dosage">
       <div class="analysis-chart-tabs">
-        <span class="chart-tab-label">图</span>
         <button type="button" class="analysis-chart-tab active" data-chart="dosage-cat">常用剂量</button>
         <button type="button" class="analysis-chart-tab" data-chart="safety">禁忌覆盖</button>
         <button type="button" class="analysis-chart-tab" data-chart="risk-cat">风险 × 分类</button>
@@ -4103,7 +4424,6 @@
 
     <div class="analysis-panel" id="panel-text">
       <div class="analysis-chart-tabs">
-        <span class="chart-tab-label">图</span>
         <button type="button" class="analysis-chart-tab active" data-chart="gongxiao-kw">功效词频</button>
         <button type="button" class="analysis-chart-tab" data-chart="zhuzhi-kw">主治词频</button>
       </div>
@@ -4123,7 +4443,6 @@
 
     <div class="analysis-panel" id="panel-network">
       <div class="analysis-chart-tabs">
-        <span class="chart-tab-label">图</span>
         <button type="button" class="analysis-chart-tab active" data-chart="formula-net">药对网络</button>
         <button type="button" class="analysis-chart-tab" data-chart="formula-pairs">高频药对</button>
         <button type="button" class="analysis-chart-tab" data-chart="formula-roles">君臣佐使</button>
@@ -4133,7 +4452,6 @@
           <h3>经典方剂 · 药对共现网络</h3>
           <p class="insight" id="insight-formula-net"></p>
           <div class="role-net-bar" id="formula-role-toggles">
-            <span class="role-net-label">角色视图</span>
             <button type="button" class="role-net-btn on" data-role="all">全部着色</button>
             <button type="button" class="role-net-btn" data-role="君">君</button>
             <button type="button" class="role-net-btn" data-role="臣">臣</button>
@@ -4145,7 +4463,6 @@
         <div class="analysis-block" data-chart-pane="formula-pairs">
           <h3>高频药对 TOP</h3>
           <p class="insight" id="insight-formula-pairs"></p>
-          <p class="chart-hint">点击柱条可将该药对送入「配伍 · 炼药」。</p>
           <div class="analysis-chart" id="chart-formula-pairs"></div>
         </div>
         <div class="analysis-block" data-chart-pane="formula-roles">
@@ -4178,7 +4495,6 @@
 
     <div class="analysis-panel" id="panel-cross">
       <div class="analysis-chart-tabs">
-        <span class="chart-tab-label">图</span>
         <button type="button" class="analysis-chart-tab active" data-chart="siqi-wuwei">四气 × 五味</button>
         <button type="button" class="analysis-chart-tab" data-chart="siqi-guijing">四气 × 归经</button>
         <button type="button" class="analysis-chart-tab" data-chart="cat-siqi">功效 × 四气</button>
@@ -4318,6 +4634,7 @@
   var alchemyKeys = [];
   var alchemyRoleCache = {};
   var alchemyFurnaceEdges = [];
+  var alchemyFormulaHerbSet = null;
   var alchemySeenEdgeKeys = {};
   var alchemyEdgeAnimTimer = null;
   var alchemyCloudTimer = null;
@@ -4325,6 +4642,7 @@
   var alchemyFurnaceChart = null;
   var alchemyMergeState = ''; // '' | merging | revealed
   var alchemyMergeTimer = null;
+  var alchemyMergeRaf = null;
   var alchemyCat = 'junchen';
   var alchemyGroup = '全部';
   var alchemySearchKw = '';
@@ -4504,7 +4822,8 @@
         try { handleHash(); } catch (e2) { console.error(e2); }
         api('/api/analysis').then(function (a) {
           analysisData = a;
-          if (document.getElementById('alchemy-root') && alchemyCat === 'junchen') {
+          refreshAlchemyFormulaHerbSet();
+          if (document.getElementById('alchemy-root')) {
             try { renderAlchemyCabinet(); } catch (e) { /* ignore */ }
           }
         }).catch(function () { /* ignore */ });
@@ -5770,12 +6089,16 @@
       syncEraRail();
       paintHomeEraViz(idx);
     }
+    var ecoWrap = document.getElementById('home-era-viz-wrap');
+    if (ecoWrap && ecoWrap.classList.contains('is-ecology')) {
+      fillEraEcologyStory(idx);
+      syncEraEcologyDynastyBtn(true);
+    }
   }
 
   function setHomeEraSheetOpen(open) {
     var sheet = document.getElementById('home-era-sheet');
     var backdrop = document.getElementById('home-era-sheet-backdrop');
-    var toggle = document.querySelector('#era-formula-ring-center .ring-center-num');
     var titleEl = document.getElementById('home-era-sheet-title');
     if (!sheet) return;
     if (open) closeEraPopup();
@@ -5785,7 +6108,6 @@
       backdrop.classList.toggle('is-open', !!open);
       backdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
     }
-    if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (open && titleEl) {
       var era = HOME_ERAS[homeEraIndex] || {};
       titleEl.textContent = (era.dynasty || '') + ' · 典籍 · 方药';
@@ -5793,27 +6115,8 @@
   }
 
   function bindHomeEraSheet() {
-    var toggle = document.querySelector('#era-formula-ring-center .ring-center-num');
     var closeBtn = document.getElementById('home-era-sheet-close');
-    var sheet = document.getElementById('home-era-sheet');
     var backdrop = document.getElementById('home-era-sheet-backdrop');
-    if (toggle && !toggle._bound) {
-      toggle._bound = true;
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var opening = !(sheet && sheet.classList.contains('is-open'));
-        if (opening) {
-          ensureEraLibrary().then(function () {
-            setHomeEra(homeEraIndex, true);
-            setHomeEraSheetOpen(true);
-          });
-        } else {
-          setHomeEraSheetOpen(false);
-        }
-      });
-    }
     if (closeBtn && !closeBtn._bound) {
       closeBtn._bound = true;
       closeBtn.addEventListener('click', function () {
@@ -6573,17 +6876,34 @@
       clearTimeout(el._swapTimer);
       el._swapTimer = null;
     }
-    el.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+    if (el._swapClearTimer) {
+      clearTimeout(el._swapClearTimer);
+      el._swapClearTimer = null;
+    }
+    var ecologyTitle = el.classList.contains('is-ecology-title');
+    el.classList.add('is-swapping');
+    el.style.transition = 'opacity 0.2s ease' + (ecologyTitle ? '' : ', transform 0.2s ease');
     el.style.opacity = '0';
-    el.style.transform = 'translateY(' + (dir > 0 ? '-7px' : '7px') + ')';
+    if (!ecologyTitle) {
+      el.style.transform = 'translateY(' + (dir > 0 ? '-7px' : '7px') + ')';
+    }
     el._swapTimer = setTimeout(function () {
       el.textContent = next;
       el.style.transition = 'none';
-      el.style.transform = 'translateY(' + (dir > 0 ? '9px' : '-9px') + ')';
+      if (!ecologyTitle) {
+        el.style.transform = 'translateY(' + (dir > 0 ? '9px' : '-9px') + ')';
+      }
       requestAnimationFrame(function () {
-        el.style.transition = 'opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1), transform 0.36s cubic-bezier(0.22, 1, 0.36, 1)';
+        el.style.transition = 'opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1)' +
+          (ecologyTitle ? '' : ', transform 0.36s cubic-bezier(0.22, 1, 0.36, 1)');
         el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
+        if (!ecologyTitle) el.style.transform = 'translateY(0)';
+        el._swapClearTimer = setTimeout(function () {
+          el.style.transition = '';
+          if (!ecologyTitle) el.style.transform = '';
+          el.classList.remove('is-swapping');
+          el._swapClearTimer = null;
+        }, 380);
       });
       el._swapTimer = null;
     }, 180);
@@ -6816,6 +7136,7 @@
     if (!eraFormulaRingChart || eraFormulaRingBound) return;
     eraFormulaRingBound = true;
     eraFormulaRingChart.on('click', function (params) {
+      if (isEraEcologyOpen()) return;
       if (!params || !params.name) return;
       var host = getEraFormulaHost();
       var currentEra = HOME_ERAS[eraFormulaRingEraIdx] || era;
@@ -6981,6 +7302,96 @@
     }
   }
 
+  function fillEraEcologyStory(idx) {
+    idx = Math.max(0, Math.min(HOME_ERAS.length - 1, idx | 0));
+    var era = HOME_ERAS[idx];
+    var story = document.getElementById('home-era-ecology-story');
+    if (!era || !story) return;
+
+    var years = formatEraYearRange(era);
+    var mile = formatEraMilestone(era);
+    var metaBits = [];
+    if (years) metaBits.push('<span class="era-bg-years">' + escapeHtml(years) + '</span>');
+    if (era.tag) metaBits.push('<span class="era-bg-tag">' + escapeHtml(era.tag) + '</span>');
+    if (mile) metaBits.push('<span>' + escapeHtml(mile) + '</span>');
+
+    var sections = [];
+    function pushSection(h, body) {
+      if (!body) return;
+      sections.push(
+        '<section class="era-bg-section">' +
+          '<h4 class="era-bg-h">' + escapeHtml(h) + '</h4>' +
+          '<p class="era-bg-p">' + escapeHtml(body) + '</p>' +
+        '</section>'
+      );
+    }
+    pushSection('时势与病患', era.context);
+    pushSection('学术脉络', era.theory);
+
+    var canonBody = era.classic || '';
+    var classicChips = '';
+    if (era.classics && era.classics.length) {
+      classicChips = '<div class="era-bg-chips">' + era.classics.map(function (c) {
+        if (!c) return '';
+        var t = c.title || '';
+        var blurb = c.blurb || '';
+        var y = c.year || '';
+        var kind = c.kind || '';
+        var sub = [y, kind].filter(Boolean).join(' · ');
+        return '<div class="era-bg-chip"><strong>' + escapeHtml(t) + '</strong>' +
+          (sub ? '<span>' + escapeHtml(sub) + '</span>' : '') +
+          (blurb ? '<span>' + escapeHtml(blurb) + '</span>' : '') +
+          '</div>';
+      }).join('') + '</div>';
+    }
+    if (canonBody || classicChips) {
+      sections.push(
+        '<section class="era-bg-section">' +
+          '<h4 class="era-bg-h">典籍与制度</h4>' +
+          (canonBody ? '<p class="era-bg-p">' + escapeHtml(canonBody) + '</p>' : '') +
+          classicChips +
+        '</section>'
+      );
+    }
+
+    pushSection('方药气象', era.pharmacy);
+
+    if (era.herbs && era.herbs.length) {
+      var herbChips = '<div class="era-bg-herbs">' + era.herbs.map(function (h) {
+        var name = (h && h[1]) || '';
+        return name ? '<span class="era-bg-herb">' + escapeHtml(name) + '</span>' : '';
+      }).join('') + '</div>';
+      sections.push(
+        '<section class="era-bg-section">' +
+          '<h4 class="era-bg-h">本朝代表药</h4>' +
+          herbChips +
+        '</section>'
+      );
+    }
+
+    story.innerHTML =
+      (metaBits.length ? '<div class="era-bg-meta">' + metaBits.join('') + '</div>' : '') +
+      (era.scene ? '<p class="era-bg-lead">' + escapeHtml(era.scene) + '</p>' : '') +
+      sections.join('') +
+      (era.pulse ? '<p class="era-bg-foot">' + escapeHtml(era.pulse) + '</p>' : '');
+  }
+
+  function syncEraEcologyDynastyBtn(open) {
+    var el = document.querySelector('#era-formula-ring-center .ring-center-dynasty');
+    if (!el) return;
+    el.style.transform = '';
+    el.style.transition = '';
+    if (open) {
+      el.setAttribute('aria-label', '返回环图');
+      el.setAttribute('title', '点击返回环图');
+      el.classList.add('is-ecology-title');
+    } else {
+      el.setAttribute('aria-label', '入本朝，查看时代生态');
+      el.setAttribute('title', '点击查看本朝时代生态');
+      el.classList.remove('is-ecology-title');
+    }
+  }
+
   function showEraPopup(idx) {
     ensureEraLibrary().then(function () {
       showEraPopupInner(idx);
@@ -6993,118 +7404,36 @@
     if (!era) return;
 
     setHomeEraSheetOpen(false);
+    collapseEraFormulaRing(true);
+    fillEraEcologyStory(idx);
 
-    var title = document.getElementById('era-popup-title');
-    var story = document.getElementById('era-popup-story');
-    var backdrop = document.getElementById('era-popup-backdrop');
-    var popup = document.getElementById('era-popup');
-
-    if (title) title.textContent = era.dynasty + ' · 时代生态';
-
-    if (story) {
-      var years = formatEraYearRange(era);
-      var mile = formatEraMilestone(era);
-      var metaBits = [];
-      if (years) metaBits.push('<span class="era-bg-years">' + escapeHtml(years) + '</span>');
-      if (era.tag) metaBits.push('<span class="era-bg-tag">' + escapeHtml(era.tag) + '</span>');
-      if (mile) metaBits.push('<span>' + escapeHtml(mile) + '</span>');
-
-      var sections = [];
-      function pushSection(h, body) {
-        if (!body) return;
-        sections.push(
-          '<section class="era-bg-section">' +
-            '<h4 class="era-bg-h">' + escapeHtml(h) + '</h4>' +
-            '<p class="era-bg-p">' + escapeHtml(body) + '</p>' +
-          '</section>'
-        );
-      }
-      pushSection('时势与病患', era.context);
-      pushSection('学术脉络', era.theory);
-
-      var canonBody = era.classic || '';
-      var classicChips = '';
-      if (era.classics && era.classics.length) {
-        classicChips = '<div class="era-bg-chips">' + era.classics.map(function (c) {
-          if (!c) return '';
-          var t = c.title || '';
-          var blurb = c.blurb || '';
-          var y = c.year || '';
-          var kind = c.kind || '';
-          var sub = [y, kind].filter(Boolean).join(' · ');
-          return '<div class="era-bg-chip"><strong>' + escapeHtml(t) + '</strong>' +
-            (sub ? '<span>' + escapeHtml(sub) + '</span>' : '') +
-            (blurb ? '<span>' + escapeHtml(blurb) + '</span>' : '') +
-            '</div>';
-        }).join('') + '</div>';
-      }
-      if (canonBody || classicChips) {
-        sections.push(
-          '<section class="era-bg-section">' +
-            '<h4 class="era-bg-h">典籍与制度</h4>' +
-            (canonBody ? '<p class="era-bg-p">' + escapeHtml(canonBody) + '</p>' : '') +
-            classicChips +
-          '</section>'
-        );
-      }
-
-      pushSection('方药气象', era.pharmacy);
-
-      var herbChips = '';
-      if (era.herbs && era.herbs.length) {
-        herbChips = '<div class="era-bg-herbs">' + era.herbs.map(function (h) {
-          var name = (h && h[1]) || '';
-          return name ? '<span class="era-bg-herb">' + escapeHtml(name) + '</span>' : '';
-        }).join('') + '</div>';
-        sections.push(
-          '<section class="era-bg-section">' +
-            '<h4 class="era-bg-h">本朝代表药</h4>' +
-            herbChips +
-          '</section>'
-        );
-      }
-
-      story.innerHTML =
-        (metaBits.length ? '<div class="era-bg-meta">' + metaBits.join('') + '</div>' : '') +
-        (era.scene ? '<p class="era-bg-lead">' + escapeHtml(era.scene) + '</p>' : '') +
-        sections.join('') +
-        (era.pulse ? '<p class="era-bg-foot">' + escapeHtml(era.pulse) + '</p>' : '');
-    }
-
-    if (backdrop) {
-      backdrop.classList.add('is-open');
-      backdrop.setAttribute('aria-hidden', 'false');
-    }
-    if (popup) {
-      popup.classList.add('is-open');
-      popup.setAttribute('aria-hidden', 'false');
-    }
+    var wrap = document.getElementById('home-era-viz-wrap');
+    var panel = document.getElementById('home-era-ecology');
+    if (wrap) wrap.classList.add('is-ecology');
+    if (panel) panel.setAttribute('aria-hidden', 'false');
+    syncEraEcologyDynastyBtn(true);
   }
 
   function closeEraPopup() {
-    var backdrop = document.getElementById('era-popup-backdrop');
-    var popup = document.getElementById('era-popup');
-    if (backdrop) {
-      backdrop.classList.remove('is-open');
-      backdrop.setAttribute('aria-hidden', 'true');
-    }
-    if (popup) {
-      popup.classList.remove('is-open');
-      popup.setAttribute('aria-hidden', 'true');
-    }
+    var wrap = document.getElementById('home-era-viz-wrap');
+    var panel = document.getElementById('home-era-ecology');
+    if (wrap) wrap.classList.remove('is-ecology');
+    if (panel) panel.setAttribute('aria-hidden', 'true');
+    syncEraEcologyDynastyBtn(false);
+  }
+
+  function isEraEcologyOpen() {
+    var wrap = document.getElementById('home-era-viz-wrap');
+    return !!(wrap && wrap.classList.contains('is-ecology'));
   }
 
   function bindEraPopup() {
-    var closeBtn = document.getElementById('era-popup-close');
-    var backdrop = document.getElementById('era-popup-backdrop');
+    var closeBtn = document.getElementById('home-era-ecology-close');
     if (closeBtn && !closeBtn._bound) {
       closeBtn._bound = true;
-      closeBtn.addEventListener('click', closeEraPopup);
-    }
-    if (backdrop && !backdrop._bound) {
-      backdrop._bound = true;
-      backdrop.addEventListener('click', function (e) {
-        if (e.target === backdrop) closeEraPopup();
+      closeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        closeEraPopup();
       });
     }
     if (!window._eraPopupEscBound) {
@@ -7118,8 +7447,11 @@
     }
   }
 
-
   function openEraExplore(idx) {
+    if (isEraEcologyOpen()) {
+      closeEraPopup();
+      return;
+    }
     showEraPopup(idx);
   }
 
@@ -8106,42 +8438,63 @@
     return list;
   }
 
+  function clipAlchemyHint(text, maxLen) {
+    var s = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!s) return '';
+    if (s.length > maxLen) s = s.slice(0, maxLen).replace(/[，、；。\s]+$/u, '') + '…';
+    return s;
+  }
+
+  /** 试炼提示三行：治法 / 方义 / 煎服，只给解题线索，不泄方名与组成 */
   function buildAlchemyTrialInfoHtml(trial, apiF) {
-    var name = (apiF && apiF.name_zh) || trial.name;
     var src = '';
     if (apiF) {
-      src = FORMULA_SOURCE[apiF.source_text_key] || apiF.source_text_key || '';
-    }
-    var metaBits = [];
-    if (apiF) {
-      if (apiF.category) metaBits.push(apiF.category);
-      if (apiF.subcategory) metaBits.push(apiF.subcategory);
-      if (apiF.name_pinyin) metaBits.push(apiF.name_pinyin);
-      if (src) metaBits.push(src);
-      if (apiF.source_chapter) metaBits.push(apiF.source_chapter);
-    } else {
-      if (trial.effect) metaBits.push(trial.effect);
+      src = FORMULA_SOURCE[apiF.source_text_key] || '';
     }
     var count = trial.herbCount ||
       (apiF && apiF.composition ? apiF.composition.length : 0) ||
       ((trial.keys || []).length);
-    var principle = (apiF && apiF.principle) || '';
-    var desc = (apiF && apiF.description_zh) || trial.tip || '';
-    var prep = (apiF && apiF.preparation_zh) || '';
-    // 去掉描述里可能夹带的药名列举感过强的全文；不展示 composition / full_text
-    var html = '<div class="ati-kicker">' + (trial.taboo ? '禁忌试炼' : '试炼题目') + '</div>' +
-      '<div class="ati-title">' + escapeHtml(name) + '</div>' +
-      (metaBits.length ? ('<div class="ati-meta">' + escapeHtml(metaBits.join(' · ')) + '</div>') : '');
+
+    var principle = clipAlchemyHint(
+      (apiF && apiF.principle) || trial.effect || '',
+      40
+    );
+    // 方义优先短提示；长描述压缩，保留药对/治法线索
+    var rawDesc = (apiF && apiF.description_zh) || trial.tip || '';
+    var fangyi = clipAlchemyHint(rawDesc, 64);
+    var prep = clipAlchemyHint((apiF && apiF.preparation_zh) || '', 48);
+
+    // 禁忌题：用 tip 作方义行
+    if (trial.taboo && !fangyi) {
+      fangyi = clipAlchemyHint(trial.tip || '注意相反相恶，勿妄合同炉。', 64);
+    }
+
+    var lines = [];
     if (principle) {
-      html += '<div class="ati-sec"><h6>治法</h6><div>' + escapeHtml(principle) + '</div></div>';
+      lines.push({ lab: '治法', text: principle });
+    } else if (trial.effect) {
+      lines.push({ lab: '治法', text: clipAlchemyHint(trial.effect, 40) });
     }
-    if (desc) {
-      html += '<div class="ati-sec"><h6>方义提示</h6><div>' + escapeHtml(desc) + '</div></div>';
-    }
+    if (fangyi) lines.push({ lab: '方义', text: fangyi });
     if (prep) {
-      html += '<div class="ati-sec"><h6>煎服</h6><div>' + escapeHtml(prep) + '</div></div>';
+      lines.push({ lab: '煎服', text: prep });
+    } else if (src) {
+      lines.push({ lab: '出典', text: src });
+    } else if (lines.length < 3) {
+      lines.push({ lab: '提示', text: '据治法与方义选药，约 ' + count + ' 味成方' });
     }
-    html += '<div class="ati-hint">约 ' + count + ' 味 · 组成不公布，请据方义自炉中配伍</div>';
+
+    // 固定至多 3 行解题线索
+    lines = lines.slice(0, 3);
+
+    var html = '<div class="ati-kicker">' + (trial.taboo ? '禁忌试炼' : '试炼题目') + '</div>';
+    html += '<div class="ati-lines">';
+    lines.forEach(function (ln) {
+      html += '<div class="ati-line"><span class="ati-lab">' + escapeHtml(ln.lab) + '</span>' +
+        escapeHtml(ln.text) + '</div>';
+    });
+    html += '</div>';
+    html += '<div class="ati-hint">约 ' + count + ' 味</div>';
     return html;
   }
 
@@ -8281,33 +8634,107 @@
   }
 
   function clearAlchemyMergeTimers() {
+    if (alchemyMergeRaf != null) {
+      cancelAnimationFrame(alchemyMergeRaf);
+      alchemyMergeRaf = null;
+    }
+    if (Array.isArray(alchemyMergeTimer)) {
+      alchemyMergeTimer.forEach(function (t) { clearTimeout(t); });
+      alchemyMergeTimer = null;
+      return;
+    }
     if (alchemyMergeTimer) {
       clearTimeout(alchemyMergeTimer);
       alchemyMergeTimer = null;
     }
   }
 
+  function scheduleAlchemyMergeStep(fn, ms) {
+    var id = setTimeout(fn, ms);
+    if (!Array.isArray(alchemyMergeTimer)) alchemyMergeTimer = alchemyMergeTimer ? [alchemyMergeTimer] : [];
+    alchemyMergeTimer.push(id);
+    return id;
+  }
+
+  function hideAlchemyFormulaSeal() {
+    var stage = document.getElementById('alchemy-stage');
+    var seal = document.getElementById('alchemy-formula-seal');
+    if (stage) stage.classList.remove('is-revealed');
+    if (seal) {
+      seal.classList.remove('is-on', 'is-ready', 'is-taboo', 'is-fail');
+      seal.innerHTML = '';
+    }
+  }
+
+  function seedAlchemyNodesNearCenter() {
+    var mini = document.getElementById('alchemy-net');
+    if (!alchemyFurnaceChart || !mini || !alchemyKeys.length) return;
+    var w = Math.max(120, mini.clientWidth);
+    var h = Math.max(120, mini.clientHeight);
+    var cx = w / 2;
+    var cy = h / 2;
+    var r = Math.min(36, Math.min(w, h) * 0.08);
+    var nCount = alchemyKeys.length || 1;
+    var data = alchemyKeys.map(function (k, i) {
+      var meta = alchemyRoleCache[k] || {};
+      var role = meta.top_role || '未标';
+      var ang = (i / nCount) * Math.PI * 2 - Math.PI / 2;
+      return {
+        id: k,
+        name: meta.name_zh || alchemyHerbName(k),
+        x: cx + Math.cos(ang) * r,
+        y: cy + Math.sin(ang) * r,
+        fixed: true,
+        symbolSize: role === '君' ? 46 : 36,
+        itemStyle: {
+          color: ALCHEMY_ROLE_COLORS[role] || '#A8A098',
+          opacity: 0.95
+        },
+        label: { show: false }
+      };
+    });
+    try {
+      alchemyFurnaceChart.setOption({
+        animation: false,
+        animationDurationUpdate: 0,
+        legend: [{ show: false }],
+        tooltip: { show: false },
+        series: [{
+          type: 'graph',
+          layout: 'none',
+          roam: false,
+          draggable: false,
+          data: data,
+          links: [],
+          lineStyle: { opacity: 0 }
+        }]
+      }, true);
+    } catch (e) { /* ignore */ }
+  }
+
   function resetAlchemyMergeVisual() {
     clearAlchemyMergeTimers();
     alchemyMergeState = '';
     var stage = document.getElementById('alchemy-stage');
-    if (stage) stage.classList.remove('is-merging', 'is-revealed');
-    var seal = document.getElementById('alchemy-formula-seal');
-    if (seal) {
-      seal.classList.remove('is-on', 'is-ready', 'is-taboo');
-      seal.innerHTML = '';
-    }
+    if (stage) stage.classList.remove('is-merging', 'is-revealed', 'is-refining');
+    hideAlchemyFormulaSeal();
   }
+
+  var ALCHEMY_REFINE_SCATTER_MS = 900;
+  var ALCHEMY_REFINE_HOLD_MS = 280;
+  var ALCHEMY_REFINE_GATHER_MS = 1400;
+  var ALCHEMY_REFINE_REVEAL_GAP_MS = 380;
 
   function showAlchemyFormulaSeal(info) {
     var stage = document.getElementById('alchemy-stage');
     var seal = document.getElementById('alchemy-formula-seal');
     if (!stage || !seal || !info) return;
-    stage.classList.remove('is-merging');
+    stage.classList.remove('is-merging', 'is-refining');
     stage.classList.add('is-revealed');
     var taboo = !!info.taboo;
-    seal.className = 'is-on' + (taboo ? ' is-taboo' : '');
-    var name = info.name || info.name_zh || '未名方';
+    var fail = !!info.fail;
+    seal.className = 'is-on' + (taboo ? ' is-taboo' : '') + (fail ? ' is-fail' : '');
+    var name = info.name || info.name_zh || (fail ? '未成' : '未名方');
     var chars = Array.from(String(name));
     var nameHtml = chars.map(function (ch, i) {
       return '<span class="afs-ch" style="animation-delay:' + (0.38 + i * 0.085) + 's">' +
@@ -8321,15 +8748,20 @@
         entries.map(function (e, ei) {
           if (!e || !e.text) return '';
           var delay = entryStart + 0.14 + ei * 0.12;
-          return '<div class="afs-entry" style="animation-delay:' + delay.toFixed(2) + 's">' +
-            (e.label ? '<span class="afs-entry-label">' + escapeHtml(e.label) + '</span>' : '') +
-            escapeHtml(e.text) +
+          var isEaster = e.kind === 'easter' || e.label === '丹成';
+          var labelHtml = (!isEaster && e.label)
+            ? '<span class="afs-entry-label">' + escapeHtml(e.label) + '</span>'
+            : '';
+          return '<div class="afs-entry' + (isEaster ? ' is-easter' : '') +
+            '" style="animation-delay:' + delay.toFixed(2) + 's">' +
+            labelHtml + escapeHtml(e.text) +
             '</div>';
         }).join('') + '</div>';
     }
+    var kicker = taboo ? '禁忌显形' : (fail ? '未成' : '方成');
     seal.innerHTML =
       '<div class="afs-orb">' +
-        '<div class="afs-kicker">' + (taboo ? '禁忌显形' : '方成') + '</div>' +
+        '<div class="afs-kicker">' + kicker + '</div>' +
         '<div class="afs-name">' + nameHtml + '</div>' +
         entriesHtml +
       '</div>';
@@ -8339,14 +8771,13 @@
         entr.style.setProperty('--afs-entry-line-delay', entryStart.toFixed(2) + 's');
       }
     }
-    // 强制回流后再开场，保证动画从初始态播放
     void seal.offsetWidth;
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         seal.classList.add('is-ready');
       });
     });
-    setStatus((taboo ? '禁忌显形：' : '方成：') + name);
+    setStatus((taboo ? '禁忌显形：' : (fail ? '炼药未成：' : '方成：')) + name);
   }
 
   function playAlchemyMergeReveal(info) {
@@ -8356,94 +8787,176 @@
     clearAlchemyMergeTimers();
     clearAlchemyLinkDraw();
     clearAlchemyClouds();
+    // 再次炼药：先隐去成败结果，避免与过程叠影
+    hideAlchemyFormulaSeal();
     alchemyMergeState = 'merging';
-    stage.classList.add('is-merging');
+    stage.classList.add('is-merging', 'is-refining');
     stage.classList.remove('is-revealed');
+    setStatus('炉火正旺，炼药中…');
 
     var reduceMotion = false;
     try {
       reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     } catch (e) { /* ignore */ }
 
-    if (alchemyFurnaceChart) {
-      var w = Math.max(120, mini.clientWidth);
-      var h = Math.max(120, mini.clientHeight);
-      var cx = w / 2;
-      var cy = h / 2;
-      var pos = getAlchemyNodePositions();
-      var mergeNodes = alchemyKeys.map(function (k, i) {
-        var meta = alchemyRoleCache[k] || {};
-        var role = meta.top_role || '未标';
-        var n = alchemyKeys.length || 1;
-        var ang = (i / n) * Math.PI * 2 - Math.PI / 2;
-        var p = pos[k];
+    var scatterMs = reduceMotion ? 0 : ALCHEMY_REFINE_SCATTER_MS;
+    var holdMs = reduceMotion ? 0 : ALCHEMY_REFINE_HOLD_MS;
+    var gatherMs = reduceMotion ? 0 : ALCHEMY_REFINE_GATHER_MS;
+    var revealGap = reduceMotion ? 0 : ALCHEMY_REFINE_REVEAL_GAP_MS;
+
+    function finishReveal() {
+      if (alchemyMergeState !== 'merging') return;
+      stage.classList.remove('is-refining', 'is-merging');
+      alchemyMergeState = 'revealed';
+      showAlchemyFormulaSeal(info);
+      if (alchemyFurnaceChart) {
+        try { alchemyFurnaceChart.clear(); } catch (e2) { /* ignore */ }
+      }
+      alchemyMergeTimer = null;
+      alchemyMergeRaf = null;
+    }
+
+    if (!alchemyFurnaceChart) {
+      scheduleAlchemyMergeStep(finishReveal, scatterMs + holdMs + gatherMs + revealGap);
+      return;
+    }
+
+    var w = Math.max(120, mini.clientWidth);
+    var h = Math.max(120, mini.clientHeight);
+    var cx = w / 2;
+    var cy = h / 2;
+    var outerR = Math.min(w, h) * 0.4;
+    var startR = Math.min(42, Math.min(w, h) * 0.09);
+    var pos = getAlchemyNodePositions();
+    var nCount = alchemyKeys.length || 1;
+    var gatherColor = info.taboo ? '#B89082' : (info.fail ? '#A09888' : '#C4A574');
+
+    var base = alchemyKeys.map(function (k, i) {
+      var meta = alchemyRoleCache[k] || {};
+      var role = meta.top_role || '未标';
+      var ang = (i / nCount) * Math.PI * 2 - Math.PI / 2;
+      var p = pos[k];
+      return {
+        id: k,
+        name: meta.name_zh || alchemyHerbName(k),
+        ang: ang,
+        x: p ? p.x : (cx + Math.cos(ang) * startR),
+        y: p ? p.y : (cy + Math.sin(ang) * startR),
+        symbolSize: role === '君' ? 46 : 36,
+        color: ALCHEMY_ROLE_COLORS[role] || '#A8A098'
+      };
+    });
+
+    function paintAtRadius(r, opts) {
+      opts = opts || {};
+      var t = opts.t != null ? opts.t : 0;
+      var sizeFrom = opts.sizeFrom != null ? opts.sizeFrom : 1;
+      var sizeTo = opts.sizeTo != null ? opts.sizeTo : 1;
+      var sizeScale = sizeFrom + (sizeTo - sizeFrom) * t;
+      var opacity = opts.opacityFrom != null
+        ? opts.opacityFrom + ((opts.opacityTo != null ? opts.opacityTo : opts.opacityFrom) - opts.opacityFrom) * t
+        : 0.95;
+      var data = base.map(function (n) {
+        var sz = Math.max(10, n.symbolSize * sizeScale);
         return {
-          id: k,
-          name: meta.name_zh || alchemyHerbName(k),
-          x: p ? p.x : (cx + Math.cos(ang) * Math.min(90, w * 0.18)),
-          y: p ? p.y : (cy + Math.sin(ang) * Math.min(90, h * 0.18)),
+          id: n.id,
+          name: opts.hideName ? '' : n.name,
+          x: cx + Math.cos(n.ang) * r,
+          y: cy + Math.sin(n.ang) * r,
           fixed: true,
-          symbolSize: role === '君' ? 46 : 36,
+          symbolSize: sz,
           itemStyle: {
-            color: ALCHEMY_ROLE_COLORS[role] || '#A8A098',
-            opacity: 0.95
+            color: opts.color || n.color,
+            opacity: opacity
           },
           label: { show: false }
         };
       });
-      alchemyFurnaceChart.setOption({
-        animation: !reduceMotion,
-        animationDurationUpdate: reduceMotion ? 0 : 820,
-        animationEasingUpdate: 'cubicInOut',
-        legend: [{ show: false }],
-        tooltip: { show: false },
-        series: [{
-          type: 'graph',
-          layout: 'none',
-          roam: false,
-          draggable: false,
-          data: mergeNodes,
-          links: [],
-          lineStyle: { opacity: 0 }
-        }]
-      }, true);
-
-      alchemyMergeTimer = setTimeout(function () {
-        if (alchemyMergeState !== 'merging') return;
-        var collapsed = mergeNodes.map(function (n) {
-          return {
-            id: n.id,
-            name: '',
-            x: cx,
-            y: cy,
-            fixed: true,
-            symbolSize: 14,
-            itemStyle: {
-              color: info.taboo ? '#B89082' : '#C4A574',
-              opacity: 0.22
-            },
-            label: { show: false }
-          };
-        });
-        try {
-          alchemyFurnaceChart.setOption({
-            animationDurationUpdate: reduceMotion ? 0 : 680,
-            series: [{ data: collapsed, links: [] }]
-          });
-        } catch (e) { /* ignore */ }
-
-        alchemyMergeTimer = setTimeout(function () {
-          if (alchemyMergeState !== 'merging') return;
-          alchemyMergeState = 'revealed';
-          showAlchemyFormulaSeal(info);
-          try { alchemyFurnaceChart.clear(); } catch (e2) { /* ignore */ }
-          alchemyMergeTimer = null;
-        }, reduceMotion ? 0 : 720);
-      }, reduceMotion ? 0 : 60);
-    } else {
-      alchemyMergeState = 'revealed';
-      showAlchemyFormulaSeal(info);
+      try {
+        alchemyFurnaceChart.setOption({
+          animation: false,
+          animationDurationUpdate: 0,
+          legend: [{ show: false }],
+          tooltip: { show: false },
+          series: [{
+            type: 'graph',
+            layout: 'none',
+            roam: false,
+            draggable: false,
+            data: data,
+            links: [],
+            lineStyle: { opacity: 0 }
+          }]
+        }, true);
+      } catch (ePaint) { /* ignore */ }
     }
+
+    /** 逐帧半径动画，保证「散开 / 汇聚」过程可见（不依赖 ECharts graph 坐标插值） */
+    function animateRadius(fromR, toR, duration, paintOpts, done) {
+      paintOpts = paintOpts || {};
+      if (reduceMotion || duration <= 0) {
+        paintOpts.t = 1;
+        paintAtRadius(toR, paintOpts);
+        if (done) done();
+        return;
+      }
+      var t0 = performance.now();
+      function frame(now) {
+        if (alchemyMergeState !== 'merging') return;
+        var u = Math.min(1, (now - t0) / duration);
+        var ease = u < 0.5
+          ? 2 * u * u
+          : 1 - Math.pow(-2 * u + 2, 2) / 2;
+        var r = fromR + (toR - fromR) * ease;
+        paintOpts.t = ease;
+        paintAtRadius(r, paintOpts);
+        if (u < 1) {
+          alchemyMergeRaf = requestAnimationFrame(frame);
+        } else {
+          alchemyMergeRaf = null;
+          if (done) done();
+        }
+      }
+      alchemyMergeRaf = requestAnimationFrame(frame);
+    }
+
+    // 起点：按当前坐标估算半径，再散到四周，再汇聚到中心
+    var startRadii = base.map(function (n) {
+      var dx = n.x - cx;
+      var dy = n.y - cy;
+      return Math.sqrt(dx * dx + dy * dy) || startR;
+    });
+    var avgStartR = startRadii.reduce(function (a, b) { return a + b; }, 0) / startRadii.length;
+
+    // 先落到「当前半径」的均匀环上，便于后续半径动画连贯
+    paintAtRadius(avgStartR, { t: 0 });
+
+    requestAnimationFrame(function () {
+      // 1) 散到四周
+      animateRadius(avgStartR, outerR, scatterMs, {
+        sizeFrom: 1,
+        sizeTo: 1.05,
+        opacityFrom: 0.95,
+        opacityTo: 0.92
+      }, function () {
+        if (alchemyMergeState !== 'merging') return;
+        // 2) 在四周稍停，再汇聚到中心
+        scheduleAlchemyMergeStep(function () {
+          if (alchemyMergeState !== 'merging') return;
+          animateRadius(outerR, 0, gatherMs, {
+            hideName: true,
+            color: gatherColor,
+            sizeFrom: 1.05,
+            sizeTo: 0.32,
+            opacityFrom: 0.92,
+            opacityTo: 0.35
+          }, function () {
+            if (alchemyMergeState !== 'merging') return;
+            scheduleAlchemyMergeStep(finishReveal, revealGap);
+          });
+        }, holdMs);
+      });
+    });
   }
 
   function getAlchemyNodePositions() {
@@ -8954,9 +9467,37 @@
     });
   }
 
+  function refreshAlchemyFormulaHerbSet() {
+    var set = {};
+    var fp = analysisData && analysisData.formula_pairing;
+    var keys = (fp && fp.formula_herb_keys) || [];
+    if (keys.length) {
+      keys.forEach(function (k) { if (k) set[k] = true; });
+    } else if (fp && fp.herb_roles) {
+      Object.keys(fp.herb_roles).forEach(function (k) { set[k] = true; });
+    }
+    Object.keys(HOME_FORMULAS || {}).forEach(function (fk) {
+      var f = HOME_FORMULAS[fk];
+      ((f && f.herbs) || []).forEach(function (h) {
+        if (h && h[0]) set[h[0]] = true;
+      });
+    });
+    alchemyFormulaHerbSet = set;
+  }
+
+  function herbAppearsInFormula(h) {
+    if (!h || !h.key) return false;
+    if (!alchemyFormulaHerbSet) refreshAlchemyFormulaHerbSet();
+    // 尚无方剂索引时暂不展示，避免把未入方药材放入抓药柜
+    if (!alchemyFormulaHerbSet || !Object.keys(alchemyFormulaHerbSet).length) return false;
+    return !!alchemyFormulaHerbSet[h.key];
+  }
+
   function alchemyCabinetHerbs() {
     var meta = PAGE_META[alchemyCat];
-    if (!meta) return sortHerbsByPinyin(allHerbs).slice(0, 80);
+    if (!meta) {
+      return sortHerbsByPinyin((allHerbs || []).filter(herbAppearsInFormula)).slice(0, 80);
+    }
     var groups = buildGroups(alchemyCat);
     var out = [];
     if (alchemyGroup && alchemyGroup !== '全部' && groups[alchemyGroup]) {
@@ -8969,6 +9510,7 @@
         });
       });
     }
+    out = out.filter(herbAppearsInFormula);
     var kw = (alchemySearchKw || '').trim().toLowerCase();
     if (kw) {
       out = out.filter(function (h) {
@@ -9008,7 +9550,15 @@
     });
 
     var groups = buildGroups(alchemyCat);
-    var gkeys = orderedGroupKeys(alchemyCat, groups);
+    Object.keys(groups || {}).forEach(function (gk) {
+      groups[gk] = (groups[gk] || []).filter(herbAppearsInFormula);
+    });
+    var gkeys = orderedGroupKeys(alchemyCat, groups).filter(function (gk) {
+      return groups[gk] && groups[gk].length;
+    });
+    if (alchemyGroup !== '全部' && gkeys.indexOf(alchemyGroup) < 0) {
+      alchemyGroup = '全部';
+    }
     groupBox.innerHTML = '<button type="button" class="group-tab' +
       (alchemyGroup === '全部' ? ' active' : '') + '" data-g="全部">全部</button>' +
       gkeys.slice(0, 14).map(function (k) {
@@ -9120,10 +9670,23 @@
       return;
     }
     if (alchemyMergeState === 'merging') return;
+    // 成败已显时再点炼药：先隐去结果，再播过程（避免叠影）
+    if (alchemyMergeState === 'revealed') {
+      hideAlchemyFormulaSeal();
+      alchemyMergeState = '';
+      var stagePrep = document.getElementById('alchemy-stage');
+      if (stagePrep) {
+        stagePrep.classList.remove('is-revealed', 'is-merging');
+        stagePrep.classList.add('is-refining');
+      }
+      // 揭晓后图已清空：先把药点放回近中心，等接口返回再散开
+      seedAlchemyNodesNearCenter();
+      setStatus('炉火正旺，炼药中…');
+    }
     var box = document.getElementById('alchemy-result');
     if (box) {
       box.className = '';
-      box.innerHTML = '炉火正旺，炼制中…';
+      box.innerHTML = '';
     }
     api('/api/alchemy/refine', {
       method: 'POST',
@@ -9131,12 +9694,7 @@
       body: JSON.stringify({ keys: alchemyKeys })
     }).then(function (res) {
       var full = (res.matches && res.matches.full) || [];
-      // 全方覆盖：炉内融合变出方名词条，下方不再显示「炼成」
       if (full.length) {
-        if (box) {
-          box.className = '';
-          box.innerHTML = '';
-        }
         var f = full[0] || {};
         var entries = [];
         if (f.principle) entries.push({ label: '治法', text: f.principle });
@@ -9150,7 +9708,8 @@
           if (desc) entries.push({ label: '方义', text: desc });
         }
         if (res.easter_egg && res.easter_egg.message) {
-          entries.push({ label: '丹成', text: res.easter_egg.message });
+          var eggText = String(res.easter_egg.message).replace(/^丹成[!！]/, '丹成，');
+          entries.push({ text: eggText, kind: 'easter' });
         }
         playAlchemyMergeReveal({
           name: f.name_zh || '未名方',
@@ -9159,14 +9718,97 @@
         });
         return;
       }
-      if (alchemyMergeState) resetAlchemyMergeVisual();
-      renderAlchemyResult(res);
+      // 未全覆盖：同样融合动画，炉中显「未成」
+      var failEntries = [];
+      if (res.taboo_poison) {
+        failEntries.push({ label: '警示', text: '触发相反/相恶类禁忌，且未覆盖完整方剂' });
+      } else {
+        failEntries.push({ label: '提示', text: '炉中尚未覆盖任一方完整组成' });
+      }
+      playAlchemyMergeReveal({
+        name: '炉火未成',
+        fail: true,
+        taboo: !!res.taboo_poison,
+        entries: failEntries
+      });
     }).catch(function (err) {
+      var stageErr = document.getElementById('alchemy-stage');
+      if (stageErr) stageErr.classList.remove('is-refining', 'is-merging');
+      if (alchemyMergeState === 'merging') alchemyMergeState = '';
+      renderAlchemyUI();
       if (box) {
         box.className = '';
         box.innerHTML = '炼药失败：请确认后端已启动。' + (err && err.message ? escapeHtml(err.message) : '');
       }
     });
+  }
+
+  /** 提示：列出同时包含炉中全部药材的药方（原炼药未齐方时的提示逻辑） */
+  function alchemyHint() {
+    if (!alchemyKeys.length) {
+      setStatus('请先置入药材', true);
+      return;
+    }
+    if (alchemyMergeState === 'merging') return;
+    var box = document.getElementById('alchemy-result');
+    if (box) {
+      box.className = '';
+      box.innerHTML = '检索含药方…';
+    }
+    api('/api/alchemy/refine', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keys: alchemyKeys })
+    }).then(function (res) {
+      if (alchemyMergeState) resetAlchemyMergeVisual();
+      renderAlchemyUI();
+      renderAlchemyHintFormulas(res);
+    }).catch(function (err) {
+      if (box) {
+        box.className = '';
+        box.innerHTML = '提示失败：请确认后端已启动。' + (err && err.message ? escapeHtml(err.message) : '');
+      }
+    });
+  }
+
+  function renderAlchemyHintFormulas(res) {
+    var box = document.getElementById('alchemy-result');
+    if (!box) return;
+    var containing = (res.matches && res.matches.containing) || [];
+    // 兼容旧后端：用 partial 中「覆盖炉中全部味数」的项近似
+    if (!containing.length) {
+      var keysN = alchemyKeys.length;
+      containing = ((res.matches && res.matches.partial) || []).filter(function (f) {
+        return f && f.covered === keysN;
+      }).concat((res.matches && res.matches.full) || []);
+    }
+    if (!containing.length) {
+      box.className = '';
+      box.innerHTML = '<p style="line-height:1.75;color:#8C7A6A;font-size:13px">暂无同时包含炉中全部药材的本库方剂。</p>';
+      setStatus('暂无含药方提示');
+      return;
+    }
+    box.className = '';
+    var formulaByKey = {};
+    var html = '<div style="margin-top:2px;display:flex;flex-wrap:wrap;gap:6px">';
+    containing.slice(0, 10).forEach(function (f) {
+      if (f && f.key) formulaByKey[f.key] = f;
+      var tag = f.coverage === 'full' ? ' · 全方' : ' · 含药';
+      var label = (f.principle || '') ? String(f.principle) : '';
+      html += '<button type="button" class="hist-chip formula" data-formula="' +
+        escapeAttr(f.key) + '" title="' + escapeAttr(label) + '">' +
+        escapeHtml(f.name_zh) + tag + '</button>';
+    });
+    html += '</div>';
+    box.innerHTML = html;
+    box.querySelectorAll('[data-formula]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var fk = btn.getAttribute('data-formula');
+        var f = formulaByKey[fk] || { key: fk };
+        showAlchemyFormulaMaterialCloud(f);
+      });
+    });
+    setStatus('含药方提示 · ' + Math.min(containing.length, 10) + ' 首');
   }
 
   function alchemyFormulaMaterialNames(f) {
@@ -9224,7 +9866,9 @@
       box.innerHTML = '';
       return;
     }
-    box.className = res.taboo_poison ? 'is-danger' : (res.matches && res.matches.full && res.matches.full.length ? 'is-success' : '');
+    var full = (res.matches && res.matches.full) || [];
+    var partial = (res.matches && res.matches.partial) || [];
+    box.className = res.taboo_poison ? 'is-danger' : (full.length ? 'is-success' : '');
 
     var rolesHtml = '';
     if (res.roles_summary && res.roles_summary.length) {
@@ -9238,10 +9882,15 @@
       rolesHtml += '</div>';
     }
 
-    var html = '<div style="font-size:16px;font-weight:600;margin-bottom:6px">' +
-      escapeHtml(res.result_title || '') + '</div>' +
-      '<p style="line-height:1.75">' + escapeHtml(res.result_body || '') + '</p>' +
-      rolesHtml;
+    var html = '';
+    // 未全覆盖时不展示「未全覆盖 · 含药方提示」及说明文案
+    var hidePartialHeadline = !res.taboo_poison && !full.length && partial.length;
+    if (!hidePartialHeadline) {
+      html += '<div style="font-size:16px;font-weight:600;margin-bottom:6px">' +
+        escapeHtml(res.result_title || '') + '</div>' +
+        '<p style="line-height:1.75">' + escapeHtml(res.result_body || '') + '</p>';
+    }
+    html += rolesHtml;
 
     if (res.easter_egg) {
       html += '<div style="margin-top:10px;padding:8px 12px;background:rgba(168,90,60,0.08);border:1px dashed rgba(168,90,60,0.35);border-radius:4px">' +
@@ -9254,8 +9903,6 @@
         '<strong>⚠ 炼出禁忌毒药</strong><p style="margin-top:4px;font-size:13px;color:#8B3A2A">所选药材触发相反/相恶警示，学习上应记住禁忌组合。本页仅为课程示意，不构成处方建议。</p></div>';
     }
 
-    var full = (res.matches && res.matches.full) || [];
-    var partial = (res.matches && res.matches.partial) || [];
     var formulas = full.concat(partial).slice(0, 8);
     var formulaByKey = {};
     if (formulas.length) {
@@ -9276,11 +9923,6 @@
         html += '<li>' + escapeHtml(t.copy || t.rule || '') + '</li>';
       });
       html += '</ul>';
-    }
-
-    if (res.core_tip) {
-      html += '<p style="margin-top:10px;font-size:12px;color:#8C7A6A;border-top:1px solid rgba(60,48,36,0.1);padding-top:8px">' +
-        escapeHtml(res.core_tip) + '</p>';
     }
 
     box.innerHTML = html;
@@ -9356,12 +9998,18 @@
           '<div id="alchemy-net"></div>' +
           '<svg id="alchemy-link-svg" aria-hidden="true"></svg>' +
           '<div id="alchemy-clouds"></div>' +
+          '<div id="alchemy-refine-fx" aria-hidden="true">' +
+            '<div class="arf-ring arf-outer"></div>' +
+            '<div class="arf-ring"></div>' +
+            '<div class="arf-label">炼药中</div>' +
+          '</div>' +
           '<div id="alchemy-formula-seal"></div>' +
           '<div id="alchemy-empty">炉中尚空 · 自右侧抓药柜点选置入</div>' +
         '</div>' +
         '<div id="alchemy-actions">' +
           '<button type="button" id="alchemy-refine-btn">炼药</button>' +
           '<button type="button" class="ghost" id="alchemy-clear-btn">倾炉</button>' +
+          '<button type="button" class="hint" id="alchemy-hint-btn" title="列出同时包含炉中全部药材的药方">提示</button>' +
         '</div>' +
         '<div id="alchemy-result"></div>' +
       '</div>' +
@@ -9373,6 +10021,7 @@
       '</div>';
 
     document.getElementById('alchemy-refine-btn').onclick = alchemyRefine;
+    document.getElementById('alchemy-hint-btn').onclick = alchemyHint;
     document.getElementById('alchemy-clear-btn').onclick = function () {
       alchemyKeys = [];
       alchemyRoleCache = {};
@@ -9419,7 +10068,7 @@
       });
     });
     renderAlchemyUI();
-    setStatus('配伍 · 炼药：抓药柜选药，炼出方义或禁忌');
+    setStatus('');
   }
 
   function renderGroupTabs(pageId) {

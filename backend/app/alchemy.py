@@ -63,7 +63,7 @@ _ROLE_HINT = {
 }
 
 _EASTER = [
-    "丹成！方义闭合，君臣佐使各安其位。",
+    "丹成，方义闭合，君臣佐使各安其位。",
     "药气氤氲——你炼出的正是经典全方。",
     "彩蛋：全方覆盖达成，可对照方解细读君臣配伍。",
 ]
@@ -180,6 +180,46 @@ def _herb_role_profile(herb_key: str) -> dict[str, Any]:
     }
 
 
+def _formula_match_item(
+    f: dict[str, Any],
+    key_set: set[str],
+    fkeys: list[str],
+    fset: set[str],
+    coverage: str,
+) -> dict[str, Any]:
+    inter = key_set & fset
+    roles = []
+    for c in f.get("composition") or []:
+        if not isinstance(c, dict):
+            continue
+        if c.get("herb_key") in key_set:
+            roles.append(
+                {
+                    "herb_key": c["herb_key"],
+                    "role": ROLE_ZH.get((c.get("role") or "").strip().lower()),
+                    "dosage": c.get("dosage"),
+                }
+            )
+    principle = f.get("treatment_principle") or {}
+    if isinstance(principle, dict):
+        principle_zh = principle.get("zh")
+    else:
+        principle_zh = str(principle) if principle else None
+    return {
+        "key": f.get("key"),
+        "name_zh": f.get("name_zh") or f.get("key"),
+        "category": f.get("category"),
+        "source_text_key": f.get("source_text_key"),
+        "principle": principle_zh,
+        "description": (f.get("description_zh") or "")[:160] or None,
+        "coverage": coverage,
+        "covered": len(inter),
+        "total": len(fset),
+        "roles": roles,
+        "composition_keys": fkeys,
+    }
+
+
 def _match_formulas(keys: list[str], limit: int = 16) -> list[dict[str, Any]]:
     """按覆盖度匹配方剂：full = 炉中药材覆盖方全部组成；partial = 有交集但未齐。"""
     if not keys:
@@ -195,41 +235,29 @@ def _match_formulas(keys: list[str], limit: int = 16) -> list[dict[str, Any]]:
         inter = key_set & fset
         if not inter:
             continue
-        # 炉中覆盖方剂全部所需
         full = fset.issubset(key_set)
-        covered = len(inter)
-        total = len(fset)
-        roles = []
-        for c in comps:
-            if c["herb_key"] in key_set:
-                roles.append(
-                    {
-                        "herb_key": c["herb_key"],
-                        "role": ROLE_ZH.get((c.get("role") or "").strip().lower()),
-                        "dosage": c.get("dosage"),
-                    }
-                )
-        principle = f.get("treatment_principle") or {}
-        if isinstance(principle, dict):
-            principle_zh = principle.get("zh")
-        else:
-            principle_zh = str(principle) if principle else None
         out.append(
-            {
-                "key": f.get("key"),
-                "name_zh": f.get("name_zh") or f.get("key"),
-                "category": f.get("category"),
-                "source_text_key": f.get("source_text_key"),
-                "principle": principle_zh,
-                "description": (f.get("description_zh") or "")[:160] or None,
-                "coverage": "full" if full else "partial",
-                "covered": covered,
-                "total": total,
-                "roles": roles,
-                "composition_keys": fkeys,
-            }
+            _formula_match_item(f, key_set, fkeys, fset, "full" if full else "partial")
         )
     out.sort(key=lambda x: (0 if x["coverage"] == "full" else 1, -x["covered"], x["total"]))
+    return out[:limit]
+
+
+def _match_formulas_containing(keys: list[str], limit: int = 16) -> list[dict[str, Any]]:
+    """方剂组成同时包含炉中全部药材（可更大，用于「提示」）。"""
+    if not keys:
+        return []
+    key_set = set(keys)
+    out: list[dict[str, Any]] = []
+    for f in _load_formulas():
+        comps = [c for c in (f.get("composition") or []) if isinstance(c, dict) and c.get("herb_key")]
+        fkeys = [c["herb_key"] for c in comps]
+        fset = set(fkeys)
+        if not fset or not key_set.issubset(fset):
+            continue
+        cov = "full" if key_set == fset else "containing"
+        out.append(_formula_match_item(f, key_set, fkeys, fset, cov))
+    out.sort(key=lambda x: (x["total"], -(x["covered"])))
     return out[:limit]
 
 
@@ -405,6 +433,7 @@ def refine(herbs: list[Herb]) -> dict[str, Any]:
     matches = _match_formulas(keys)
     full = [m for m in matches if m.get("coverage") == "full"]
     partial = [m for m in matches if m.get("coverage") == "partial"]
+    containing = _match_formulas_containing(keys)
 
     taboo_poison = bool(conflicts)
     easter = None
@@ -431,12 +460,8 @@ def refine(herbs: list[Herb]) -> dict[str, Any]:
             f"{(f0.get('description') or '')}"
         )
     elif partial:
-        names_f = "、".join(m.get("name_zh") or "" for m in partial[:3])
-        result_title = "未全覆盖 · 含药方提示"
-        result_body = (
-            f"未凑齐任一方完整组成，但下列方剂含有已置入药材：{names_f}。"
-            "可继续添药求全覆盖，或点开方名对照君臣佐使。"
-        )
+        result_title = ""
+        result_body = ""
     else:
         result_title = "炉火未成"
         result_body = "本库暂未匹配到同时含上述药材的经典方。可减少味数，或以君药为主另选臣佐。"
@@ -474,7 +499,6 @@ def refine(herbs: list[Herb]) -> dict[str, Any]:
             "taboo": conflicts,
             "all": relations,
         },
-        "matches": {"full": full, "partial": partial},
+        "matches": {"full": full, "partial": partial, "containing": containing},
         "easter_egg": easter,
-        "core_tip": "炼药核心：以君臣佐使为纲——君主证，臣辅君，佐制偏或兼证，使调和或引经。",
     }

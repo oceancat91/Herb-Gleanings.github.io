@@ -376,6 +376,7 @@ def build_formula_pairing(herbs: list[Herb]) -> dict[str, Any]:
         "hubs": hubs,
         "roles": [{"name": k, "value": role_count[k]} for k in ["君", "臣", "佐", "使"] if role_count[k]],
         "herb_roles": {k: _primary_role(k) for k in herb_roles},
+        "formula_herb_keys": sorted(herb_freq.keys()),
         "formula_categories": [{"name": k, "value": v} for k, v in formula_cat.most_common(12)],
         "role_colors": {
             "君": "#B89082",
